@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/JefeReclutadorPrincipal.dart';
-import 'package:telsolreclutamiento/modelos/jefDeReclutamiento.dart';
+import 'package:telsolreclutamiento/pantallas/DashboardReclutador.dart';
+import 'package:telsolreclutamiento/modelos/reclutador.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 
 
 bool onError= false;
 
 
-class IniciarSession extends StatefulWidget{
+class iniciarsessionReclutador extends StatefulWidget{
 
 
-   IniciarSession({super.key});
+  iniciarsessionReclutador({super.key});
 
   @override
-  State<IniciarSession> createState() => _IniciarSessionState();
+  State<iniciarsessionReclutador> createState() => _iniciarsessionReclutadorState();
 }
 
-class _IniciarSessionState extends State<IniciarSession> {
+class _iniciarsessionReclutadorState extends State<iniciarsessionReclutador> {
 
   bool isLoginTrue = false;
 
@@ -25,9 +25,9 @@ class _IniciarSessionState extends State<IniciarSession> {
 
 
   login() async {
-    var response = await db.login(JefeDeReclutamiento(username: _textUserName.text, password: _textPassword.text));
+    var response = await db.loginReclu(Reclutador(username: _textUserName.text, password: _textPassword.text, habilitado: 1));
     if(response == true){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => JefeReclutadorPrincipal()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardReclutador()));
     }else{
       onError = true;
       textError = 'usuario o contrasena incorrecto';
@@ -71,8 +71,8 @@ class _IniciarSessionState extends State<IniciarSession> {
                   ),
                 ),
                 SizedBox(height: 10),
-                Text("Jefe De Reclutamiento"),
-                SizedBox(height: 10),
+                Text('Recliutador'),
+                SizedBox(height: 10,),
                 Text("Nombre de Usuario"),
                 SizedBox(height: 10),
                 SizedBox(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:telsolreclutamiento/pantallas/iniciarsessionPrincipal.dart';
 import 'package:telsolreclutamiento/pantallas/inicio.dart';
-import 'package:telsolreclutamiento/pantallas/iniciarSession.dart';
 
 //cambiar nombre a barras
 class barraInformativa extends StatelessWidget {
@@ -36,7 +36,7 @@ class barraIniciarSession extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const IniciarSession()),
+                MaterialPageRoute(builder: (context) =>  iniciarsessionprinicipal()),
               );
             },
             child: const Text(
@@ -62,7 +62,9 @@ class barraSalir extends StatelessWidget {
       ),
       actions: <Widget>[
         IconButton(
-            onPressed: () {}, icon: Icon(Icons.exit_to_app, color: Colors.white,))
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()));
+            }, icon: Icon(Icons.exit_to_app, color: Colors.white,))
       ],
       backgroundColor: Colors.blueAccent,
     );
@@ -82,9 +84,15 @@ class barraRegSal extends StatelessWidget {
       ),
       actions: <Widget>[
         IconButton(
-            onPressed: () {}, icon:   Icon(Icons.arrow_back, color: Colors.white,)),
+            onPressed: () {
+              Navigator.pop(context);
+            }, icon:   Icon(Icons.arrow_back, color: Colors.white,)),
         IconButton(
-            onPressed: () {}, icon: Icon(Icons.exit_to_app, color: Colors.white,))
+            onPressed: () {
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()));
+              };
+            }, icon: Icon(Icons.exit_to_app, color: Colors.white,))
       ],
       backgroundColor: Colors.blueAccent,
     );
