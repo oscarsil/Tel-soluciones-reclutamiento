@@ -89,9 +89,8 @@ class barraRegSal extends StatelessWidget {
             }, icon:   Icon(Icons.arrow_back, color: Colors.white,)),
         IconButton(
             onPressed: () {
-              onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()));
-              };
+
             }, icon: Icon(Icons.exit_to_app, color: Colors.white,))
       ],
       backgroundColor: Colors.blueAccent,
