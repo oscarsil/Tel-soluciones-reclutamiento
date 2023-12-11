@@ -49,6 +49,29 @@ class barraIniciarSession extends StatelessWidget {
   }
 }
 
+class barraRegresar extends StatelessWidget {
+  final String titulo;
+  const barraRegresar({required this.titulo});
+  @override
+  Widget build(BuildContext context){
+    return AppBar(
+      leading:Image.asset("assets/images/logo-Tel-soluciones.png") ,
+      title: Text(
+        titulo,
+        style: TextStyle(color: Colors.white),
+      ),
+      actions: <Widget>[
+        IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back, color: Colors.white,))
+      ],
+      backgroundColor: Colors.blueAccent,
+    );
+  }
+}
+
 class barraSalir extends StatelessWidget {
   final String titulo;
   const barraSalir({required this.titulo});

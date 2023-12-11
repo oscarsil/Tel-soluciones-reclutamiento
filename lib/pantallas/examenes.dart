@@ -4,6 +4,7 @@ import 'package:telsolreclutamiento/pantallas/instruccionesExamAudio.dart';
 import 'package:telsolreclutamiento/pantallas/quizz.dart';
 import 'package:telsolreclutamiento/pantallas/examenTecleo.dart';
 import 'package:telsolreclutamiento/pantallas/DashboardReclutador.dart';
+import 'package:telsolreclutamiento/pantallas/resultados.dart';
 
 class examenes extends StatelessWidget {
   const examenes({super.key});
@@ -32,7 +33,12 @@ class examenes extends StatelessWidget {
             ElevatedButton(onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => DashboardReclutador()));
-            }, child: Text('Dashboard reclutador'))
+            }, child: Text('Dashboard reclutador')),
+            ElevatedButton(onPressed: () {
+              Navigator.push(context, 
+                MaterialPageRoute(builder: (context) => Resultados(time: 30, length: 13, errors: 2))
+              );
+            }, child: Text('PRUEBA'))
           ],
         ),
       ),

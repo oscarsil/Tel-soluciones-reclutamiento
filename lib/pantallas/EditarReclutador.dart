@@ -58,7 +58,6 @@ class _EditarReclutador extends State<EditarReclutador>{
                       if(_textId != ''){
                         setState(() {
                           if(BuscarId('100').length != 0){
-                            print('hola');
                             llenarCampos();
                           }else{
                             print('no se encontro');

@@ -55,7 +55,7 @@ class _iniciarsessionReclutadorState extends State<iniciarsessionReclutador> {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(50),
-          child: barraInformativa(titulo: 'Tel-Soluciones')),
+          child: barraRegresar(titulo: 'Tel-Soluciones')),
       body: Center(
         child: SingleChildScrollView(
             child: Column(
