@@ -39,7 +39,6 @@ class DashboardReclutador extends StatelessWidget{
                           ))
                         ],
                       ),
-                      IconButton(onPressed: () => {}, icon: Icon(Icons.refresh, color: Colors.black,size: 50,)),
                       SizedBox(height: 15,),
                       Row(
                         children: [

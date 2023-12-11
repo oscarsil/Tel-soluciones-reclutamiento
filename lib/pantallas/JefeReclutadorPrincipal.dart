@@ -32,7 +32,6 @@ class JefeReclutadorPrincipal extends StatelessWidget{
                           ))
                         ],
                       ),
-                      IconButton(onPressed: () => {}, icon: Icon(Icons.refresh, color: Colors.black,size: 50,))
                     ],
                   )
               ),
