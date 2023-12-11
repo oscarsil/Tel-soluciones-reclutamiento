@@ -10,38 +10,34 @@ class JefeReclutadorPrincipal extends StatelessWidget{
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(50),
             child: barraSalir(titulo: 'Jefe de Reclutamiento')),
-        body: Center(
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    color: Colors.blueAccent,
-                    child: barraslaterales(),
-                  ),
-                ),
-                Expanded(
-                  flex: 5,
-                  child: Container(
-                      color: Colors.white,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Row(
-                            children: <Widget>[
-                              Expanded(child: SingleChildScrollView(
-                                  scrollDirection: Axis.vertical,
-                                  child: createDataTable()
-                              ))
-                            ],
-                          ),
-                          IconButton(onPressed: () => {}, icon: Icon(Icons.refresh, color: Colors.black,size: 50,))
+        body: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 1,
+              child: barraslaterales(),
+            ),
+            Expanded(
+              flex: 5,
+              child: Container(
+                  color: Colors.white,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: <Widget>[
+                          Expanded(child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: createDataTable()
+                          ))
                         ],
-                      )
-                  ),
-                )
-              ],
+                      ),
+                      IconButton(onPressed: () => {}, icon: Icon(Icons.refresh, color: Colors.black,size: 50,))
+                    ],
+                  )
+              ),
             )
+          ],
         ));
   }
 
