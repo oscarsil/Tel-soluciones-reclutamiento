@@ -5,6 +5,7 @@ import 'package:telsolreclutamiento/pantallas/quizz.dart';
 import 'package:telsolreclutamiento/pantallas/examenTecleo.dart';
 import 'package:telsolreclutamiento/pantallas/DashboardReclutador.dart';
 import 'package:telsolreclutamiento/pantallas/resultados.dart';
+import 'package:telsolreclutamiento/pantallas/instruccionesExamenTecleado.dart';
 
 class examenes extends StatelessWidget {
   const examenes({super.key});
@@ -24,7 +25,7 @@ class examenes extends StatelessWidget {
             }, child: Text('quiiz')),
             ElevatedButton(onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => examenTeclado()));
+                  MaterialPageRoute(builder: (context) => instruccionesExamenTeclado()));
             }, child: Text('Tecleado')),
             ElevatedButton(onPressed: () {
               Navigator.push(context,

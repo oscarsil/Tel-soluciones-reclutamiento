@@ -41,11 +41,6 @@ class _examenTeclado extends State<examenTeclado>{
         const SizedBox(
           height: 20,
         ),
-        Text('Instrucciones:'),
-        Container(width: 750,child: Wrap(children: [Text('favor de dar click en el boton de iniciar, que activara un cuadro de texto que aparecera bajo el cuadro. escribe el texto que aparece en el cuadro de arriba, el texto se pondra de color verde cuando se escriba correctamente y de otra manera este se pondra de color rojo cuando el texto mal ')])),
-        const SizedBox(
-          height: 20,
-        ),
         Text("RELOJ"),
         Text(_resultado_Tiempo,style: const TextStyle(fontSize: 50.0),),
         const SizedBox(
