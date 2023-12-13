@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/examenTecleo.dart';
+import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/examenTecleo.dart';
 
 class instruccionesExamenTeclado extends StatelessWidget{
   const instruccionesExamenTeclado({super.key});

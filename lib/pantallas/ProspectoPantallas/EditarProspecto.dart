@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:flutter/services.dart';
-import 'package:telsolreclutamiento/pantallas/JefeReclutadorPrincipal.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/JefeReclutadorPrincipal.dart';
 
 final _textid = TextEditingController();
 final _textNombre = TextEditingController();

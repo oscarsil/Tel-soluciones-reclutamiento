@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:telsolreclutamiento/pantallas/iniciarSession.dart';
-import 'package:telsolreclutamiento/pantallas/iniciarsessionReclutador.dart';
+import 'package:telsolreclutamiento/pantallas/inicioPantallas/iniciarSession.dart';
+import 'package:telsolreclutamiento/pantallas/inicioPantallas/iniciarsessionReclutador.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 
 class iniciarsessionprinicipal extends StatelessWidget{

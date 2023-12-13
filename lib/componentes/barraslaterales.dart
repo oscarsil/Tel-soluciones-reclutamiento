@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:telsolreclutamiento/pantallas/DashboardReclutador.dart';
-import 'package:telsolreclutamiento/pantallas/ListaDereclutador.dart';
-import 'package:telsolreclutamiento/pantallas/JefeReclutadorPrincipal.dart';
-import 'package:telsolreclutamiento/pantallas/EditarProspecto.dart';
-import 'package:telsolreclutamiento/pantallas/ReporteReclutador.dart';
+import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/DashboardReclutador.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/ListaDereclutador.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/JefeReclutadorPrincipal.dart';
+import 'package:telsolreclutamiento/pantallas/ProspectoPantallas/EditarProspecto.dart';
+import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/ReporteReclutador.dart';
 
 class barraslaterales extends StatelessWidget{
   @override

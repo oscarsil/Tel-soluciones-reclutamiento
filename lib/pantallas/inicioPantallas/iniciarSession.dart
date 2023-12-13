@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/DashboardReclutador.dart';
-import 'package:telsolreclutamiento/modelos/reclutador.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/JefeReclutadorPrincipal.dart';
+import 'package:telsolreclutamiento/modelos/jefDeReclutamiento.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 
 
 bool onError= false;
 
 
-class iniciarsessionReclutador extends StatefulWidget{
+class IniciarSession extends StatefulWidget{
 
 
-  iniciarsessionReclutador({super.key});
+   IniciarSession({super.key});
 
   @override
-  State<iniciarsessionReclutador> createState() => _iniciarsessionReclutadorState();
+  State<IniciarSession> createState() => _IniciarSessionState();
 }
 
-class _iniciarsessionReclutadorState extends State<iniciarsessionReclutador> {
+class _IniciarSessionState extends State<IniciarSession> {
 
   bool isLoginTrue = false;
 
@@ -25,9 +25,9 @@ class _iniciarsessionReclutadorState extends State<iniciarsessionReclutador> {
 
 
   login() async {
-    var response = await db.loginReclu(Reclutador(username: _textUserName.text, password: _textPassword.text, habilitado: 1));
+    var response = await db.login(JefeDeReclutamiento(username: _textUserName.text, password: _textPassword.text));
     if(response == true){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardReclutador()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => JefeReclutadorPrincipal()));
     }else{
       onError = true;
       textError = 'usuario o contrasena incorrecto';
@@ -71,8 +71,8 @@ class _iniciarsessionReclutadorState extends State<iniciarsessionReclutador> {
                   ),
                 ),
                 SizedBox(height: 10),
-                Text('Recliutador'),
-                SizedBox(height: 10,),
+                Text("Jefe De Reclutamiento"),
+                SizedBox(height: 10),
                 Text("Nombre de Usuario"),
                 SizedBox(height: 10),
                 SizedBox(

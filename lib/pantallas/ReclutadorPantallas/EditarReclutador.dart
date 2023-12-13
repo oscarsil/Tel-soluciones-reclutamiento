@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/ListaDereclutador.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/ListaDereclutador.dart';
 import 'package:flutter/services.dart';
 
 

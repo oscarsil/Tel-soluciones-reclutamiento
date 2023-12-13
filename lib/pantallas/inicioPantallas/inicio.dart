@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/examenes.dart';
-import 'package:telsolreclutamiento/pantallas/FormularioProspecto.dart';
+import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/examenes.dart';
+import 'package:telsolreclutamiento/pantallas/ProspectoPantallas/FormularioProspecto.dart';
 
 class Inicio extends StatelessWidget {
   const Inicio({super.key});

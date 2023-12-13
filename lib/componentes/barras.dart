@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:telsolreclutamiento/pantallas/iniciarsessionPrincipal.dart';
-import 'package:telsolreclutamiento/pantallas/inicio.dart';
+import 'package:telsolreclutamiento/pantallas/inicioPantallas/iniciarsessionPrincipal.dart';
+import 'package:telsolreclutamiento/pantallas/inicioPantallas/inicio.dart';
 
 //cambiar nombre a barras
 class barraInformativa extends StatelessWidget {

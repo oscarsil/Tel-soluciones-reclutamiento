@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/examenAuditivo.dart';
+import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/examenAuditivo.dart';
 
 class instruccionesExamenAuditivo extends StatelessWidget{
   const instruccionesExamenAuditivo({super.key});

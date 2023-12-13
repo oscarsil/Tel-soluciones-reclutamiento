@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/CrearReclutador.dart';
+import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/CrearReclutador.dart';
 import 'package:telsolreclutamiento/componentes/barraslaterales.dart';
-import 'package:telsolreclutamiento/pantallas/EditarReclutador.dart';
+import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/EditarReclutador.dart';
 
 class ListaDeReclutadores extends StatelessWidget{
 

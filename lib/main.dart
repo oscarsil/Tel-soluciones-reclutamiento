@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:telsolreclutamiento/pantallas/inicio.dart';
+import 'package:telsolreclutamiento/pantallas/inicioPantallas/inicio.dart';
 
 void main() {
   runApp( const MyApp());

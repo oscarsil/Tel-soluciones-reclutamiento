@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/instruccionesExamAudio.dart';
-import 'package:telsolreclutamiento/pantallas/quizz.dart';
-import 'package:telsolreclutamiento/pantallas/examenTecleo.dart';
-import 'package:telsolreclutamiento/pantallas/DashboardReclutador.dart';
-import 'package:telsolreclutamiento/pantallas/resultados.dart';
-import 'package:telsolreclutamiento/pantallas/instruccionesExamenTecleado.dart';
+import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/instruccionesExamAudio.dart';
+import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/quizz.dart';
+import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/DashboardReclutador.dart';
+import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/resultados.dart';
+import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/instruccionesExamenTecleado.dart';
 
 class examenes extends StatelessWidget {
   const examenes({super.key});

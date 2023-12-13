@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/resultados.dart';
+import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/resultados.dart';
 
 class examenTeclado extends StatefulWidget{
   @override
