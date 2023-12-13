@@ -17,7 +17,7 @@ class _FormularioProspecto extends State<FormularioProspecto> {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(50),
-          child: barraInformativa(titulo: 'Por Favor de Introducir Datos')),
+          child: barraRegresar(titulo: 'Por Favor de Introducir Datos')),
       body: Center(
         child: Column(
           children: [
