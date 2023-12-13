@@ -13,16 +13,13 @@ class _EditarReclutador extends State<EditarReclutador>{
   final _textId = TextEditingController();
   final _textNombre = TextEditingController();
   final _textContra = TextEditingController();
-  final Map <dynamic,dynamic> Reclutador = {
-    'id':'101',
-    'nombre': 'Yudith Garcia',
-    'contra':'Telcel01',
-    'habilitado': true
-  };
-  final Map <dynamic,dynamic> prueba = {};
-  String nombre = '';
-  String Contra = '';
   bool isChecked = false;
+  bool buscarError = false;
+  String buscarMensajeError = '';
+
+  bool editarError = false;
+  String editarErrorMensaje = '';
+
   @override
   Widget build(BuildContext context){
     return  Scaffold(
@@ -55,19 +52,20 @@ class _EditarReclutador extends State<EditarReclutador>{
                     ),
                     SizedBox(width: 20,),
                     ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),onPressed: () {
-                      if(_textId != ''){
-                        setState(() {
-                          if(BuscarId('100').length != 0){
-                            llenarCampos();
-                          }else{
-                            print('no se encontro');
-                            //TODO logica si no encuentra el relcutador, como poner mensaje de error
-                          }
-                        });
-                      }else{
-                        print('llenar campo');//TODO agregarun texto que dice que falta llenar campo
-                      }
-                      }, child: Text('Buscar', style: TextStyle(color: Colors.white),))
+                      setState(() {
+                        if(_textId.text == ''){
+                          buscarError = true;
+                          buscarMensajeError = 'Falta llenar campo';
+                        }else{
+                        buscarError = false;
+                        buscarMensajeError = '';
+                        print("buscando");
+                        }
+                      });
+                    }, child: Text('Buscar', style: TextStyle(color: Colors.white),)),
+                    Container(
+                      child: buscarError ? Text(buscarMensajeError) : null,
+                    )
                   ],
                 ),
               ),
@@ -102,30 +100,29 @@ class _EditarReclutador extends State<EditarReclutador>{
                   Checkbox(value: isChecked, onChanged: (bool? value){
                     setState(() {
                       isChecked = value!;
-                      Reclutador['habilitado'] = value!;
-                      print(Reclutador.toString());
                     });
                   }),
                 ],
               ),
               ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),onPressed: ()  {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ListaDeReclutadores()));
-              }, child: Text('Listo', style: TextStyle(color: Colors.white),))
+                setState(() {
+                  if(_textNombre.text =='' || _textContra.text == ''){
+                    editarError = true;
+                    editarErrorMensaje = 'Falta llenar campo';
+                  }else{
+                    editarError = false;
+                    editarErrorMensaje = '';
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ListaDeReclutadores()));
+                  }
+                });
+              }, child: Text('Listo', style: TextStyle(color: Colors.white),)),
+              Container(
+                child: editarError ? Text(editarErrorMensaje) : null,
+              )
             ],
           ),
         )
       ),
     );
   }
-  Map <dynamic,dynamic> BuscarId(String id){
-    return Reclutador;
-  }
-
-  void llenarCampos(){
-    print(Reclutador['nombre']);
-    _textNombre.text = Reclutador['nombre'];
-    _textContra.text = Reclutador['contra'];
-    isChecked = Reclutador['habilitado'];
-  }
-
 }
