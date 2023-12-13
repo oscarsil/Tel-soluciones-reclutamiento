@@ -3,10 +3,16 @@ import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/componentes/barraslaterales.dart';
 import 'package:flutter/services.dart';
 
-class DashboardReclutador extends StatelessWidget{
+class DashboardReclutador extends StatefulWidget{
   const DashboardReclutador({super.key});
 
+  @override
+  State<DashboardReclutador> createState() => _DashboardReclutadorState();
+}
 
+class _DashboardReclutadorState extends State<DashboardReclutador> {
+  bool isError = false;
+  String error = '';
   @override
   Widget build(BuildContext context){
     final _textID = TextEditingController();
@@ -53,7 +59,19 @@ class DashboardReclutador extends StatelessWidget{
                               ],
                             ),
                           ),
-                          ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),onPressed: () => {}, child: Text('Iniciar Proceso', style: TextStyle(color: Colors.white),))
+                          ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),onPressed: ()  {
+                            setState(() {
+                              if(_textID.text.isEmpty){
+                                isError = true;
+                                error = 'favor de llenar campo';
+                              }else{
+                                isError = false;
+                                error = '';
+                              }
+                            });
+                          }, child: Text('Iniciar Proceso', style: TextStyle(color: Colors.white),)),
+                          Container(
+                            child: isError ? Text(error) :  null),
                         ],
                       )
                     ],
@@ -65,7 +83,6 @@ class DashboardReclutador extends StatelessWidget{
       ),
     );
   }
-
 
   DataTable createDataTable(){
     return DataTable(columns: createcolumns(), rows: createRows(),
@@ -83,6 +100,7 @@ class DashboardReclutador extends StatelessWidget{
       DataColumn(label: Text('Motivo')),
     ];
   }
+
   List<DataRow> createRows(){
     return _prospectos
         .map((prospecto) => DataRow(cells: [
