@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:flutter/services.dart';
 import 'dart:math';
-
 bool formularioLlenado = false;
 bool FaltaLlenarCampo = false;
+
 
 class FormularioProspecto extends StatefulWidget {
   @override
@@ -35,30 +35,33 @@ class campos extends StatefulWidget {
 }
 
 class _campos extends State<campos> {
+  String error='';
+  bool isError= false;
 
   bool validarBoton(String vn, vap, vam, ved,vs,vt,ves){
     if(vn == '' || vap== '' || vam== '' || ved== '' ||  vs== '' || vt== '' || ves== ''){
-      FaltaLlenarCampo = true;
+      isError = true;
+      error = "falta llenar campo";
       return false;
     }else{
-      FaltaLlenarCampo = false;
-      return true;
+      if(vt.length == 10){
+        print(vt.length);
+        isError = false;
+        return true;
+      }else{
+        print(vt.length);
+        isError = true;
+        error = "numero de telefono invalido";
+        return false;
+      }
     }
   }
 
-  String dropdownvalueReclu = 'Reclutadora';
 
   String dropdownvalueCamp = 'Agente R02';
 
-  var campanas = ['Agente R02','Agente R03','Renovaciones','Admin'];
+  var campanas = ['Agente R02','Agente R03','Renovaciones','Admin','Megacable'];
 
-
-  var reclutadoras = [
-    'Reclutadora',
-    'Yudith Garcia',
-    'Mariana Paz',
-    'Angelica flores',
-  ];
 
    final _textNombre = TextEditingController();
   final _textAp = TextEditingController();
@@ -90,6 +93,9 @@ class _campos extends State<campos> {
             SizedBox(
                 width: 300,
                 child: TextField(
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ]"))
+                  ],
                   controller: _textNombre,
                   decoration: InputDecoration(
                       labelText: 'Nombre(s)',
@@ -101,6 +107,9 @@ class _campos extends State<campos> {
             SizedBox(
                 width: 300,
                 child: TextField(
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ]"))
+                  ],
                   controller: _textAp,
                   decoration: InputDecoration(
                       labelText: 'Apellido Paterno',
@@ -109,6 +118,9 @@ class _campos extends State<campos> {
             SizedBox(
                 width: 300,
                 child: TextField(
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ]"))
+                  ],
                   controller: _textAm,
                   decoration: InputDecoration(
                       labelText: 'Apellido Materno',
@@ -134,6 +146,9 @@ class _campos extends State<campos> {
             SizedBox(
                 width: 80,
                 child: TextField(
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]"))
+                  ],
                   controller: _textSexo,
                   decoration: InputDecoration(
                       labelText: 'Sexo',
@@ -165,28 +180,6 @@ class _campos extends State<campos> {
             SizedBox(
               width: 10,
             ),
-            Container(
-              child: DropdownButton(
-                // Initial Value
-                value: dropdownvalueReclu,
-                // Down Arrow Icon
-                icon: const Icon(Icons.keyboard_arrow_down),
-                // Array list of items
-                items: reclutadoras.map((String items) {
-                  return DropdownMenuItem(
-                    value: items,
-                    child: Text(items),
-                  );
-                }).toList(),
-                // After selecting the desired option,it will
-                // change button value to selected value
-                onChanged: (String? newValue) {
-                  setState(() {
-                    dropdownvalueReclu = newValue!;
-                  });
-                },
-              ),
-            ),
             SizedBox(
               width: 10,
             ),
@@ -214,8 +207,7 @@ class _campos extends State<campos> {
           setState(() {
             if(validarBoton(_textNombre.text, _textAp.text, _textAm.text, _textEdad.text, _textSexo.text,_textTelefono.text, _textEsc.text)){
               createprospect( _textNombre.text, _textAp.text, _textAm.text, _textEdad.text,
-                  _textSexo.text, _textTelefono.text, _textEsc.text, dropdownvalueReclu,dropdownvalueCamp);
-              formularioLlenado = true;
+                  _textSexo.text, _textTelefono.text, _textEsc.text,dropdownvalueCamp);
             }else{
               print('no go');
             }
@@ -226,11 +218,8 @@ class _campos extends State<campos> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30))),),
         Container(
-          child: formularioLlenado ? Text('ID PROCESO: $idGenerado') : null,
+          child: isError ? Text(error) :  Text('ID PROCESO: $idGenerado'),
         ),
-        Container(
-          child: FaltaLlenarCampo ? Text('Falta llenar un campo') : null
-        )
       ],
     );
 
@@ -239,12 +228,12 @@ class _campos extends State<campos> {
 
 
 int idGenerado = 0;
-void createprospect(String nombre, apellidopat, apellidomat, edad, sexo, telefono, escolaridad,reclutador,campana){
+void createprospect(String nombre, apellidopat, apellidomat, edad, sexo, telefono, escolaridad,campana){
   idGenerado = generarId();
   print('PROSPECT = {id: $idGenerado,nombre: $nombre'
       'Apellido Paterno: $apellidopat, Apellido Materno: $apellidomat'
       'Edad: $edad, Sexo: $sexo, Telefono: $telefono'
-      'Escolaridad: $escolaridad Reclutadora : $reclutador ,Campaña : $campana}');
+      'Escolaridad: $escolaridad ,Campaña : $campana}');
 }
 
 int generarId(){
