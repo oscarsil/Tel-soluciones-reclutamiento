@@ -72,7 +72,7 @@ class _EditarProspecto extends State<EditarProspecto>{
                               if(formKey.currentState!.validate()){
 
                               }
-                              }, child: Text('Buscar', style: TextStyle(color: Colors.white),))
+                              }, child: Text('Buscar por Nombre', style: TextStyle(color: Colors.white),))
                             ],
                           ),
                         ),
