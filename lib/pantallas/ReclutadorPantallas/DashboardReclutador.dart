@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/componentes/barraslaterales.dart';
 import 'package:flutter/services.dart';
+import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/quizz.dart';
 
 class DashboardReclutador extends StatefulWidget{
   const DashboardReclutador({super.key});
@@ -67,6 +68,7 @@ class _DashboardReclutadorState extends State<DashboardReclutador> {
                               }else{
                                 isError = false;
                                 error = '';
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => quizz(prospecto_int: int.parse(_textID.text))));
                               }
                             });
                           }, child: Text('Iniciar Proceso', style: TextStyle(color: Colors.white),)),

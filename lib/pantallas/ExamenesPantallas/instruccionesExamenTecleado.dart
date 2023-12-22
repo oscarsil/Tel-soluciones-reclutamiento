@@ -3,7 +3,9 @@ import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/examenTecleo.dart';
 
 class instruccionesExamenTeclado extends StatelessWidget{
-  const instruccionesExamenTeclado({super.key});
+  final int prospecto_id;
+  final int quizzscore;
+  const instruccionesExamenTeclado({required this.prospecto_id,required this.quizzscore});
 
   @override
   Widget build(BuildContext context){
@@ -15,7 +17,7 @@ class instruccionesExamenTeclado extends StatelessWidget{
             Container(width: 750,child: Wrap(children: [Text('favor de dar click en el boton de iniciar, que activara un cuadro de texto que aparecera bajo el cuadro. escribe el texto que aparece en el cuadro de arriba, el texto se pondra de color verde cuando se escriba correctamente y de otra manera este se pondra de color rojo cuando el texto mal ')])),
             ElevatedButton(onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (builder) => examenTeclado()));
+                  MaterialPageRoute(builder: (builder) => examenTeclado(prospect_id: 100, quizzscore: 100,)));
             }, child: Text('Comenzar'))
           ],
         ),

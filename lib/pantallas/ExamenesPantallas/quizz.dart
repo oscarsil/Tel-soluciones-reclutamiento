@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/inicioPantallas/inicio.dart';
+import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/instruccionesExamenTecleado.dart';
 
 var preguntas_basicas = [
   '',
@@ -33,6 +33,8 @@ var opciones = [
 
 
 class quizz extends StatefulWidget{
+  final int prospecto_int;
+  quizz({required this.prospecto_int});
   @override
   State<quizz> createState() => _quizzState();
 }
@@ -54,7 +56,8 @@ class _quizzState extends State<quizz>{
       if(question_pointer ==5 ){
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Inicio())
+            MaterialPageRoute(builder: (context) => const instruccionesExamenTeclado(prospecto_id: 100,quizzscore: 100,)
+            )
         );
       }else {
         question_pointer ++;
@@ -64,7 +67,7 @@ class _quizzState extends State<quizz>{
         opcion2 = opciones[question_pointer][1];
         opcion3 = opciones[question_pointer][2];
         opcion4 = opciones[question_pointer][3];
-        puntuaje = score.toString();
+        puntuaje = (score*2).toString();
       }
     });
   }

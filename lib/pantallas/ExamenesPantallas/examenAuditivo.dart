@@ -3,28 +3,34 @@ import 'package:telsolreclutamiento/componentes/reproductor.dart';
 import 'package:telsolreclutamiento/componentes/validarRespuestaExamenAuditorio.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:timer_count_down/timer_count_down.dart';
+import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/Apto.dart';
 
 class examenAuditivo extends StatefulWidget {
+  final int prospecto_id;
+  final int quizzscore;
+  final double tecladoscore;
+  examenAuditivo({required this.prospecto_id, required this.quizzscore, required this.tecladoscore});
   @override
   State<examenAuditivo> createState() => _examenAuditivo();
 }
 
 class _examenAuditivo extends State<examenAuditivo> {
+  double result = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(50),
+      appBar: const PreferredSize(
+          preferredSize:  Size.fromHeight(50),
           child: barraInformativa(titulo: 'Examen de Auditivo')),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Text('Segundos Restantes'),
+            const Text('Segundos Restantes'),
             Countdown(
                 seconds: 120,
                 build: (BuildContext context, double time) =>
                     Text(time.toString()),
-                interval: Duration(milliseconds: 100),
+                interval: const Duration(milliseconds: 100),
                 onFinished: () {
                   setState(() {
                     examenterminado = true;
@@ -37,15 +43,43 @@ class _examenAuditivo extends State<examenAuditivo> {
                         Estadoseleccionado,
                         Cacseleccionado));
                   });
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => apto(prospecto_id: this.widget.prospecto_id, quizzscore: this.widget.quizzscore, tecladoscore: this.widget.tecladoscore, auditivoscore: double.parse(resultadofinal.toStringAsFixed(2)),)));
                 }),
             reproductor(),
             QuestionOptions(),
-            SizedBox(height: 30,),
-            ButtonEnviarRespuestas(),
-            SizedBox(
+            const SizedBox(height: 30,),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                    padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30))),
+                onPressed: () {
+                  setState(() {
+                    examenterminado = true;
+                    result = vp.calcularcalificacion(vp.Calificacion(
+                        NipSeleccionado,
+                        FechaSeleccionada,
+                        PromoSeleccionadda,
+                        NacSeleccionada,
+                        NombreSeleccionada,
+                        Estadoseleccionado,
+                        Cacseleccionado));
+                    resultadofinal = result;
+                  });
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => apto(prospecto_id: this.widget.prospecto_id, quizzscore: this.widget.quizzscore, tecladoscore: this.widget.tecladoscore, auditivoscore: double.parse(resultadofinal.toStringAsFixed(2)),)));
+                },
+                child: const Text(
+                  'Terminar',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                )),
+            const SizedBox(
               height: 10,
             ),
             if (examenterminado) Text(resultadofinal.toStringAsFixed(2)),
+            const SizedBox(
+              height: 10,
+            ),
           ],
         ),
       ),
@@ -68,19 +102,19 @@ class _QuestionOption extends State<QuestionOptions> {
       width: 500,
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
             children: [
-              Text('Nip:'),
-              Spacer(),
+              const Text('Nip:'),
+              const Spacer(),
               DropdownMenu<String>(
                 onSelected: (String? value) {
                   // This is called when the user selects an item.
                   NipSeleccionado = value!;
                   setState(() {
-                    dropdownValue = value!;
+                    dropdownValue = value;
                   });
                 },
                 dropdownMenuEntries:
@@ -90,19 +124,19 @@ class _QuestionOption extends State<QuestionOptions> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
             children: [
-              Text('Fecha de Portabilidad:'),
-              Spacer(),
+              const Text('Fecha de Portabilidad:'),
+              const Spacer(),
               DropdownMenu<String>(
                 onSelected: (String? value) {
                   // This is called when the user selects an item.
                   FechaSeleccionada = value!;
                   setState(() {
-                    dropdownValue = value!;
+                    dropdownValue = value;
                   });
                 },
                 dropdownMenuEntries:
@@ -112,19 +146,19 @@ class _QuestionOption extends State<QuestionOptions> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
             children: [
-              Text('Promocion:'),
-              Spacer(),
+              const Text('Promocion:'),
+              const Spacer(),
               DropdownMenu<String>(
                 onSelected: (String? value) {
                   // This is called when the user selects an item.
                   PromoSeleccionadda = value!;
                   setState(() {
-                    dropdownValue = value!;
+                    dropdownValue = value;
                   });
                 },
                 dropdownMenuEntries:
@@ -134,19 +168,19 @@ class _QuestionOption extends State<QuestionOptions> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
             children: [
-              Text('Fecha de Nacimiento:'),
-              Spacer(),
+              const Text('Fecha de Nacimiento:'),
+              const Spacer(),
               DropdownMenu<String>(
                 onSelected: (String? value) {
                   NacSeleccionada = value!;
                   // This is called when the user selects an item.
                   setState(() {
-                    dropdownValue = value!;
+                    dropdownValue = value;
                   });
                 },
                 dropdownMenuEntries:
@@ -156,19 +190,19 @@ class _QuestionOption extends State<QuestionOptions> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
             children: [
-              Text('Nombre'),
-              Spacer(),
+              const Text('Nombre'),
+              const Spacer(),
               DropdownMenu<String>(
                 onSelected: (String? value) {
                   NombreSeleccionada = value!;
                   // This is called when the user selects an item.
                   setState(() {
-                    dropdownValue = value!;
+                    dropdownValue = value;
                   });
                 },
                 dropdownMenuEntries:
@@ -178,19 +212,19 @@ class _QuestionOption extends State<QuestionOptions> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
             children: [
-              Text('Estado:'),
-              Spacer(),
+              const Text('Estado:'),
+              const Spacer(),
               DropdownMenu<String>(
                 onSelected: (String? value) {
                   Estadoseleccionado = value!;
                   // This is called when the user selects an item.
                   setState(() {
-                    dropdownValue = value!;
+                    dropdownValue = value;
                   });
                 },
                 dropdownMenuEntries:
@@ -200,19 +234,19 @@ class _QuestionOption extends State<QuestionOptions> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
             children: [
-              Text('CAC Cercano:'),
-              Spacer(),
+              const Text('CAC Cercano:'),
+              const Spacer(),
               DropdownMenu<String>(
                 onSelected: (String? value) {
                   Cacseleccionado = value!;
                   // This is called when the user selects an item.
                   setState(() {
-                    dropdownValue = value!;
+                    dropdownValue = value;
                   });
                 },
                 dropdownMenuEntries:
@@ -271,7 +305,6 @@ String Cacseleccionado = '';
 
 double resultadofinal = 0;
 bool examenterminado = false;
-bool faltarespuesta = false;
 
 class ButtonEnviarRespuestas extends StatefulWidget {
   @override
@@ -294,15 +327,6 @@ class _ButtonEnviarRespuestas extends State<ButtonEnviarRespuestas> {
                     borderRadius: BorderRadius.circular(30))),
             onPressed: () {
               setState(() {
-                if (vp.validarBoton(
-                    NipSeleccionado,
-                    FechaSeleccionada,
-                    PromoSeleccionadda,
-                    NacSeleccionada,
-                    NombreSeleccionada,
-                    Estadoseleccionado,
-                    Cacseleccionado)) {
-                  faltarespuesta = false;
                   examenterminado = true;
                   result = vp.calcularcalificacion(vp.Calificacion(
                       NipSeleccionado,
@@ -313,20 +337,16 @@ class _ButtonEnviarRespuestas extends State<ButtonEnviarRespuestas> {
                       Estadoseleccionado,
                       Cacseleccionado));
                   resultadofinal = result;
-                } else {
-                  faltarespuesta = true;
-                }
               });
             },
-            child: Text(
+            child: const Text(
               'Terminar',
               style: TextStyle(color: Colors.white, fontSize: 20),
             )),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        if (faltarespuesta) Text('falta elejir'),
-
+        if (examenterminado) Text(resultadofinal.toStringAsFixed(2)),
       ],
     );
   }

@@ -3,7 +3,10 @@ import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/examenAuditivo.dart';
 
 class instruccionesExamenAuditivo extends StatelessWidget{
-  const instruccionesExamenAuditivo({super.key});
+  final int prospecto_id;
+  final int quizzscore;
+  final double tecladoscore;
+  const instruccionesExamenAuditivo({required this.prospecto_id,required this.quizzscore, required this.tecladoscore});
 
   @override
   Widget build(BuildContext context){
@@ -15,7 +18,7 @@ class instruccionesExamenAuditivo extends StatelessWidget{
             Text('El siguiente es un examen auditivo, donde despues de presionar el boton comenzar,tendran dos minutos para escuchar el audio y  seleccionar las respuestas correctas'),
             ElevatedButton(onPressed: () {
               Navigator.push(context,
-              MaterialPageRoute(builder: (builder) => examenAuditivo()));
+              MaterialPageRoute(builder: (builder) => examenAuditivo(prospecto_id: this.prospecto_id, quizzscore:this.quizzscore,tecladoscore: 45,)));
             }, child: Text('Comenzar'))
           ],
         ),

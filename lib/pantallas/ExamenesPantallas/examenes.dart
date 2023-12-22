@@ -20,15 +20,15 @@ class examenes extends StatelessWidget {
           children: [
             ElevatedButton(onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => quizz()));
+                  MaterialPageRoute(builder: (context) => quizz(prospecto_int: 101,)));
             }, child: Text('quiiz')),
             ElevatedButton(onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => instruccionesExamenTeclado()));
+                  MaterialPageRoute(builder: (context) => instruccionesExamenTeclado(prospecto_id: 101,quizzscore: 100,)));
             }, child: Text('Tecleado')),
             ElevatedButton(onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => instruccionesExamenAuditivo()));
+                  MaterialPageRoute(builder: (context) => instruccionesExamenAuditivo(prospecto_id: 101,quizzscore: 100, tecladoscore: 45,)));
             }, child: Text('Auditivo')),
             ElevatedButton(onPressed: () {
               Navigator.push(context,

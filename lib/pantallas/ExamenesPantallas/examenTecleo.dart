@@ -2,13 +2,24 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/resultados.dart';
+import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/instruccionesExamAudio.dart';
 
 class examenTeclado extends StatefulWidget{
+  final int prospect_id;
+  final int quizzscore;
+  examenTeclado({required this.prospect_id,required this.quizzscore});
   @override
   State<examenTeclado> createState() => _examenTeclado();
 }
 
 class _examenTeclado extends State<examenTeclado>{
+  double sacarWpm(int letras, int segundos) {
+    double palabras = letras / 5;
+    double resultado = (palabras / segundos) * 60;
+    return resultado;
+  }
+
+
   @override
   Widget build(BuildContext context){
     setString();
@@ -72,7 +83,8 @@ class _examenTeclado extends State<examenTeclado>{
                   _textFieldController.clear();
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>  Resultados(time: tiempofinal, length: exam.length, errors: errores,)));
+                      //MaterialPageRoute(builder: (context) =>  Resultados(time: tiempofinal, length: exam.length, errors: errores,)));
+                      MaterialPageRoute(builder: (context) => instruccionesExamenAuditivo(prospecto_id: 100, quizzscore: 100, tecladoscore: sacarWpm(exam.length, tiempofinal),)));
                 }
                 else{
                   textpointer++;
