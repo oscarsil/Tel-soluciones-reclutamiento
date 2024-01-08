@@ -17,8 +17,9 @@ class instruccionesExamenAuditivo extends StatelessWidget{
           children: [
             Text('El siguiente es un examen auditivo, donde despues de presionar el boton comenzar,tendran dos minutos para escuchar el audio y  seleccionar las respuestas correctas'),
             ElevatedButton(onPressed: () {
+              print(this.prospecto_id.toString()+" "+this.quizzscore.toString()+" "+this.tecladoscore.toString());
               Navigator.push(context,
-              MaterialPageRoute(builder: (builder) => examenAuditivo(prospecto_id: this.prospecto_id, quizzscore:this.quizzscore,tecladoscore: 45,)));
+              MaterialPageRoute(builder: (builder) => examenAuditivo(prospecto_id: this.prospecto_id, quizzscore:this.quizzscore,tecladoscore: this.tecladoscore,)));
             }, child: Text('Comenzar'))
           ],
         ),

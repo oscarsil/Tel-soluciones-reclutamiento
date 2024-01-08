@@ -41,6 +41,7 @@ class quizz extends StatefulWidget{
 
 var question_pointer = 1;
 int score = 0;
+int finalscore = 0;
 
 class _quizzState extends State<quizz>{
   int contador_Preguntas = question_pointer;
@@ -54,9 +55,12 @@ class _quizzState extends State<quizz>{
   void actualizarPregunta(){
     setState(() {
       if(question_pointer ==5 ){
+        puntuaje='0';
+        resetearexamen();
+        print(this.widget.prospecto_int.toString()+" "+(2*finalscore).toString());
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const instruccionesExamenTeclado(prospecto_id: 100,quizzscore: 100,)
+            MaterialPageRoute(builder: (context) =>  instruccionesExamenTeclado(prospecto_id: this.widget.prospecto_int,quizzscore: finalscore*2,)
             )
         );
       }else {
@@ -124,4 +128,11 @@ void esCorrecto(String respuesta, respuestacorrecta){
   if(respuesta == respuestacorrecta){
     score = score+10;
   }
+}
+
+
+void resetearexamen(){
+  question_pointer = 1;
+  finalscore=score;
+  score = 0;
 }

@@ -6,7 +6,17 @@ class reproductor extends StatefulWidget{
   State<reproductor> createState() => _reproductorState();
 }
 
+
+
 class _reproductorState extends State<reproductor>{
+
+
+  Future stopAudio() async{
+    await audioPlayer.stop();
+  }
+
+
+
   Future setAudio() async {
     final player = AudioCache(prefix:  'assets/');
     final url = await player.load('Pregunta_Audio.mp3');
@@ -23,7 +33,6 @@ class _reproductorState extends State<reproductor>{
       seconds
     ].join(':');
   }
-
 
   final audioPlayer = AudioPlayer();
   bool isPlaying = false;
@@ -54,6 +63,8 @@ class _reproductorState extends State<reproductor>{
       });
     });
   }
+
+
 
 
   @override

@@ -68,6 +68,7 @@ class _DashboardReclutadorState extends State<DashboardReclutador> {
                               }else{
                                 isError = false;
                                 error = '';
+                                print(_textID.text);
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => quizz(prospecto_int: int.parse(_textID.text))));
                               }
                             });

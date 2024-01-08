@@ -1,9 +1,11 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:telsolreclutamiento/componentes/reproductor.dart';
 import 'package:telsolreclutamiento/componentes/validarRespuestaExamenAuditorio.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
+import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/Apto.dart';
+
 
 class examenAuditivo extends StatefulWidget {
   final int prospecto_id;
@@ -15,6 +17,63 @@ class examenAuditivo extends StatefulWidget {
 }
 
 class _examenAuditivo extends State<examenAuditivo> {
+
+  final CountdownController _controller =
+  new CountdownController(autoStart: true);
+
+  final audioPlayer = AudioPlayer();
+  bool isPlaying = false;
+  Duration duration = Duration.zero;
+  Duration position = Duration.zero;
+
+  Future stopAudio() async{
+    await audioPlayer.stop();
+  }
+
+
+
+  Future setAudio() async {
+    final player = AudioCache(prefix:  'assets/');
+    final url = await player.load('Pregunta_Audio.mp3');
+    audioPlayer.setUrl(url.path, isLocal: true);
+  }
+
+  String formatTime(Duration duration){
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    final minutes = twoDigits(duration.inMinutes.remainder(60));
+    final seconds = twoDigits(duration.inSeconds.remainder(60));
+
+    return [
+      minutes,
+      seconds
+    ].join(':');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    setAudio();
+
+    audioPlayer.onPlayerStateChanged.listen((state) {
+      setState(() {
+        isPlaying = state == PlayerState.PLAYING;
+      });
+    });
+
+    audioPlayer.onDurationChanged.listen((newDuration) {
+      setState(() {
+        duration = newDuration;
+      });
+    });
+
+    audioPlayer.onAudioPositionChanged.listen((newPosition) {
+      setState(() {
+        position = newPosition;
+      });
+    });
+  }
+
   double result = 0;
   @override
   Widget build(BuildContext context) {
@@ -27,6 +86,7 @@ class _examenAuditivo extends State<examenAuditivo> {
           children: [
             const Text('Segundos Restantes'),
             Countdown(
+                controller: _controller.restart(),
                 seconds: 120,
                 build: (BuildContext context, double time) =>
                     Text(time.toString()),
@@ -43,9 +103,44 @@ class _examenAuditivo extends State<examenAuditivo> {
                         Estadoseleccionado,
                         Cacseleccionado));
                   });
+                  audioPlayer.stop();
+                  print(this.widget.prospecto_id.toString()+" "+this.widget.quizzscore.toString()+" "+this.widget.tecladoscore.toString()+" "+resultadofinal.toStringAsFixed(2));
                   Navigator.push(context, MaterialPageRoute(builder: (context) => apto(prospecto_id: this.widget.prospecto_id, quizzscore: this.widget.quizzscore, tecladoscore: this.widget.tecladoscore, auditivoscore: double.parse(resultadofinal.toStringAsFixed(2)),)));
                 }),
-            reproductor(),
+            Slider(
+              min:0,
+              max: duration.inSeconds.toDouble(),
+              value: position.inSeconds.toDouble(),
+              onChanged: (value) async {
+                final position = Duration(seconds: value.toInt());
+                await audioPlayer.seek(position);
+
+                await audioPlayer.resume();
+              },
+            ),
+            Padding(padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(formatTime(position)),
+                    Text(formatTime(duration)),
+                  ],
+                )
+            ),
+            CircleAvatar(
+              radius: 35,
+              child: IconButton(
+                icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
+                iconSize: 50,
+                onPressed: () async {
+                  if(isPlaying){
+                    await audioPlayer.pause();
+                  }else{
+                    await audioPlayer.resume();
+                  }
+                },
+              ),
+            ),
             QuestionOptions(),
             const SizedBox(height: 30,),
             ElevatedButton(
@@ -55,6 +150,7 @@ class _examenAuditivo extends State<examenAuditivo> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30))),
                 onPressed: () {
+                  _controller.restart();
                   setState(() {
                     examenterminado = true;
                     result = vp.calcularcalificacion(vp.Calificacion(
@@ -67,6 +163,8 @@ class _examenAuditivo extends State<examenAuditivo> {
                         Cacseleccionado));
                     resultadofinal = result;
                   });
+                  audioPlayer.stop();
+                  print(this.widget.prospecto_id.toString()+" "+this.widget.quizzscore.toString()+" "+this.widget.tecladoscore.toString()+" "+resultadofinal.toStringAsFixed(2));
                   Navigator.push(context, MaterialPageRoute(builder: (context) => apto(prospecto_id: this.widget.prospecto_id, quizzscore: this.widget.quizzscore, tecladoscore: this.widget.tecladoscore, auditivoscore: double.parse(resultadofinal.toStringAsFixed(2)),)));
                 },
                 child: const Text(

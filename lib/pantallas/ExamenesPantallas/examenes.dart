@@ -3,7 +3,7 @@ import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/instruccionesExamAudio.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/quizz.dart';
 import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/DashboardReclutador.dart';
-import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/resultados.dart';
+import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/Apto.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/instruccionesExamenTecleado.dart';
 
 class examenes extends StatelessWidget {
@@ -19,14 +19,17 @@ class examenes extends StatelessWidget {
         child: Column(
           children: [
             ElevatedButton(onPressed: () {
+              print("101");
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => quizz(prospecto_int: 101,)));
             }, child: Text('quiiz')),
             ElevatedButton(onPressed: () {
+              print("101 100");
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => instruccionesExamenTeclado(prospecto_id: 101,quizzscore: 100,)));
             }, child: Text('Tecleado')),
             ElevatedButton(onPressed: () {
+              print("101 100 45");
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => instruccionesExamenAuditivo(prospecto_id: 101,quizzscore: 100, tecladoscore: 45,)));
             }, child: Text('Auditivo')),
@@ -36,9 +39,9 @@ class examenes extends StatelessWidget {
             }, child: Text('Dashboard reclutador')),
             ElevatedButton(onPressed: () {
               Navigator.push(context, 
-                MaterialPageRoute(builder: (context) => Resultados(time: 30, length: 13, errors: 2))
+                MaterialPageRoute(builder: (context) => apto(prospecto_id: 102, quizzscore: 100, tecladoscore: 42, auditivoscore: 80))
               );
-            }, child: Text('PRUEBA'))
+            }, child: Text('Apto'))
           ],
         ),
       ),

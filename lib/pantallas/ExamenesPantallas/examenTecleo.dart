@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/resultados.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/instruccionesExamAudio.dart';
 
 class examenTeclado extends StatefulWidget{
@@ -81,10 +80,14 @@ class _examenTeclado extends State<examenTeclado>{
                   tiempofinal = _stopwatch.elapsed.inSeconds;
                   _stop();
                   _textFieldController.clear();
+                  erroresfinales=errores;
+                  tiempofinalExamen=tiempofinal;
+                  resetearexamen();
+                  print(this.widget.prospect_id.toString()+" "+this.widget.quizzscore.toString()+" "+sacarWpm(exam.length, tiempofinal).toString());
                   Navigator.push(
                       context,
                       //MaterialPageRoute(builder: (context) =>  Resultados(time: tiempofinal, length: exam.length, errors: errores,)));
-                      MaterialPageRoute(builder: (context) => instruccionesExamenAuditivo(prospecto_id: 100, quizzscore: 100, tecladoscore: sacarWpm(exam.length, tiempofinal),)));
+                      MaterialPageRoute(builder: (context) => instruccionesExamenAuditivo(prospecto_id: this.widget.prospect_id, quizzscore: this.widget.quizzscore, tecladoscore: sacarWpm(exam.length, tiempofinal),)));
                 }
                 else{
                   textpointer++;
@@ -106,6 +109,20 @@ class _examenTeclado extends State<examenTeclado>{
           errorText,
           style: const TextStyle(color: Colors.red), // Estilo del mensaje de error
         ),
+        ElevatedButton(onPressed: () {
+          startExam();
+          tiempofinal = _stopwatch.elapsed.inSeconds;
+          _stop();
+          _textFieldController.clear();
+          erroresfinales=errores;
+          tiempofinalExamen=tiempofinal;
+          resetearexamen();
+          print(this.widget.prospect_id.toString()+" "+this.widget.quizzscore.toString()+" "+sacarWpm(exam.length, 10).toString());
+          Navigator.push(
+              context,
+              //MaterialPageRoute(builder: (context) =>  Resultados(time: tiempofinal, length: exam.length, errors: errores,)));
+              MaterialPageRoute(builder: (context) => instruccionesExamenAuditivo(prospecto_id: this.widget.prospect_id, quizzscore: this.widget.quizzscore, tecladoscore: sacarWpm(exam.length, 10),)));
+        }, child: Text('saltar quizz'))
       ],
     ),
     );
@@ -145,6 +162,8 @@ class _examenTeclado extends State<examenTeclado>{
 
 
   int tiempofinal = 0;
+  int tiempofinalExamen = 0;
+  int erroresfinales=0;
 
 
   void setString() {
@@ -204,4 +223,10 @@ class _examenTeclado extends State<examenTeclado>{
 
   bool examenTerminado = false;
   bool examenEmpezado = false;
+
+  void resetearexamen(){
+    botonReiniciar();
+    errores=0;
+    tiempofinal=0;
+  }
 }
