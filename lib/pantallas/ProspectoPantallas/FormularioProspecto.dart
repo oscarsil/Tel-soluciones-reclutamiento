@@ -73,6 +73,28 @@ class _campos extends State<campos> {
 
 
   @override
+  void initState(){
+    _textNombre.text = '';
+    _textAp.text ='';
+    _textAm.text='';
+    _textEdad.text='';
+    _textSexo.text='';
+    _textTelefono.text='';
+    _textEsc.text='';
+  }
+
+  void cleartext(){
+    _textNombre.clear();
+    _textAp.clear();
+    _textAm.clear();
+    _textEdad.clear();
+    _textSexo.clear();
+    _textTelefono.clear();
+    _textEsc.clear();
+  }
+
+
+  @override
   void dispose(){
     _textNombre.dispose();
     _textAp.dispose();
@@ -208,6 +230,7 @@ class _campos extends State<campos> {
             if(validarBoton(_textNombre.text, _textAp.text, _textAm.text, _textEdad.text, _textSexo.text,_textTelefono.text, _textEsc.text)){
               createprospect( _textNombre.text, _textAp.text, _textAm.text, _textEdad.text,
                   _textSexo.text, _textTelefono.text, _textEsc.text,dropdownvalueCamp);
+              cleartext();
             }else{
               print('no go');
             }

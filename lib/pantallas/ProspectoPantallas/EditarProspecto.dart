@@ -22,6 +22,9 @@ class EditarProspecto extends StatefulWidget{
 
 class _EditarProspecto extends State<EditarProspecto>{
 
+
+
+
   @override
   void diaspose(){
     _textNombreBuscar.dispose();
@@ -114,6 +117,33 @@ class campos extends StatefulWidget {
 }
 
 class _campos extends State<campos>{
+
+  @override
+  void initState(){
+    _textNombreBuscar.text = '';
+    _textNombre.text = '';
+    _textAP.text ='';
+    _textAM.text='';
+    _textEdad.text='';
+    _textSexo.text='';
+    _textTelefono.text='';
+    _textEscolaridad.text='';
+    _textestatus.text='';
+    _textMotivo.text='';
+  }
+
+  void cleartext(){
+    _textNombreBuscar.clear();
+    _textNombre.clear();
+    _textAP.clear();
+    _textAM.clear();
+    _textEdad.clear();
+    _textSexo.clear();
+    _textTelefono.clear();
+    _textEscolaridad.clear();
+    _textestatus.clear();
+    _textMotivo.clear();
+  }
 
   final formKey = GlobalKey<FormState>();
   String dropdownvalueCamp = 'Agente R02';
@@ -313,6 +343,7 @@ class _campos extends State<campos>{
           ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),onPressed: ()  {
             if(formKey.currentState!.validate()){
               Navigator.push(context, MaterialPageRoute(builder: (context) => JefeReclutadorPrincipal()));
+              cleartext();
             }
           }, child: Text('Guardar', style: TextStyle(color: Colors.white),))
         ],
