@@ -10,6 +10,15 @@ class EditarReclutador extends StatefulWidget{
 }
 
 class _EditarReclutador extends State<EditarReclutador>{
+  @override
+  void dispose(){
+    _textId.dispose();
+    _textNombre.dispose();
+    _textContra.dispose();
+    super.dispose();
+  }
+
+
   final _textId = TextEditingController();
   final _textNombre = TextEditingController();
   final _textContra = TextEditingController();

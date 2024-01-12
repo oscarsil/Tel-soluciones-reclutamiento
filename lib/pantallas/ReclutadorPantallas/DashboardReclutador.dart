@@ -12,11 +12,19 @@ class DashboardReclutador extends StatefulWidget{
 }
 
 class _DashboardReclutadorState extends State<DashboardReclutador> {
+  @override
+  void dispose(){
+    _textID.dispose();
+    super.dispose();
+  }
+
+  final _textID = TextEditingController();
+
   bool isError = false;
   String error = '';
   @override
   Widget build(BuildContext context){
-    final _textID = TextEditingController();
+
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(50),

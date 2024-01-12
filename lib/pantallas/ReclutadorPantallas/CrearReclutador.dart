@@ -11,6 +11,17 @@ class CrearReclutador extends StatefulWidget {
 }
 
 class _CrearReclutadorState extends State<CrearReclutador> {
+
+  final Nombre = TextEditingController();
+  final contra = TextEditingController();
+
+  @override
+  void dispose(){
+    Nombre.dispose();
+    contra.dispose();
+    super.dispose();
+  }
+
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -31,6 +42,7 @@ class _CrearReclutadorState extends State<CrearReclutador> {
                 SizedBox(
                   width: 500,
                   child: TextFormField(
+                    controller: Nombre,
                     validator: (value){
                       if(value!.isEmpty){
                         return "nombre Requerido";
@@ -50,6 +62,7 @@ class _CrearReclutadorState extends State<CrearReclutador> {
                 SizedBox(
                   width: 500,
                   child: TextFormField(
+                    controller: contra,
                     validator: (value){
                       if(value!.isEmpty){
                         return "contraseña Requerido";

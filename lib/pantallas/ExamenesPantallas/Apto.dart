@@ -67,46 +67,6 @@ class _aptoState extends State<apto> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardReclutador()));
                 },
                 child: Text("Volver a pagina principal", style: TextStyle(color: Colors.white, fontSize: 20),)),
-            /*
-            Row(
-              children: [
-                Text('Prospecto id: '),
-                Text(this.widget.prospecto_id.toString()),
-              ],
-            ),
-            Row(
-              children: [
-                Text('Calificacion de quizz: '),
-                Text(this.widget.quizzscore.toString()),
-              ],
-            ),
-            Row(
-              children: [
-                Text('PPM: '),
-                Text(this.widget.tecladoscore.toString()),
-                Text(' Calificacion de examen de Teclado: '),
-                Text(wpmtograde(this.widget.tecladoscore).toString()),
-              ],
-            ),
-            Row(
-              children: [
-                Text('Calificacion de examen auditivo: '),
-                Text(this.widget.auditivoscore.toString()),
-              ],
-            ),
-            Row(
-              children: [
-                Text('Promedio'),
-                Text(finalgrade(this.widget.quizzscore, wpmtograde(this.widget.tecladoscore), this.widget.auditivoscore).toStringAsFixed(2)),
-              ],
-            ),
-            Row(
-              children: [
-                Text("Apto o No apto: "),
-                Text(VarificarApto(puntuajefinall))
-              ],
-            ),
-            */
           ],
         ),
       ),

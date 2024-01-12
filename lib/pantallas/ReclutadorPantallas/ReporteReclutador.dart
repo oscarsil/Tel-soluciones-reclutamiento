@@ -21,6 +21,13 @@ class _ReporteReclutador extends State<ReporteReclutador>{
   }
 
   @override
+  void dispose(){
+    ValorDesde.dispose();
+    ValorHasta.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar: PreferredSize(

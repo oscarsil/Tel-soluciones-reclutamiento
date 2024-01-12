@@ -50,6 +50,13 @@ class _examenAuditivo extends State<examenAuditivo> {
   }
 
   @override
+  void dispose(){
+    audioPlayer.dispose();
+    _controller.restart();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
 

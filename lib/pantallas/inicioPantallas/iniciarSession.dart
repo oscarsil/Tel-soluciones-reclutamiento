@@ -19,6 +19,13 @@ class IniciarSession extends StatefulWidget{
 
 class _IniciarSessionState extends State<IniciarSession> {
 
+  @override
+  void dispose(){
+    _textUserName.dispose();
+    _textPassword.dispose();
+    super.dispose();
+  }
+
   bool isLoginTrue = false;
 
   final db = database_helper();

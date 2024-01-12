@@ -21,6 +21,22 @@ class EditarProspecto extends StatefulWidget{
 }
 
 class _EditarProspecto extends State<EditarProspecto>{
+
+  @override
+  void diaspose(){
+    _textNombreBuscar.dispose();
+    _textNombre.dispose();
+    _textAP.dispose();
+    _textAM.dispose();
+    _textEdad.dispose();
+    _textSexo.dispose();
+    _textTelefono.dispose();
+    _textEscolaridad.dispose();
+    _textestatus.dispose();
+    _textMotivo.dispose();
+    super.dispose;
+  }
+
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context){

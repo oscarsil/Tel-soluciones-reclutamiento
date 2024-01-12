@@ -19,6 +19,12 @@ class iniciarsessionReclutador extends StatefulWidget{
 
 class _iniciarsessionReclutadorState extends State<iniciarsessionReclutador> {
 
+  @override
+  void dispose(){
+    _textUserName.dispose();
+    _textPassword.dispose();
+  }
+
   bool isLoginTrue = false;
 
   final db = database_helper();

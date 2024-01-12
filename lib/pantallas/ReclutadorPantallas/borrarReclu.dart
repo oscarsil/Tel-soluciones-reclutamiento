@@ -9,6 +9,14 @@ class borrarReclu extends StatefulWidget{
 class _borrarRecluState extends State<borrarReclu> {
 
   @override
+  void dispose(){
+    buscarNombre.dispose();
+    super.dispose();
+  }
+
+  final buscarNombre = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(child: barraRegSal(titulo: "borrar reclutador"), preferredSize: const Size.fromHeight(50)),
@@ -18,7 +26,9 @@ class _borrarRecluState extends State<borrarReclu> {
             Row(
               children: [
                 Text("buscar por nombre"),
-                Container(width:200,child: TextFormField()),
+                Container(width:200,child: TextFormField(
+                  controller: buscarNombre,
+                )),
                 ElevatedButton(onPressed: () {}, child: Icon(Icons.search))
               ],
             ),

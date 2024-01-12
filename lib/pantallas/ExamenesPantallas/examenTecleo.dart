@@ -4,6 +4,8 @@ import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/instruccionesExamAudio.dart';
 
 class examenTeclado extends StatefulWidget{
+
+
   final int prospect_id;
   final int quizzscore;
   examenTeclado({required this.prospect_id,required this.quizzscore});
@@ -16,6 +18,13 @@ class _examenTeclado extends State<examenTeclado>{
     double palabras = letras / 5;
     double resultado = (palabras / segundos) * 60;
     return resultado;
+  }
+
+  @override
+  void dispose(){
+    _timer.cancel();
+    _textFieldController.dispose();
+    super.dispose();
   }
 
 
