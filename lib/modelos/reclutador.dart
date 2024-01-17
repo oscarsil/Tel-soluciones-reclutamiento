@@ -10,7 +10,8 @@ class Reclutador{
       required this.habilitado});
 
   factory Reclutador.fromMap(Map<String, dynamic> json) => Reclutador(
-      username: json["id"],
+      id: json["id"],
+      username: json["username"],
       password: json["password"],
       habilitado: json["habilitado"]);
 

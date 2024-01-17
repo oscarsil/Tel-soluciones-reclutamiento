@@ -1,6 +1,7 @@
 class Prospecto{
   final int? id;
-  final String nombre,primerApellido,segundoApellido,direccion,telefono,correo;
+  final String nombre,primerApellido,segundoApellido,direccion,telefono,escolaridad;
+  final int edad;
   final int? calquizz, calexamTec, calexamAud;
   final String? campana, estatus, motivo;
 
@@ -11,7 +12,8 @@ class Prospecto{
     required this.segundoApellido,
     required this.direccion,
     required this.telefono,
-    required this.correo,
+    required this.escolaridad,
+    required this.edad,
     this.calquizz,
     this.calexamTec,
     this.calexamAud,
@@ -21,12 +23,21 @@ class Prospecto{
 });
 
   factory Prospecto.fromMap(Map<String, dynamic> json) => Prospecto(
+      id: json["id"],
       nombre: json["nombre"],
       primerApellido: json["primerApellido"],
       segundoApellido: json["segundoApellido"],
       direccion: json["direccion"],
       telefono: json["telefono"],
-      correo: json["correo"]);
+      escolaridad: json["escolaridad"],
+      edad: json["edad"],
+      calquizz:  json["calquizz"],
+      calexamTec: json["calexamTec"],
+      calexamAud: json["calexamAud"],
+      campana: json["campana"],
+      estatus: json["estatus"],
+      motivo: json["motivo"]
+  );
 
   Map<String, dynamic> toMap(){
     return{
@@ -36,7 +47,8 @@ class Prospecto{
       'segundoApellido':segundoApellido,
       'direccion':direccion,
       'telefono':telefono,
-      'correo':correo,
+      'escolaridad':escolaridad,
+      'edad': edad,
       'calquizz':calquizz,
       'calexamTec':calexamTec,
       'calecamAud':calexamAud,

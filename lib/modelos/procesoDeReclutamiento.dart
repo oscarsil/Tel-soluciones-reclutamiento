@@ -2,7 +2,7 @@ class ProccesoDeContratacion{
   final int? id;
   final String nombre_reclutador;
   final int id_reclutante, id_prospecto;
-  final DateTime proc_time_stamp;
+  final String proc_time_stamp;
 
   ProccesoDeContratacion({
     this.id,
@@ -13,6 +13,7 @@ class ProccesoDeContratacion{
 });
 
   factory ProccesoDeContratacion.fromMap(Map<String, dynamic> json) => ProccesoDeContratacion(
+      id: json["id"],
       nombre_reclutador: json["nombre_reclutador"],
       id_reclutante: json["id_reclutante"],
       id_prospecto: json["id_prospecto"],
