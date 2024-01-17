@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/ListaDereclutador.dart';
+import 'package:telsolreclutamiento/modelos/reclutador.dart';
+import 'package:telsolreclutamiento/database_helper.dart';
 
 class CrearReclutador extends StatefulWidget {
 
@@ -14,6 +16,8 @@ class _CrearReclutadorState extends State<CrearReclutador> {
 
   final Nombre = TextEditingController();
   final contra = TextEditingController();
+
+  final db = database_helper();
 
   @override
   void dispose(){
@@ -82,7 +86,12 @@ class _CrearReclutadorState extends State<CrearReclutador> {
                         backgroundColor: Colors.orange),
                     onPressed: () {
                       if(formKey.currentState!.validate()){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ListaDeReclutadores()));
+                        db.crearReclutador(Reclutador(
+                            username: Nombre.text,
+                            password: contra.text,
+                            habilitado: 1)).whenComplete(() {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ListaDeReclutadores()));
+                        });
                       }
                     },
                     child: Text('Crear', style: TextStyle(color: Colors.white),)
