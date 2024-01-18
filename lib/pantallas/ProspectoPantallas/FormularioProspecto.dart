@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:flutter/services.dart';
-import 'dart:math';
+import 'package:telsolreclutamiento/modelos/prospecto.dart';
+import 'package:telsolreclutamiento/database_helper.dart';
+
+
 bool formularioLlenado = false;
 bool FaltaLlenarCampo = false;
 
+final db = database_helper();
 
 class FormularioProspecto extends StatefulWidget {
   @override
@@ -35,21 +39,31 @@ class campos extends StatefulWidget {
 }
 
 class _campos extends State<campos> {
+
+
+  bool _mostrarBoton = true;
+
+  void esconderBoton(){
+    setState(() {
+      _mostrarBoton = !_mostrarBoton;
+    });
+  }
+
   String error='';
   bool isError= false;
 
-  bool validarBoton(String vn, vap, vam, ved,vs,vt,ves){
-    if(vn == '' || vap== '' || vam== '' || ved== '' ||  vs== '' || vt== '' || ves== ''){
+  int newid = 0;
+
+  bool validarBoton(String vn, vap, vam, ved, vdir,vt,ves){
+    if(vn == '' || vap== '' || vam== '' || vdir=='' || ved== ''  || vt== '' || ves== ''){
       isError = true;
       error = "falta llenar campo";
       return false;
     }else{
       if(vt.length == 10){
-        print(vt.length);
         isError = false;
         return true;
       }else{
-        print(vt.length);
         isError = true;
         error = "numero de telefono invalido";
         return false;
@@ -66,8 +80,8 @@ class _campos extends State<campos> {
    final _textNombre = TextEditingController();
   final _textAp = TextEditingController();
   final _textAm = TextEditingController();
+  final _textdir = TextEditingController();
   final _textEdad = TextEditingController();
-  final _textSexo = TextEditingController();
   final _textTelefono = TextEditingController();
   final _textEsc = TextEditingController();
 
@@ -77,8 +91,8 @@ class _campos extends State<campos> {
     _textNombre.text = '';
     _textAp.text ='';
     _textAm.text='';
+    _textdir.text='';
     _textEdad.text='';
-    _textSexo.text='';
     _textTelefono.text='';
     _textEsc.text='';
   }
@@ -87,8 +101,8 @@ class _campos extends State<campos> {
     _textNombre.clear();
     _textAp.clear();
     _textAm.clear();
+    _textdir.clear();
     _textEdad.clear();
-    _textSexo.clear();
     _textTelefono.clear();
     _textEsc.clear();
   }
@@ -99,8 +113,8 @@ class _campos extends State<campos> {
     _textNombre.dispose();
     _textAp.dispose();
     _textAm.dispose();
+    _textdir.dispose();
     _textEdad.dispose();
-    _textSexo.dispose();
     _textTelefono.dispose();
     _textEsc.dispose();
     super.dispose();
@@ -152,30 +166,14 @@ class _campos extends State<campos> {
               width: 10,
             ),
             SizedBox(
-                width: 80,
-                child: TextField(
-                  controller: _textEdad,
-                  decoration: InputDecoration(
-                      labelText: 'Edad',),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
-                )),
-            SizedBox(
-              width: 10,
+              width: 300,
+              child: TextField(
+                controller: _textdir,
+                decoration: InputDecoration(
+                  labelText: 'Direccion'
+                ),
+              ),
             ),
-            SizedBox(
-                width: 80,
-                child: TextField(
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]"))
-                  ],
-                  controller: _textSexo,
-                  decoration: InputDecoration(
-                      labelText: 'Sexo',
-                  ),
-                )),
             SizedBox(
               width: 10,
             ),
@@ -203,6 +201,17 @@ class _campos extends State<campos> {
               width: 10,
             ),
             SizedBox(
+                width: 80,
+                child: TextField(
+                  controller: _textEdad,
+                  decoration: InputDecoration(
+                    labelText: 'Edad',),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                )),
+            SizedBox(
               width: 10,
             ),
             Container(
@@ -227,22 +236,20 @@ class _campos extends State<campos> {
         ),
         ElevatedButton(onPressed: () {
           setState(() {
-            if(validarBoton(_textNombre.text, _textAp.text, _textAm.text, _textEdad.text, _textSexo.text,_textTelefono.text, _textEsc.text)){
-              createprospect( _textNombre.text, _textAp.text, _textAm.text, _textEdad.text,
-                  _textSexo.text, _textTelefono.text, _textEsc.text,dropdownvalueCamp);
-              cleartext();
-            }else{
-              print('no go');
+            if(validarBoton(_textNombre.text, _textAp.text, _textAm.text, _textEdad.text, _textdir.text, _textTelefono.text, _textEsc.text)){
+              db.crearProspecto(
+                  Prospecto(
+                      nombre: _textNombre.text,
+                      primerApellido: _textAp.text,
+                      segundoApellido: _textAm.text,
+                      direccion: _textdir.text,
+                      telefono: _textTelefono.text,
+                      escolaridad: _textEsc.text,
+                      edad: int.parse(_textEdad.text),
+                      campana: dropdownvalueCamp)).whenComplete(() => Navigator.pop(context));
             }
           });
-        }, child: Text('Enviar',style: TextStyle(color: Colors.white, fontSize: 15),), style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.orange,
-            padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30))),),
-        Container(
-          child: isError ? Text(error) :  Text('ID PROCESO: $idGenerado'),
-        ),
+        }, child: Text("Nuevo")) 
       ],
     );
 
@@ -250,16 +257,5 @@ class _campos extends State<campos> {
 }
 
 
-int idGenerado = 0;
-void createprospect(String nombre, apellidopat, apellidomat, edad, sexo, telefono, escolaridad,campana){
-  idGenerado = generarId();
-  print('PROSPECT = {id: $idGenerado,nombre: $nombre'
-      'Apellido Paterno: $apellidopat, Apellido Materno: $apellidomat'
-      'Edad: $edad, Sexo: $sexo, Telefono: $telefono'
-      'Escolaridad: $escolaridad ,Campaña : $campana}');
-}
 
-int generarId(){
-  Random random = new Random();
-  return random.nextInt(100000);
-}
+

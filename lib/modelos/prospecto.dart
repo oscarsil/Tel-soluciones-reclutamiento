@@ -51,7 +51,7 @@ class Prospecto{
       'edad': edad,
       'calquizz':calquizz,
       'calexamTec':calexamTec,
-      'calecamAud':calexamAud,
+      'calexamAud':calexamAud,
       'campana':campana,
       'estatus':estatus,
       'motivo':motivo
