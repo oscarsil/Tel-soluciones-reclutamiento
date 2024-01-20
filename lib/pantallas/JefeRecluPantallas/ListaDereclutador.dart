@@ -3,10 +3,42 @@ import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/CrearReclutador.dart';
 import 'package:telsolreclutamiento/componentes/barraslaterales.dart';
 import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/EditarReclutador.dart';
+import 'dart:core';
+import 'package:telsolreclutamiento/database_helper.dart';
+import 'package:telsolreclutamiento/modelos/reclutador.dart';
 
-class ListaDeReclutadores extends StatelessWidget{
+class ListaDeReclutadores extends StatefulWidget{
 
   const ListaDeReclutadores({super.key});
+
+  @override
+  State<ListaDeReclutadores> createState() => _ListaDeReclutadoresState();
+}
+
+class _ListaDeReclutadoresState extends State<ListaDeReclutadores> {
+  late database_helper handler;
+  late Future<List<Reclutador>> reclutadores;
+  final db = database_helper();
+
+  Future<void> _refresh() async{
+    setState(() {
+      reclutadores = getallReclutadores();
+    });
+  }
+
+  @override
+  void initState() {
+    handler = database_helper();
+    reclutadores = handler.getReclutadores();
+    handler.initDB().whenComplete(() {
+      reclutadores = getallReclutadores();
+    });
+    super.initState();
+  }
+
+  Future <List<Reclutador>> getallReclutadores(){
+    return handler.getReclutadores();
+  }
 
   @override
   Widget build(BuildContext context){
@@ -31,14 +63,56 @@ class ListaDeReclutadores extends StatelessWidget{
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Row(
-                            children: <Widget>[
-                              Expanded(child: SingleChildScrollView(
-                                  scrollDirection: Axis.vertical,
-                                  child: createDataTable()
-                              ))
-                            ],
-                          ),
+                          FutureBuilder<List<Reclutador>>(
+                                future: reclutadores,
+                                builder: (BuildContext context, AsyncSnapshot<List<Reclutador>> snapshot){
+                                  if(snapshot.connectionState == ConnectionState.waiting){
+                                    return CircularProgressIndicator();
+                                  }else if(snapshot.hasData && snapshot.data!.isEmpty){
+                                    return Text("no data");
+                                  }else if(snapshot.hasError){
+                                    return Text(snapshot.error.toString());
+                                  }else{
+                                    final items = snapshot.data ?? <Reclutador>[];
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                          child: Table(
+                                            children:
+                                              const <TableRow>[
+                                                TableRow(
+                                                  children: [
+                                                    TableCell(child: Text("id")),
+                                                    TableCell(child: Text("nombre"))
+                                                  ]
+                                                )],
+                                          )
+                                        ),
+                                        ListView.builder(
+                                            itemCount: items.length,
+                                          scrollDirection: Axis.vertical,
+                                          shrinkWrap: true,
+                                          itemBuilder: (context,index){
+                                              return Container(
+                                                child: Table(
+                                                  children: <TableRow>[
+                                                    TableRow(
+                                                      children: [
+                                                        TableCell(child: Text(items[index].id.toString())),
+                                                        TableCell(child: Text(items[index].username))
+                                                      ]
+                                                    )
+                                                  ],
+                                                ),
+                                              );
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  }
+                                },
+                              ),
                           SizedBox(
                             height: 20,
                           ),
@@ -72,44 +146,5 @@ class ListaDeReclutadores extends StatelessWidget{
               ],
             )
         ));
-  }
-
-  final List<Map> _reclutadores =const [
-    {
-      'id':100,
-      'Nombre':'Mariana',
-      'Habilitado':true
-    },
-    {
-      'id':101,
-      'Nombre':'Judith',
-      'Habilitado':false
-    },
-    {
-      'id':102,
-      'Nombre':'Angelica',
-      'Habilitado':true
-    }];
-
-  DataTable createDataTable(){
-    return DataTable(columns: createcolumns(), rows: createRows(),
-      headingRowColor: MaterialStateProperty.resolveWith((states) => Colors.orange),
-      headingTextStyle: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),);
-  }
-
-  List<DataColumn> createcolumns(){
-    return [
-      DataColumn(label: Text('ID')),
-      DataColumn(label: Text('Nombre')),
-      DataColumn(label: Text('Habilitado')),
-    ];
-  }
-  List<DataRow> createRows(){
-    return _reclutadores
-        .map((reclutador) => DataRow(cells: [
-      DataCell(Text(reclutador['id'].toString())),
-      DataCell(Text(reclutador['Nombre'])),
-      DataCell(Text(reclutador['Habilitado'].toString()))
-    ])).toList();
   }
 }

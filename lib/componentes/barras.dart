@@ -108,7 +108,7 @@ class barraRegSal extends StatelessWidget {
       actions: <Widget>[
         IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.of(context).pop();
             }, icon:   Icon(Icons.arrow_back, color: Colors.white,)),
         IconButton(
             onPressed: () {

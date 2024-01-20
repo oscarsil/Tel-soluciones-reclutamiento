@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/componentes/barraslaterales.dart';
-import 'package:telsolreclutamiento/modelos/prospecto.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
+import 'package:telsolreclutamiento/modelos/prospecto.dart';
+import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/DashboardReclutador.dart';
+import 'package:telsolreclutamiento/componentes/barras.dart';
 
-class JefeReclutadorPrincipal extends StatefulWidget{
-  const JefeReclutadorPrincipal({super.key});
+class borrarProspecto extends StatefulWidget{
+  const borrarProspecto({super.key});
 
   @override
-  State<JefeReclutadorPrincipal> createState() => _JefeReclutadorPrincipalState();
+  State<borrarProspecto> createState() => _borrarProspectoState();
 }
 
-class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
+class _borrarProspectoState extends State<borrarProspecto> {
   late database_helper handler;
   late Future<List<Prospecto>> prospectos;
   final db = database_helper();
@@ -20,6 +20,7 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
   @override
   void dispose(){
     Keyword.dispose();
+    super.dispose();
   }
 
   @override
@@ -47,20 +48,15 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
     });
   }
 
-
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(50),
-            child: barraSalir(titulo: 'Jefe de Reclutamiento')),
+            child: barraRegSal(titulo: 'borrar Prospecto')),
         body: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              flex: 1,
-              child: barraslaterales(),
-            ),
             Expanded(
               flex: 5,
               child: Column(
@@ -115,16 +111,8 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
                                         TableCell(child: Text("nombre")),
                                         TableCell(child: Text("primer apellido")),
                                         TableCell(child: Text("segundo apellido")),
-                                        TableCell(child: Text("direccion")),
-                                        TableCell(child: Text("telefono")),
-                                        TableCell(child: Text("calquizz")),
-                                        TableCell(child: Text("calexamtex")),
-                                        TableCell(child: Text("calexamaud")),
-                                        TableCell(child: Text("campaña")),
                                         TableCell(child: Text("motivo")),
                                         TableCell(child: Text("Estatus")),
-                                        TableCell(child: Text("Edad")),
-                                        TableCell(child: Text("escolaridad")),
                                       ],
                                     ),]
                               ),
@@ -145,16 +133,13 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
                                               TableCell(child: Text(items[index].nombre)),
                                               TableCell(child: Text(items[index].primerApellido)),
                                               TableCell(child: Text(items[index].segundoApellido)),
-                                              TableCell(child: Text(items[index].direccion)),
-                                              TableCell(child: Text(items[index].telefono)),
-                                              TableCell(child: Text(items[index].calquizz.toString())),
-                                              TableCell(child: Text(items[index].calexamTec.toString())),
-                                              TableCell(child: Text(items[index].calexamAud.toString())),
-                                              TableCell(child: Text(items[index].campana.toString())),
                                               TableCell(child: Text(items[index].motivo.toString())),
                                               TableCell(child: Text(items[index].estatus.toString())),
-                                              TableCell(child: Text(items[index].edad.toString())),
-                                              TableCell(child: Text(items[index].escolaridad)),
+                                              TableCell(child: IconButton(onPressed: () {
+                                                setState(() {
+                                                  db.borrarProspecto(int.parse(items[index].id.toString())).whenComplete(_refresh);
+                                                });
+                                              }, icon: Icon(Icons.delete)))
                                             ]
                                         ),
                                       ],
