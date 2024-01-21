@@ -2,9 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/ListaDereclutador.dart';
 import 'package:flutter/services.dart';
+import 'package:telsolreclutamiento/database_helper.dart';
 
 
 class EditarReclutador extends StatefulWidget{
+  final int? id;
+  final String username, password;
+  bool habilitado;
+  EditarReclutador({
+    required this.id,
+    required this.username,
+    required this.password,
+    required this.habilitado
+});
   @override
   State<EditarReclutador> createState() => _EditarReclutador();
 }
@@ -18,10 +28,17 @@ class _EditarReclutador extends State<EditarReclutador>{
     super.dispose();
   }
 
+  int editarHabilitado(bool habilitado){
+    if(habilitado){return 1;}else{return 0;}
+  }
+
+  final db = database_helper();
 
   final _textId = TextEditingController();
   final _textNombre = TextEditingController();
   final _textContra = TextEditingController();
+
+
   bool isChecked = false;
   bool buscarError = false;
   String buscarMensajeError = '';
@@ -31,6 +48,8 @@ class _EditarReclutador extends State<EditarReclutador>{
 
   @override
   Widget build(BuildContext context){
+    _textNombre.text = widget.username;
+    _textContra.text = widget.password;
     return  Scaffold(
       appBar: PreferredSize(child: barraRegSal(titulo: 'Editar Reclutador',), preferredSize: Size.fromHeight(50)),
       body: Center(
@@ -39,48 +58,6 @@ class _EditarReclutador extends State<EditarReclutador>{
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Buscar Reclutador por ID'),
-                    SizedBox(width: 20,),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all()
-                      ),
-                      width: 200,
-                      child: TextField(
-                        controller: _textId,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: 20,),
-                    ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),onPressed: () {
-                      setState(() {
-                        if(_textId.text == ''){
-                          buscarError = true;
-                          buscarMensajeError = 'Falta llenar campo';
-                        }else{
-                        buscarError = false;
-                        buscarMensajeError = '';
-                        print("buscando");
-                        }
-                      });
-                    }, child: Text('Buscar', style: TextStyle(color: Colors.white),)),
-                    Container(
-                      child: buscarError ? Text(buscarMensajeError) : null,
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 50,
-              ),
               Text('Nombre Completo'),
               Container(
                 width: 200,
@@ -106,9 +83,11 @@ class _EditarReclutador extends State<EditarReclutador>{
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('Habilitado'),
-                  Checkbox(value: isChecked, onChanged: (bool? value){
+                  Checkbox(
+                      value: widget.habilitado,
+                      onChanged: (newvalue){
                     setState(() {
-                      isChecked = value!;
+                      widget.habilitado = newvalue!;
                     });
                   }),
                 ],
@@ -121,7 +100,11 @@ class _EditarReclutador extends State<EditarReclutador>{
                   }else{
                     editarError = false;
                     editarErrorMensaje = '';
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ListaDeReclutadores()));
+                    db.editarReclutador(
+                        _textNombre.text,
+                        _textContra.text,
+                        editarHabilitado(widget.habilitado),
+                        widget.id).whenComplete((){Navigator.pop(context);});
                   }
                 });
               }, child: Text('Listo', style: TextStyle(color: Colors.white),)),

@@ -40,6 +40,14 @@ class _ListaDeReclutadoresState extends State<ListaDeReclutadores> {
     return handler.getReclutadores();
   }
 
+  bool valorHabil(int habilitado){
+    if(habilitado == 1){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -100,7 +108,15 @@ class _ListaDeReclutadoresState extends State<ListaDeReclutadores> {
                                                     TableRow(
                                                       children: [
                                                         TableCell(child: Text(items[index].id.toString())),
-                                                        TableCell(child: Text(items[index].username))
+                                                        TableCell(child: Text(items[index].username)),
+                                                        TableCell(child: IconButton(onPressed: () {
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => EditarReclutador(
+                                                              id: items[index].id,
+                                                              username: items[index].username,
+                                                              password: items[index].password,
+                                                              habilitado: valorHabil(items[index].habilitado))
+                                                          )).then((value) => _refresh());
+                                                        }, icon: Icon(Icons.format_italic)))
                                                       ]
                                                     )
                                                   ],
@@ -130,6 +146,7 @@ class _ListaDeReclutadoresState extends State<ListaDeReclutadores> {
                               SizedBox(
                                 width: 20,
                               ),
+                              /*
                               ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.orange),
@@ -137,11 +154,12 @@ class _ListaDeReclutadoresState extends State<ListaDeReclutadores> {
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => EditarReclutador()));
                                   },
                                   child: Text('Actualizar reclutador',
-                                      style: TextStyle(color: Colors.white)))
+                                      style: TextStyle(color: Colors.white)))*/
                             ],
                           )
                         ],
-                      )),
+                      )
+                  ),
                 )
               ],
             )
