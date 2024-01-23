@@ -3,6 +3,7 @@ import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/componentes/barraslaterales.dart';
 import 'package:telsolreclutamiento/modelos/prospecto.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
+import 'package:telsolreclutamiento/pantallas/ProspectoPantallas/EditarProspecto.dart';
 
 class JefeReclutadorPrincipal extends StatefulWidget{
   const JefeReclutadorPrincipal({super.key});
@@ -90,7 +91,8 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
                       ),
                     ),
                   ),
-                  Expanded(child: FutureBuilder<List<Prospecto>>(
+                  Expanded(
+                    child: FutureBuilder<List<Prospecto>>(
                     future: prospectos,
                     builder: (BuildContext context, AsyncSnapshot<List<Prospecto>> snapshot){
 
@@ -142,7 +144,17 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
                                             children:
                                             [
                                               TableCell(child: Text(items[index].id.toString())),
-                                              TableCell(child: Text(items[index].nombre)),
+                                              TableCell(
+                                                  child: GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(builder: (context) => EditarProspecto(pros: items[index]))
+                                                        ).then((value) => _refresh());
+                                                      },
+                                                      child: Text(items[index].nombre
+                                                      ))
+                                              ),
                                               TableCell(child: Text(items[index].primerApellido)),
                                               TableCell(child: Text(items[index].segundoApellido)),
                                               TableCell(child: Text(items[index].direccion)),

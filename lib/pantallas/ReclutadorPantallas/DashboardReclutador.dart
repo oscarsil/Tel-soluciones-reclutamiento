@@ -3,6 +3,9 @@ import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/componentes/barraslaterales.dart';
 import 'package:flutter/services.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/quizz.dart';
+import 'package:telsolreclutamiento/modelos/prospecto.dart';
+import 'package:telsolreclutamiento/database_helper.dart';
+import 'package:telsolreclutamiento/pantallas/ProspectoPantallas/EditarProspecto.dart';
 
 class DashboardReclutador extends StatefulWidget{
   const DashboardReclutador({super.key});
@@ -12,16 +15,49 @@ class DashboardReclutador extends StatefulWidget{
 }
 
 class _DashboardReclutadorState extends State<DashboardReclutador> {
+  late database_helper handler;
+  late Future<List<Prospecto>> prospectos;
+  final db = database_helper();
+  final Keyword = TextEditingController();
+
   @override
   void dispose(){
+    Keyword.dispose();
     _textID.dispose();
     super.dispose();
   }
 
   final _textID = TextEditingController();
 
+  @override
+  void initState() {
+    handler = database_helper();
+    prospectos = handler.getProspectos();
+    handler.initDB().whenComplete(() {
+      prospectos = getallProspectos();
+    });
+    super.initState();
+  }
+
+  Future<List<Prospecto>> getallProspectos(){
+    return handler.getProspectos();
+  }
+
+  Future<List<Prospecto>> searchProspecto(){
+    return handler.searchProspecto(Keyword.text);
+  }
+
+
+  Future<void> _refresh() async {
+    setState(() {
+      prospectos = getallProspectos();
+    });
+  }
+
   bool isError = false;
   String error = '';
+
+
   @override
   Widget build(BuildContext context){
 
@@ -46,15 +82,118 @@ class _DashboardReclutadorState extends State<DashboardReclutador> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Row(
-                        children: <Widget>[
-                          Expanded(child: SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: createDataTable()
-                          ))
-                        ],
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8)
+                        ),
+                        child: TextFormField(
+                          controller: Keyword,
+                          onChanged: (value){
+                            if(value.isNotEmpty){
+                              setState(() {
+                                prospectos = searchProspecto();
+                              });
+                            }else{
+                              setState(() {
+                                prospectos = getallProspectos();
+                              });
+                            }
+                          },
+                          decoration: const InputDecoration(
+                              border: InputBorder.none,
+                              icon: Icon(Icons.search),
+                              hintText: "search"
+                          ),
+                        ),
                       ),
-                      SizedBox(height: 15,),
+                      FutureBuilder<List<Prospecto>>(
+                            future: prospectos,
+                            builder: (BuildContext context, AsyncSnapshot<List<Prospecto>> snapshot){
+
+                              if(snapshot.connectionState == ConnectionState.waiting){
+                                return CircularProgressIndicator();
+                              }else if(snapshot.hasData && snapshot.data!.isEmpty){
+                                return Text("no data");
+                              }else if(snapshot.hasError) {
+                                return Text(snapshot.error.toString());
+                              }else{
+                                final items = snapshot.data ?? <Prospecto>[];
+                                return Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      child: Table(
+
+                                          children: const <TableRow>[
+                                            TableRow(
+                                              children: [
+                                                TableCell(child: Text("id",)),
+                                                TableCell(child: Text("nombre")),
+                                                TableCell(child: Text("primer apellido")),
+                                                TableCell(child: Text("segundo apellido")),
+                                                TableCell(child: Text("direccion")),
+                                                TableCell(child: Text("telefono")),
+                                                TableCell(child: Text("calquizz")),
+                                                TableCell(child: Text("calexamtex")),
+                                                TableCell(child: Text("calexamaud")),
+                                                TableCell(child: Text("campaña")),
+                                                TableCell(child: Text("motivo")),
+                                                TableCell(child: Text("Estatus")),
+                                                TableCell(child: Text("Edad")),
+                                                TableCell(child: Text("escolaridad")),
+                                              ],
+                                            ),]
+                                      ),
+                                    ),
+                                    ListView.builder(
+                                        itemCount: items.length,
+                                        scrollDirection: Axis.vertical,
+                                        shrinkWrap: true,
+                                        itemBuilder: (context, index)
+                                        {
+                                          return Container(
+                                            child: Table(
+                                              children: <TableRow>[
+                                                TableRow(
+                                                    children:
+                                                    [
+                                                      TableCell(child: Text(items[index].id.toString())),
+                                                      TableCell(
+                                                          child: GestureDetector(
+                                                              onTap: () {
+                                                                Navigator.push(
+                                                                    context,
+                                                                    MaterialPageRoute(builder: (context) => EditarProspecto(pros: items[index]))
+                                                                ).then((value) => _refresh());
+                                                              },
+                                                              child: Text(items[index].nombre
+                                                              ))
+                                                      ),
+                                                      TableCell(child: Text(items[index].primerApellido)),
+                                                      TableCell(child: Text(items[index].segundoApellido)),
+                                                      TableCell(child: Text(items[index].direccion)),
+                                                      TableCell(child: Text(items[index].telefono)),
+                                                      TableCell(child: Text(items[index].calquizz.toString())),
+                                                      TableCell(child: Text(items[index].calexamTec.toString())),
+                                                      TableCell(child: Text(items[index].calexamAud.toString())),
+                                                      TableCell(child: Text(items[index].campana.toString())),
+                                                      TableCell(child: Text(items[index].motivo.toString())),
+                                                      TableCell(child: Text(items[index].estatus.toString())),
+                                                      TableCell(child: Text(items[index].edad.toString())),
+                                                      TableCell(child: Text(items[index].escolaridad)),
+                                                    ]
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        }),
+                                  ],
+                                );
+                              }
+                            },
+                          ),
+                      SizedBox(height: 45,),
                       Row(
                         children: [
                           SizedBox(width: 40,),
@@ -95,59 +234,5 @@ class _DashboardReclutadorState extends State<DashboardReclutador> {
     );
   }
 
-  DataTable createDataTable(){
-    return DataTable(columns: createcolumns(), rows: createRows(),
-      headingRowColor: MaterialStateProperty.resolveWith((states) => Colors.orange),
-      headingTextStyle: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),);
-  }
 
-  List<DataColumn> createcolumns(){
-    return [
-      DataColumn(label: Text('ID')),
-      DataColumn(label: Text('Nombre')),
-      DataColumn(label: Text('Fecha')),
-      DataColumn(label: Text('Resultados')),
-      DataColumn(label: Text('Estatus')),
-      DataColumn(label: Text('Motivo')),
-    ];
-  }
-
-  List<DataRow> createRows(){
-    return _prospectos
-        .map((prospecto) => DataRow(cells: [
-      DataCell(Text(prospecto['id'].toString())),
-      DataCell(Text(prospecto['Nombre'])),
-      DataCell(Text(prospecto['Fecha'].toString())),
-      DataCell(Text(prospecto['resultados'].toString())),
-      DataCell(Text(prospecto['estatus'])),
-      DataCell(Text(prospecto['motivo'].toString())),
-    ])).toList();
-  }
-
-  final List<Map> _prospectos = const [
-    {
-      'id': 100,
-      'Nombre': 'Juan Vazquez',
-      'Fecha':'09/03/2023',
-      'resultados': '100% 80% 33 WPM',
-      'estatus': 'Contrato pendiente',
-      'motivo': ''
-    },
-    {
-      'id': 101,
-      'Nombre': 'Mario Gomez',
-      'Fecha':'03/02/2023',
-      'resultados': '90% 100% 45 WPM',
-      'estatus': 'Contrato pendiente',
-      'motivo': 'esperando entrevista personal'
-    },
-    {
-      'id': 103,
-      'Nombre': 'Ricardo Cruz',
-      'Fecha':'18/05/2023',
-      'resultados': '70% 90% 40 WPM',
-      'estatus': 'Contrato pendiente',
-      'motivo': 'capacitacion pendiente'
-    }
-  ];
 }

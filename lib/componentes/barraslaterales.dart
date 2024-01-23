@@ -22,12 +22,6 @@ class barraslaterales extends StatelessWidget{
             SizedBox(
               height: 55,
             ),
-            IconButton(onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => EditarProspecto()));
-            }, icon: Icon(Icons.edit_square, color: Colors.white,size: 50,)),
-            SizedBox(height: 10,),
-            Wrap(children: [Text('Editar info de prospecto',style: TextStyle(fontSize: 18, color: Colors.white),)],),
-            SizedBox(height: 50,),
             IconButton(onPressed: ()  {
               Navigator.push(context, MaterialPageRoute(builder: (context) => ListaDeReclutadores()));
             }, icon: Icon(Icons.account_circle, color: Colors.white,size: 50,)),
@@ -69,11 +63,6 @@ class barraRelcutador extends StatelessWidget{
   Widget build(BuildContext context){
     return Column(
       children: [
-        IconButton(onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => EditarProspecto()));
-        }, icon: Icon(Icons.edit_square, color: Colors.white,size: 50,)),
-        SizedBox(height: 10,),
-        Wrap(children: [Text('Editar info de prospecto',style: TextStyle(fontSize: 18, color: Colors.white),)],),
         SizedBox(height: 50,),
         IconButton(onPressed: ()  {
           Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardReclutador()));

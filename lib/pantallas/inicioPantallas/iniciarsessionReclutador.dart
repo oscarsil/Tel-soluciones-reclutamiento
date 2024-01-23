@@ -23,6 +23,7 @@ class _iniciarsessionReclutadorState extends State<iniciarsessionReclutador> {
   void dispose(){
     _textUserName.dispose();
     _textPassword.dispose();
+    super.dispose();
   }
 
   bool isLoginTrue = false;
