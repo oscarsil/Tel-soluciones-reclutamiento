@@ -106,6 +106,13 @@ class database_helper {
     return searchResult.map((e) => Prospecto.fromMap(e)).toList();
   }
 
+  Future<List<Prospecto>> noscore() async{
+    final Database db = await initDB();
+    List<Map<String, Object?>> resultado = (await
+    db.rawQuery("SELECT * FROM PROSPECTO WHERE calquizz IS NULL"));
+    return resultado.map((e) => Prospecto.fromMap(e)).toList();
+  }
+
   Future<List<ProccesoDeContratacion>> buscarProcesoPorFecha(String desde, hasta) async {
     final Database db = await initDB();
     List<Map<String, Object?>> resultado = await db.rawQuery("SELECT * FROM PROCESO WHERE pts > ? and pts < ?", [desde,hasta]);
@@ -148,5 +155,7 @@ class database_helper {
     final Database db = await initDB();
     return db.rawUpdate('UPDATE PROSPECTO SET calquizz = ?, calexamTec = ?, calexamAud = ? WHERE id = ?',[calquizz, calexamTec, calexamAud, id]);
   }
+
+
 
 }

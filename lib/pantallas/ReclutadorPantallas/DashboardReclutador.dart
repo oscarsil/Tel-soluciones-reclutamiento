@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/componentes/barraslaterales.dart';
 import 'package:flutter/services.dart';
-import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/quizz.dart';
+import 'package:telsolreclutamiento/pantallas/ProcesoPantallas/ElegirReclutador.dart';
 import 'package:telsolreclutamiento/modelos/prospecto.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 import 'package:telsolreclutamiento/pantallas/ProspectoPantallas/EditarProspecto.dart';
@@ -23,11 +23,9 @@ class _DashboardReclutadorState extends State<DashboardReclutador> {
   @override
   void dispose(){
     Keyword.dispose();
-    _textID.dispose();
     super.dispose();
   }
 
-  final _textID = TextEditingController();
 
   @override
   void initState() {
@@ -54,8 +52,6 @@ class _DashboardReclutadorState extends State<DashboardReclutador> {
     });
   }
 
-  bool isError = false;
-  String error = '';
 
 
   @override
@@ -197,31 +193,10 @@ class _DashboardReclutadorState extends State<DashboardReclutador> {
                       Row(
                         children: [
                           SizedBox(width: 40,),
-                          SizedBox(
-                            width: 200,
-                            child: TextField(
-                              controller: _textID,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                            ),
-                          ),
                           ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),onPressed: ()  {
-                            setState(() {
-                              if(_textID.text.isEmpty){
-                                isError = true;
-                                error = 'favor de llenar campo';
-                              }else{
-                                isError = false;
-                                error = '';
-                                print(_textID.text);
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => quizz(prospecto_int: int.parse(_textID.text))));
-                              }
-                            });
+                                //Navigator.push(context, MaterialPageRoute(builder: (context) => quizz(prospecto_int: int.parse(_textID.text))));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => ElegirReclu()));
                           }, child: Text('Iniciar Proceso', style: TextStyle(color: Colors.white),)),
-                          Container(
-                            child: isError ? Text(error) :  null),
                         ],
                       )
                     ],
