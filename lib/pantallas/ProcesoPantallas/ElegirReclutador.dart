@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/modelos/reclutador.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
+import 'package:telsolreclutamiento/pantallas/ProcesoPantallas/ElegirProspecto.dart';
 
 class ElegirReclu extends StatefulWidget{
   const ElegirReclu({super.key});
@@ -60,7 +61,7 @@ class _ElegirRecluState extends State<ElegirReclu> {
                         title: Text(items[index].username),
                         subtitle: Text(items[index].id.toString()),
                         onTap: () {
-                         // Navigator.push(context, MaterialPageRoute(builder: (context) => Prueba2(nombre: items[index].username, idR: idReclu))).whenComplete(() => Navigator.pop(context));
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => ElegirPros(idReclu: items[index].id, UsernameReclu: items[index].username)));
                         },
                       );
                     });

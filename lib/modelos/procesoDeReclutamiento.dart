@@ -1,31 +1,31 @@
 class ProccesoDeContratacion{
   final int? id;
-  final String nombre_reclutador;
-  final int id_reclutante, id_prospecto;
-  final String proc_time_stamp;
+  final String nombreReclutador;
+  final int? idReclutante, idProspecto;
+  final String pts;
 
   ProccesoDeContratacion({
     this.id,
-    required this.nombre_reclutador,
-    required this.id_reclutante,
-    required this.id_prospecto,
-    required this.proc_time_stamp
+    required this.nombreReclutador,
+    required this.idReclutante,
+    required this.idProspecto,
+    required this.pts
 });
 
   factory ProccesoDeContratacion.fromMap(Map<String, dynamic> json) => ProccesoDeContratacion(
       id: json["id"],
-      nombre_reclutador: json["nombre_reclutador"],
-      id_reclutante: json["id_reclutante"],
-      id_prospecto: json["id_prospecto"],
-      proc_time_stamp: json["proc_time_stamp"]);
+      nombreReclutador: json["nombreReclutador"],
+      idReclutante: json["idReclutante"],
+      idProspecto: json["idProspecto"],
+      pts: json["pts"]);
 
   Map<String, dynamic> toMap(){
     return{
       'id':id,
-      'nombre_reclutador':nombre_reclutador,
-      'id_reclutante':id_reclutante,
-      'id_prospecto':id_prospecto,
-      'proc_time_stamp':proc_time_stamp,
+      'nombreReclutador':nombreReclutador,
+      'idReclutante':idReclutante,
+      'idProspecto':idProspecto,
+      'pts':pts,
     };
   }
 
