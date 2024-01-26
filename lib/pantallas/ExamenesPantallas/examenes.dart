@@ -5,6 +5,7 @@ import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/quizz.dart';
 import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/DashboardReclutador.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/Apto.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/instruccionesExamenTecleado.dart';
+import 'package:telsolreclutamiento/pantallas/ProcesoPantallas/LeerProcesos.dart';
 
 class examenes extends StatelessWidget {
   const examenes({super.key});
@@ -41,7 +42,12 @@ class examenes extends StatelessWidget {
               Navigator.push(context, 
                 MaterialPageRoute(builder: (context) => apto(prospecto_id: 102, quizzscore: 100, tecladoscore: 42, auditivoscore: 80))
               );
-            }, child: Text('Apto'))
+            }, child: Text('Apto')),
+            ElevatedButton(onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => verProceso())
+              );
+            }, child: Text('ver proceso'))
           ],
         ),
       ),

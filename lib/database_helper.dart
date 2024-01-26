@@ -119,6 +119,8 @@ class database_helper {
     return resultado.map((e) => ProccesoDeContratacion.fromMap(e)).toList();
   }
 
+
+
   //METODOS DE BORRAR
 
   Future<int> borrarReclutador(int id) async {
@@ -156,6 +158,18 @@ class database_helper {
     return db.rawUpdate('UPDATE PROSPECTO SET calquizz = ?, calexamTec = ?, calexamAud = ? WHERE id = ?',[calquizz, calexamTec, calexamAud, id]);
   }
 
+  Future<String> getCount(idReclu,desde,hasta) async {
+    final Database db = await initDB();
+    var x = await db.rawQuery('SELECT COUNT (*) FROM PROCESO WHERE idReclutante = ? AND pts > ? and pts < ?',[idReclu, desde,hasta]);
+    int? count = await Sqflite.firstIntValue(x);
+    return count.toString();
+  }
+
+  Future<List<ProccesoDeContratacion>> getProcesos() async{
+    final Database db = await initDB();
+    List<Map<String, Object?>> result = await db.query('PROCESO');
+    return result.map((e) => ProccesoDeContratacion.fromMap(e)).toList();
+  }
 
 
 }
