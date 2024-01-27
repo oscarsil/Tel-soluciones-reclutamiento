@@ -113,6 +113,7 @@ class _borrarProspectoState extends State<borrarProspecto> {
                                         TableCell(child: Text("segundo apellido")),
                                         TableCell(child: Text("motivo")),
                                         TableCell(child: Text("Estatus")),
+                                        TableCell(child: Icon(Icons.delete))
                                       ],
                                     ),]
                               ),

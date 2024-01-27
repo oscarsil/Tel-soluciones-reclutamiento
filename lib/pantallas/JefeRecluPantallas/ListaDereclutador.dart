@@ -116,7 +116,7 @@ class _ListaDeReclutadoresState extends State<ListaDeReclutadores> {
                                                               password: items[index].password,
                                                               habilitado: valorHabil(items[index].habilitado))
                                                           )).then((value) => _refresh());
-                                                        }, icon: Icon(Icons.format_italic)))
+                                                        }, icon: Icon(Icons.edit)))
                                                       ]
                                                     )
                                                   ],

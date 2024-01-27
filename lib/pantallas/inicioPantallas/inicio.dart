@@ -46,7 +46,7 @@ class Inicio extends StatelessWidget {
                         fontWeight: FontWeight.w900,
                         fontSize: 25),
                   )),
-              ElevatedButton(onPressed: () {
+             /* ElevatedButton(onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -58,7 +58,7 @@ class Inicio extends StatelessWidget {
                     color: Colors.white,
                     fontWeight: FontWeight.w900,
                     fontSize: 25),
-              )),
+              )),*/
             ],
           ),
         ),

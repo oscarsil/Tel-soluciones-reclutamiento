@@ -15,11 +15,20 @@ class instruccionesExamenTeclado extends StatelessWidget{
         child: Column(
           children: [
             Container(width: 750,child: Wrap(children: [Text('favor de dar click en el boton de iniciar, que activara un cuadro de texto que aparecera bajo el cuadro. escribe el texto que aparece en el cuadro de arriba, el texto se pondra de color verde cuando se escriba correctamente y de otra manera este se pondra de color rojo cuando el texto mal ')])),
-            ElevatedButton(onPressed: () {
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                    padding: const EdgeInsets.fromLTRB(180, 30, 180, 30),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30))),
+                onPressed: () {
               print(prospecto_id.toString()+" "+quizzscore.toString());
               Navigator.push(context,
                   MaterialPageRoute(builder: (builder) => examenTeclado(prospect_id: prospecto_id, quizzscore: quizzscore,)));
-            }, child: Text('Comenzar'))
+            }, child: Text('Comenzar',style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w900,
+                fontSize: 25),))
           ],
         ),
       ),

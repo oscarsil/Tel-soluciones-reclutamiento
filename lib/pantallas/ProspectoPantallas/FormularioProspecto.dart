@@ -130,7 +130,7 @@ class _campos extends State<campos> {
                 width: 300,
                 child: TextField(
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ]"))
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ ]"))
                   ],
                   controller: _textNombre,
                   decoration: InputDecoration(
@@ -144,7 +144,7 @@ class _campos extends State<campos> {
                 width: 300,
                 child: TextField(
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ]"))
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ ]"))
                   ],
                   controller: _textAp,
                   decoration: InputDecoration(
@@ -155,7 +155,7 @@ class _campos extends State<campos> {
                 width: 300,
                 child: TextField(
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ]"))
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ ]"))
                   ],
                   controller: _textAm,
                   decoration: InputDecoration(
@@ -234,7 +234,13 @@ class _campos extends State<campos> {
             SizedBox(height: 20,),
           ],
         ),
-        ElevatedButton(onPressed: () {
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange,
+                padding: const EdgeInsets.fromLTRB(60, 30, 60, 30),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30))),
+            onPressed: () {
           setState(() {
             if(validarBoton(_textNombre.text, _textAp.text, _textAm.text, _textEdad.text, _textdir.text, _textTelefono.text, _textEsc.text)){
               db.crearProspecto(
@@ -249,7 +255,10 @@ class _campos extends State<campos> {
                       campana: dropdownvalueCamp)).whenComplete(() => Navigator.pop(context));
             }
           });
-        }, child: Text("Nuevo")) 
+        }, child: Text("Nuevo",style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+            fontSize: 25),))
       ],
     );
 
