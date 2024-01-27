@@ -5,6 +5,7 @@ import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/Apto.dart';
+import 'package:telsolreclutamiento/database_helper.dart';
 
 
 class examenAuditivo extends StatefulWidget {
@@ -17,6 +18,8 @@ class examenAuditivo extends StatefulWidget {
 }
 
 class _examenAuditivo extends State<examenAuditivo> {
+
+  final db = database_helper();
 
   final CountdownController _controller =
   new CountdownController(autoStart: true);
@@ -112,7 +115,10 @@ class _examenAuditivo extends State<examenAuditivo> {
                   });
                   audioPlayer.stop();
                   print(this.widget.prospecto_id.toString()+" "+this.widget.quizzscore.toString()+" "+this.widget.tecladoscore.toString()+" "+resultadofinal.toStringAsFixed(2));
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => apto(prospecto_id: this.widget.prospecto_id, quizzscore: this.widget.quizzscore, tecladoscore: this.widget.tecladoscore, auditivoscore: double.parse(resultadofinal.toStringAsFixed(2)),)));
+                  db.editarCalificacionProspecto(this.widget.quizzscore, this.widget.tecladoscore.toInt(), double.parse(resultadofinal.toStringAsFixed(2)).toInt(), this.widget.prospecto_id)
+                      .whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                      apto(prospecto_id: this.widget.prospecto_id, quizzscore: this.widget.quizzscore, tecladoscore: this.widget.tecladoscore, auditivoscore: double.parse(resultadofinal.toStringAsFixed(2)),)))
+                  );
                 }),
             Slider(
               min:0,
@@ -171,8 +177,10 @@ class _examenAuditivo extends State<examenAuditivo> {
                     resultadofinal = result;
                   });
                   audioPlayer.stop();
-                  print(this.widget.prospecto_id.toString()+" "+this.widget.quizzscore.toString()+" "+this.widget.tecladoscore.toString()+" "+resultadofinal.toStringAsFixed(2));
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => apto(prospecto_id: this.widget.prospecto_id, quizzscore: this.widget.quizzscore, tecladoscore: this.widget.tecladoscore, auditivoscore: double.parse(resultadofinal.toStringAsFixed(2)),)));
+                  db.editarCalificacionProspecto(this.widget.quizzscore, this.widget.tecladoscore.toInt(), double.parse(resultadofinal.toStringAsFixed(2)).toInt(), this.widget.prospecto_id)
+                      .whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                      apto(prospecto_id: this.widget.prospecto_id, quizzscore: this.widget.quizzscore, tecladoscore: this.widget.tecladoscore, auditivoscore: double.parse(resultadofinal.toStringAsFixed(2)),)))
+                  );
                 },
                 child: const Text(
                   'Terminar',
