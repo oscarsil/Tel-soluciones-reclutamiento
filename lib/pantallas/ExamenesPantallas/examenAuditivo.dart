@@ -19,6 +19,14 @@ class examenAuditivo extends StatefulWidget {
 
 class _examenAuditivo extends State<examenAuditivo> {
 
+  int wpmtograde(double wpm){
+    if(wpm >= 45){
+      return 100;
+    }else{
+      return ((wpm*100)/45).toInt();
+    }
+  }
+
   final db = database_helper();
 
   final CountdownController _controller =
@@ -115,7 +123,7 @@ class _examenAuditivo extends State<examenAuditivo> {
                   });
                   audioPlayer.stop();
                   print(this.widget.prospecto_id.toString()+" "+this.widget.quizzscore.toString()+" "+this.widget.tecladoscore.toString()+" "+resultadofinal.toStringAsFixed(2));
-                  db.editarCalificacionProspecto(this.widget.quizzscore, this.widget.tecladoscore.toInt(), double.parse(resultadofinal.toStringAsFixed(2)).toInt(), this.widget.prospecto_id)
+                  db.editarCalificacionProspecto(this.widget.quizzscore, wpmtograde(this.widget.tecladoscore), double.parse(resultadofinal.toStringAsFixed(2)).toInt(), this.widget.prospecto_id)
                       .whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) =>
                       apto(prospecto_id: this.widget.prospecto_id, quizzscore: this.widget.quizzscore, tecladoscore: this.widget.tecladoscore, auditivoscore: double.parse(resultadofinal.toStringAsFixed(2)),)))
                   );
@@ -177,7 +185,7 @@ class _examenAuditivo extends State<examenAuditivo> {
                     resultadofinal = result;
                   });
                   audioPlayer.stop();
-                  db.editarCalificacionProspecto(this.widget.quizzscore, this.widget.tecladoscore.toInt(), double.parse(resultadofinal.toStringAsFixed(2)).toInt(), this.widget.prospecto_id)
+                  db.editarCalificacionProspecto(this.widget.quizzscore, wpmtograde(this.widget.tecladoscore), double.parse(resultadofinal.toStringAsFixed(2)).toInt(), this.widget.prospecto_id)
                       .whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) =>
                       apto(prospecto_id: this.widget.prospecto_id, quizzscore: this.widget.quizzscore, tecladoscore: this.widget.tecladoscore, auditivoscore: double.parse(resultadofinal.toStringAsFixed(2)),)))
                   );
