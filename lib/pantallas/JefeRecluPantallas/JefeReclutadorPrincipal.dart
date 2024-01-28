@@ -112,21 +112,24 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
 
                                   children: const <TableRow>[
                                     TableRow(
+                                      decoration: BoxDecoration(
+                                        color: Colors.orange
+                                      ),
                                       children: [
-                                        TableCell(child: Text("id",)),
-                                        TableCell(child: Text("nombre")),
-                                        TableCell(child: Text("primer apellido")),
-                                        TableCell(child: Text("segundo apellido")),
-                                        TableCell(child: Text("direccion")),
-                                        TableCell(child: Text("telefono")),
-                                        TableCell(child: Text("calquizz")),
-                                        TableCell(child: Text("calexamtex")),
-                                        TableCell(child: Text("calexamaud")),
-                                        TableCell(child: Text("campaña")),
-                                        TableCell(child: Text("motivo")),
-                                        TableCell(child: Text("Estatus")),
-                                        TableCell(child: Text("Edad")),
-                                        TableCell(child: Text("escolaridad")),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Id",style: TextStyle(color: Colors.white),))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Nombre",style: TextStyle(color: Colors.white),))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Primer Apellido",style: TextStyle(color: Colors.white),))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Segundo Apellido",style: TextStyle(color: Colors.white),))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Direccion",style: TextStyle(color: Colors.white),))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Telefono",style: TextStyle(color: Colors.white),))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Quizz",style: TextStyle(color: Colors.white),))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Calificacion PPM",style: TextStyle(color: Colors.white),))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Audio",style: TextStyle(color: Colors.white),))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Campaña",style: TextStyle(color: Colors.white),))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Motivo",style: TextStyle(color: Colors.white),))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Estatus",style: TextStyle(color: Colors.white),))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Edad",style: TextStyle(color: Colors.white),))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Escolaridad",style: TextStyle(color: Colors.white),))),
                                       ],
                                     ),]
                               ),
@@ -143,30 +146,33 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
                                         TableRow(
                                             children:
                                             [
-                                              TableCell(child: Text(items[index].id.toString())),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].id.toString()))),
                                               TableCell(
-                                                  child: GestureDetector(
-                                                      onTap: () {
-                                                        Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(builder: (context) => EditarProspecto(pros: items[index]))
-                                                        ).then((value) => _refresh());
-                                                      },
-                                                      child: Text(items[index].nombre
-                                                      ))
+                                                  child: Align(
+                                                    alignment: Alignment.center,
+                                                    child: GestureDetector(
+                                                        onTap: () {
+                                                          Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(builder: (context) => EditarProspecto(pros: items[index]))
+                                                          ).then((value) => _refresh());
+                                                        },
+                                                        child: Text(items[index].nombre
+                                                        )),
+                                                  )
                                               ),
-                                              TableCell(child: Text(items[index].primerApellido)),
-                                              TableCell(child: Text(items[index].segundoApellido)),
-                                              TableCell(child: Text(items[index].direccion)),
-                                              TableCell(child: Text(items[index].telefono)),
-                                              TableCell(child: Text(items[index].calquizz.toString())),
-                                              TableCell(child: Text(items[index].calexamTec.toString())),
-                                              TableCell(child: Text(items[index].calexamAud.toString())),
-                                              TableCell(child: Text(items[index].campana.toString())),
-                                              TableCell(child: Text(items[index].motivo.toString())),
-                                              TableCell(child: Text(items[index].estatus.toString())),
-                                              TableCell(child: Text(items[index].edad.toString())),
-                                              TableCell(child: Text(items[index].escolaridad)),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].primerApellido))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].segundoApellido))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].direccion))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].telefono))),
+                                              TableCell(child:Align(alignment: Alignment.center,child:  Text(items[index].calquizz.toString()))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].calexamTec.toString()))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].calexamAud.toString()))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].campana.toString()))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].motivo.toString()))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].estatus.toString()))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].edad.toString()))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].escolaridad))),
                                             ]
                                         ),
                                       ],
