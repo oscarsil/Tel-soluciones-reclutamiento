@@ -45,7 +45,8 @@ class _ReporteState extends State<Reporte> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("prueba de reporte"),
+        title: Text("prueba de reporte",style: TextStyle(color: Colors.white),),
+        backgroundColor: Colors.blue,
       ),
       body: FutureBuilder<List<Reclutador>>(
         future: reclutadores,
@@ -69,10 +70,13 @@ class _ReporteState extends State<Reporte> {
                         child: Table(
                             children: const <TableRow>[
                               TableRow(
+                                decoration: BoxDecoration(
+                                    color: Colors.orange
+                                ),
                                 children: [
-                                  TableCell(child: Text("id",)),
-                                  TableCell(child: Text("nombre")),
-                                  TableCell(child: Text('Entrevistados'),),
+                                  TableCell(child: Align(alignment: Alignment.center,child: Text("id",style: TextStyle(color: Colors.white),))),
+                                  TableCell(child:  Align(alignment: Alignment.center,child:Text("nombre",style: TextStyle(color: Colors.white)))),
+                                  TableCell(child:  Align(alignment: Alignment.center,child:Text('Entrevistados',style: TextStyle(color: Colors.white))),),
                                 ],
                               ),]
                         ),
@@ -89,22 +93,25 @@ class _ReporteState extends State<Reporte> {
                                   TableRow(
                                       children:
                                       [
-                                        TableCell(child: Text(items[index].id.toString())),
-                                        TableCell(child: Text(items[index].username)),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].id.toString()))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].username))),
                                         TableCell(
-                                            child: FutureBuilder(
-                                                future: function(items[index].id),
-                                                builder: (BuildContext context, AsyncSnapshot<String> text){
-                                                  if(text.connectionState == ConnectionState.waiting){
-                                                    return Text("waiting");
-                                                  }else if (text.hasData && text.data!.isEmpty){
-                                                    return Text("no data");
-                                                  }else if(text.hasError){
-                                                    return Text(text.error.toString());
-                                                  }else{
-                                                    return new Text(text.data as String);
-                                                  }
-                                                })
+                                            child: Align(
+                                              alignment: Alignment.center,
+                                              child: FutureBuilder(
+                                                  future: function(items[index].id),
+                                                  builder: (BuildContext context, AsyncSnapshot<String> text){
+                                                    if(text.connectionState == ConnectionState.waiting){
+                                                      return Text("waiting");
+                                                    }else if (text.hasData && text.data!.isEmpty){
+                                                      return Text("no data");
+                                                    }else if(text.hasError){
+                                                      return Text(text.error.toString());
+                                                    }else{
+                                                      return new Text(text.data as String);
+                                                    }
+                                                  }),
+                                            )
                                         )
                                       ]
                                   ),

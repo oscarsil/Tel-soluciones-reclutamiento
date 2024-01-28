@@ -74,18 +74,27 @@ class _ReporteReclutador extends State<ReporteReclutador>{
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          Icon(Icons.calendar_month),
                           Text(formatter.format(_dateTimeDesde)),
-                          ElevatedButton(onPressed: () {
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+                              onPressed: () {
                             _showDatePickerDesde();
-                          }, child: Text("Desde")),
+                          }, child: Text("Desde", style: TextStyle(color: Colors.white))),
+                          Icon(Icons.calendar_month),
                           Text(formatter.format(_dateTimeHasta)),
-                          ElevatedButton(onPressed: () {
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+                              onPressed: () {
                             _showDatePickerHasta();
-                          }, child: Text("Hasta")),
-                          ElevatedButton(onPressed: () {
+                          }, child: Text("Hasta", style: TextStyle(color: Colors.white))),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+                              onPressed: () {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => Reporte(desde: formatter.format(_dateTimeDesde), hasta: formatter.format(_dateTimeHasta)) ));
-                          }, child: Text("Buscar"))
+                          }, child: Text("Buscar", style: TextStyle(color: Colors.white)))
                         ],
                       )
                     ],

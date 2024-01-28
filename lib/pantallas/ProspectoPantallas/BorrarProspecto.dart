@@ -103,17 +103,19 @@ class _borrarProspectoState extends State<borrarProspecto> {
                           children: [
                             Container(
                               child: Table(
-
                                   children: const <TableRow>[
                                     TableRow(
+                                      decoration: BoxDecoration(
+                                          color: Colors.orange
+                                      ),
                                       children: [
-                                        TableCell(child: Text("id",)),
-                                        TableCell(child: Text("nombre")),
-                                        TableCell(child: Text("primer apellido")),
-                                        TableCell(child: Text("segundo apellido")),
-                                        TableCell(child: Text("motivo")),
-                                        TableCell(child: Text("Estatus")),
-                                        TableCell(child: Icon(Icons.delete))
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("id", style: TextStyle(color: Colors.white)))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("nombre", style: TextStyle(color: Colors.white)))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("primer apellido", style: TextStyle(color: Colors.white)))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("segundo apellido", style: TextStyle(color: Colors.white)))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("motivo", style: TextStyle(color: Colors.white)))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Estatus", style: TextStyle(color: Colors.white)))),
+                                        TableCell(child: Align(alignment: Alignment.center,child: Icon(Icons.delete,color: Colors.white,)))
                                       ],
                                     ),]
                               ),
@@ -130,17 +132,17 @@ class _borrarProspectoState extends State<borrarProspecto> {
                                         TableRow(
                                             children:
                                             [
-                                              TableCell(child: Text(items[index].id.toString())),
-                                              TableCell(child: Text(items[index].nombre)),
-                                              TableCell(child: Text(items[index].primerApellido)),
-                                              TableCell(child: Text(items[index].segundoApellido)),
-                                              TableCell(child: Text(items[index].motivo.toString())),
-                                              TableCell(child: Text(items[index].estatus.toString())),
-                                              TableCell(child: IconButton(onPressed: () {
+                                              TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].id.toString()))),
+                                              TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].nombre))),
+                                              TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].primerApellido))),
+                                              TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].segundoApellido))),
+                                              TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].motivo.toString()))),
+                                              TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].estatus.toString()))),
+                                              TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: IconButton(onPressed: () {
                                                 setState(() {
                                                   db.borrarProspecto(int.parse(items[index].id.toString())).whenComplete(_refresh);
                                                 });
-                                              }, icon: Icon(Icons.delete)))
+                                              }, icon: Icon(Icons.delete))))
                                             ]
                                         ),
                                       ],

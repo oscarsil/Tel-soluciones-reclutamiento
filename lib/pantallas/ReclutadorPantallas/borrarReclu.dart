@@ -66,10 +66,13 @@ class _borrarRecluState extends State<borrarReclu> {
                             children:
                             const <TableRow>[
                               TableRow(
+                                  decoration: BoxDecoration(
+                                    color: Colors.orange
+                                  ),
                                   children: [
-                                    TableCell(child: Text("id")),
-                                    TableCell(child: Text("nombre")),
-                                    TableCell(child: Text("Delete"))
+                                    TableCell(child: Align(alignment: Alignment.center,child: Text("Id", style: TextStyle(color: Colors.white),))),
+                                    TableCell(child: Align(alignment: Alignment.center,child: Text("Nombre", style: TextStyle(color: Colors.white),))),
+                                    TableCell(child: Align(alignment: Alignment.center,child:Text("Delete", style: TextStyle(color: Colors.white),)))
                                   ]
                               )],
                           )
@@ -84,13 +87,19 @@ class _borrarRecluState extends State<borrarReclu> {
                               children: <TableRow>[
                                 TableRow(
                                     children: [
-                                      TableCell(child: Text(items[index].id.toString())),
-                                      TableCell(child: Text(items[index].username)),
-                                      TableCell(child: ElevatedButton(onPressed: () {
-                                        setState(() {
-                                          db.borrarReclutador(int.parse(items[index].id.toString())).whenComplete(_refresh);
-                                        });
-                                      }, child: Icon(Icons.delete_forever_outlined)))
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].id.toString(),style: TextStyle(fontWeight: FontWeight.w500),))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].username,style: TextStyle(fontWeight: FontWeight.w500),))),
+                                      TableCell(child: Container(
+                                        alignment: Alignment.center,
+                                        width: 30,
+                                        height: 25,
+                                        child: ElevatedButton(
+                                            onPressed: () {
+                                          setState(() {
+                                            db.borrarReclutador(int.parse(items[index].id.toString())).whenComplete(_refresh);
+                                          });
+                                        }, child: Icon(Icons.delete_forever_outlined)),
+                                      ))
                                     ]
                                 )
                               ],
