@@ -28,7 +28,6 @@ class database_helper {
       await db.execute(pruebaReclutador);
       await db.execute(createProspectoTable);
       await db.execute(createProcesoTable);
-      print('base de datos creados');
     });
   }
 

@@ -12,7 +12,7 @@ class examenAuditivo extends StatefulWidget {
   final int prospecto_id;
   final int quizzscore;
   final double tecladoscore;
-  examenAuditivo({required this.prospecto_id, required this.quizzscore, required this.tecladoscore});
+  const examenAuditivo({required this.prospecto_id, required this.quizzscore, required this.tecladoscore});
   @override
   State<examenAuditivo> createState() => _examenAuditivo();
 }
@@ -122,7 +122,6 @@ class _examenAuditivo extends State<examenAuditivo> {
                         Cacseleccionado));
                   });
                   audioPlayer.stop();
-                  print(this.widget.prospecto_id.toString()+" "+this.widget.quizzscore.toString()+" "+this.widget.tecladoscore.toString()+" "+resultadofinal.toStringAsFixed(2));
                   db.editarCalificacionProspecto(this.widget.quizzscore, wpmtograde(this.widget.tecladoscore), double.parse(resultadofinal.toStringAsFixed(2)).toInt(), this.widget.prospecto_id)
                       .whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) =>
                       apto(prospecto_id: this.widget.prospecto_id, quizzscore: this.widget.quizzscore, tecladoscore: this.widget.tecladoscore, auditivoscore: double.parse(resultadofinal.toStringAsFixed(2)),)))

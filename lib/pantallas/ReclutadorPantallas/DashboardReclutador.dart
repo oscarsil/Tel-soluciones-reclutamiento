@@ -58,8 +58,8 @@ class _DashboardReclutadorState extends State<DashboardReclutador> {
   Widget build(BuildContext context){
 
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(50),
+      appBar: const PreferredSize(
+          preferredSize:  Size.fromHeight(50),
           child: barraSalir(titulo: 'Reclutador')),
       body: Center(
         child: Row(
@@ -79,7 +79,7 @@ class _DashboardReclutadorState extends State<DashboardReclutador> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8)
                         ),
@@ -108,9 +108,9 @@ class _DashboardReclutadorState extends State<DashboardReclutador> {
                             builder: (BuildContext context, AsyncSnapshot<List<Prospecto>> snapshot){
 
                               if(snapshot.connectionState == ConnectionState.waiting){
-                                return CircularProgressIndicator();
+                                return const CircularProgressIndicator();
                               }else if(snapshot.hasData && snapshot.data!.isEmpty){
-                                return Text("no data");
+                                return const Text("no data");
                               }else if(snapshot.hasError) {
                                 return Text(snapshot.error.toString());
                               }else{
@@ -118,32 +118,30 @@ class _DashboardReclutadorState extends State<DashboardReclutador> {
                                 return Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Container(
-                                      child: Table(
+                                    Table(
 
-                                          children: const <TableRow>[
-                                            TableRow(
-                                              decoration: BoxDecoration(
-                                                color: Colors.orange
-                                              ),
-                                              children: [
-                                                TableCell(child: Align(alignment: Alignment.center,child: Text("Id",style: TextStyle(color: Colors.white),))),
-                                                TableCell(child: Align(alignment: Alignment.center,child: Text("Nombre",style: TextStyle(color: Colors.white),))),
-                                                TableCell(child: Align(alignment: Alignment.center,child: Text("Primer Apellido",style: TextStyle(color: Colors.white),))),
-                                                TableCell(child: Align(alignment: Alignment.center,child: Text("Segundo Apellido",style: TextStyle(color: Colors.white),))),
-                                                TableCell(child: Align(alignment: Alignment.center,child: Text("Direccion",style: TextStyle(color: Colors.white),))),
-                                                TableCell(child: Align(alignment: Alignment.center,child: Text("Telefono",style: TextStyle(color: Colors.white),))),
-                                                TableCell(child: Align(alignment: Alignment.center,child: Text("Quizz",style: TextStyle(color: Colors.white),))),
-                                                TableCell(child: Align(alignment: Alignment.center,child: Text("Calificacion PPM",style: TextStyle(color: Colors.white),))),
-                                                TableCell(child: Align(alignment: Alignment.center,child: Text("Audio",style: TextStyle(color: Colors.white),))),
-                                                TableCell(child: Align(alignment: Alignment.center,child: Text("Campaña",style: TextStyle(color: Colors.white),))),
-                                                TableCell(child: Align(alignment: Alignment.center,child: Text("Motivo",style: TextStyle(color: Colors.white),))),
-                                                TableCell(child: Align(alignment: Alignment.center,child: Text("Estatus",style: TextStyle(color: Colors.white),))),
-                                                TableCell(child: Align(alignment: Alignment.center,child: Text("Edad",style: TextStyle(color: Colors.white),))),
-                                                TableCell(child: Align(alignment: Alignment.center,child: Text("Escolaridad",style: TextStyle(color: Colors.white),))),
-                                              ],
-                                            ),]
-                                      ),
+                                        children: const <TableRow>[
+                                          TableRow(
+                                            decoration: BoxDecoration(
+                                              color: Colors.orange
+                                            ),
+                                            children: [
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text("Id",style: TextStyle(color: Colors.white),))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text("Nombre",style: TextStyle(color: Colors.white),))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text("Primer Apellido",style: TextStyle(color: Colors.white),))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text("Segundo Apellido",style: TextStyle(color: Colors.white),))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text("Direccion",style: TextStyle(color: Colors.white),))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text("Telefono",style: TextStyle(color: Colors.white),))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text("Quizz",style: TextStyle(color: Colors.white),))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text("Calificacion PPM",style: TextStyle(color: Colors.white),))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text("Audio",style: TextStyle(color: Colors.white),))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text("Campaña",style: TextStyle(color: Colors.white),))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text("Motivo",style: TextStyle(color: Colors.white),))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text("Estatus",style: TextStyle(color: Colors.white),))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text("Edad",style: TextStyle(color: Colors.white),))),
+                                              TableCell(child: Align(alignment: Alignment.center,child: Text("Escolaridad",style: TextStyle(color: Colors.white),))),
+                                            ],
+                                          ),]
                                     ),
                                     ListView.builder(
                                         itemCount: items.length,
@@ -151,43 +149,41 @@ class _DashboardReclutadorState extends State<DashboardReclutador> {
                                         shrinkWrap: true,
                                         itemBuilder: (context, index)
                                         {
-                                          return Container(
-                                            child: Table(
-                                              children: <TableRow>[
-                                                TableRow(
-                                                    children:
-                                                    [
-                                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].id.toString()))),
-                                                      TableCell(
-                                                          child: Align(
-                                                            alignment: Alignment.center,
-                                                            child: GestureDetector(
-                                                                onTap: () {
-                                                                  Navigator.push(
-                                                                      context,
-                                                                      MaterialPageRoute(builder: (context) => EditarProspecto(pros: items[index]))
-                                                                  ).then((value) => _refresh());
-                                                                },
-                                                                child: Text(items[index].nombre
-                                                                )),
-                                                          )
-                                                      ),
-                                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].primerApellido))),
-                                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].segundoApellido))),
-                                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].direccion))),
-                                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].telefono))),
-                                                      TableCell(child:Align(alignment: Alignment.center,child:  Text(items[index].calquizz.toString()))),
-                                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].calexamTec.toString()))),
-                                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].calexamAud.toString()))),
-                                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].campana.toString()))),
-                                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].motivo.toString()))),
-                                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].estatus.toString()))),
-                                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].edad.toString()))),
-                                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].escolaridad))),
-                                                    ]
-                                                ),
-                                              ],
-                                            ),
+                                          return Table(
+                                            children: <TableRow>[
+                                              TableRow(
+                                                  children:
+                                                  [
+                                                    TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].id.toString()))),
+                                                    TableCell(
+                                                        child: Align(
+                                                          alignment: Alignment.center,
+                                                          child: GestureDetector(
+                                                              onTap: () {
+                                                                Navigator.push(
+                                                                    context,
+                                                                    MaterialPageRoute(builder: (context) => EditarProspecto(pros: items[index]))
+                                                                ).then((value) => _refresh());
+                                                              },
+                                                              child: Text(items[index].nombre
+                                                              )),
+                                                        )
+                                                    ),
+                                                    TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].primerApellido))),
+                                                    TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].segundoApellido))),
+                                                    TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].direccion))),
+                                                    TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].telefono))),
+                                                    TableCell(child:Align(alignment: Alignment.center,child:  Text(items[index].calquizz.toString()))),
+                                                    TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].calexamTec.toString()))),
+                                                    TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].calexamAud.toString()))),
+                                                    TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].campana.toString()))),
+                                                    TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].motivo.toString()))),
+                                                    TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].estatus.toString()))),
+                                                    TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].edad.toString()))),
+                                                    TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].escolaridad))),
+                                                  ]
+                                              ),
+                                            ],
                                           );
                                         }),
                                   ],
@@ -195,14 +191,14 @@ class _DashboardReclutadorState extends State<DashboardReclutador> {
                               }
                             },
                           ),
-                      SizedBox(height: 45,),
+                      const SizedBox(height: 45,),
                       Row(
                         children: [
-                          SizedBox(width: 40,),
+                          const SizedBox(width: 40,),
                           ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),onPressed: ()  {
                                 //Navigator.push(context, MaterialPageRoute(builder: (context) => quizz(prospecto_int: int.parse(_textID.text))));
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => ElegirReclu()));
-                          }, child: Text('Iniciar Proceso', style: TextStyle(color: Colors.white),)),
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const ElegirReclu()));
+                          }, child: const Text('Iniciar Proceso', style: TextStyle(color: Colors.white),)),
                         ],
                       )
                     ],

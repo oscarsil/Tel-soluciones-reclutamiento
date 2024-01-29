@@ -34,7 +34,7 @@ class iniciarsessionprinicipal extends StatelessWidget{
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => IniciarSession()),
+                          builder: (context) => const IniciarSession()),
                     );
                   },
                   child: const Text(
@@ -44,7 +44,7 @@ class iniciarsessionprinicipal extends StatelessWidget{
                         fontWeight: FontWeight.w500,
                         fontSize: 15),
                   )),
-              SizedBox(height: 25,),
+              const SizedBox(height: 25,),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange,

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/ListaDereclutador.dart';
-import 'package:flutter/services.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 
 
@@ -51,17 +49,17 @@ class _EditarReclutador extends State<EditarReclutador>{
     _textNombre.text = widget.username;
     _textContra.text = widget.password;
     return  Scaffold(
-      appBar: PreferredSize(child: barraRegSal(titulo: 'Editar Reclutador',), preferredSize: Size.fromHeight(50)),
+      appBar: const PreferredSize(preferredSize: Size.fromHeight(50), child: barraRegSal(titulo: 'Editar Reclutador',)),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('Nombre Completo'),
+              const Text('Nombre Completo'),
               Container(
                 width: 200,
-                margin: EdgeInsets.all(10),
+                margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   border: Border.all()
                 ),
@@ -69,7 +67,7 @@ class _EditarReclutador extends State<EditarReclutador>{
                   controller: _textNombre,
                 ),
               ),
-              Text('Contraseña'),
+              const Text('Contraseña'),
               Container(
                 decoration: BoxDecoration(
                   border: Border.all()
@@ -82,7 +80,7 @@ class _EditarReclutador extends State<EditarReclutador>{
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Habilitado'),
+                  const Text('Habilitado'),
                   Checkbox(
                       value: widget.habilitado,
                       onChanged: (newvalue){
@@ -107,7 +105,7 @@ class _EditarReclutador extends State<EditarReclutador>{
                         widget.id).whenComplete((){Navigator.pop(context);});
                   }
                 });
-              }, child: Text('Listo', style: TextStyle(color: Colors.white),)),
+              }, child: const Text('Listo', style: TextStyle(color: Colors.white),)),
               Container(
                 child: editarError ? Text(editarErrorMensaje) : null,
               )

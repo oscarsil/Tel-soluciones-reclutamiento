@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/examenes.dart';
 import 'package:telsolreclutamiento/pantallas/ProspectoPantallas/FormularioProspecto.dart';
 
 class Inicio extends StatelessWidget {
@@ -9,8 +8,8 @@ class Inicio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(50),
+      appBar: const PreferredSize(
+          preferredSize:  Size.fromHeight(50),
           child: barraIniciarSession(titulo: 'Tel-Soluciones')),
       body: Center(
         child: SingleChildScrollView(

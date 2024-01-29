@@ -30,7 +30,7 @@ class _CrearReclutadorState extends State<CrearReclutador> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(preferredSize: const Size.fromHeight(50),
+      appBar: const PreferredSize(preferredSize:  Size.fromHeight(50),
           child: barraRegSal(titulo: 'Crear Reclutador')),
       body: Form(
         key: formKey,
@@ -39,10 +39,10 @@ class _CrearReclutadorState extends State<CrearReclutador> {
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text('Nuevo Reclutador', style: TextStyle(fontSize: 25),),
-                SizedBox(height: 20),
-                Text('Nombre Complete'),
-                SizedBox(height: 15,),
+                const Text('Nuevo Reclutador', style: TextStyle(fontSize: 25),),
+                const SizedBox(height: 20),
+                const Text('Nombre Complete'),
+                const SizedBox(height: 15,),
                 SizedBox(
                   width: 500,
                   child: TextFormField(
@@ -60,9 +60,9 @@ class _CrearReclutadorState extends State<CrearReclutador> {
                     ),
                   ),
                 ),
-                SizedBox(height: 30,),
-                Text('Contraseña'),
-                SizedBox(height: 15,),
+                const SizedBox(height: 30,),
+                const Text('Contraseña'),
+                const SizedBox(height: 15,),
                 SizedBox(
                   width: 500,
                   child: TextFormField(
@@ -80,7 +80,7 @@ class _CrearReclutadorState extends State<CrearReclutador> {
                     ),
                   ),
                 ),
-                SizedBox(height: 40,),
+                const SizedBox(height: 40,),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange),
@@ -90,11 +90,11 @@ class _CrearReclutadorState extends State<CrearReclutador> {
                             username: Nombre.text,
                             password: contra.text,
                             habilitado: 1)).whenComplete(() {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ListaDeReclutadores()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const ListaDeReclutadores()));
                         });
                       }
                     },
-                    child: Text('Crear', style: TextStyle(color: Colors.white),)
+                    child: const Text('Crear', style: TextStyle(color: Colors.white),)
                 )
               ],
             )

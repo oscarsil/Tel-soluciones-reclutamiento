@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 import 'package:telsolreclutamiento/modelos/prospecto.dart';
-import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/DashboardReclutador.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 
 class borrarProspecto extends StatefulWidget{
@@ -51,8 +50,8 @@ class _borrarProspectoState extends State<borrarProspecto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(50),
+        appBar: const PreferredSize(
+            preferredSize:  Size.fromHeight(50),
             child: barraRegSal(titulo: 'borrar Prospecto')),
         body: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +61,7 @@ class _borrarProspectoState extends State<borrarProspecto> {
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8)
                     ),
@@ -91,9 +90,9 @@ class _borrarProspectoState extends State<borrarProspecto> {
                     builder: (BuildContext context, AsyncSnapshot<List<Prospecto>> snapshot){
 
                       if(snapshot.connectionState == ConnectionState.waiting){
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       }else if(snapshot.hasData && snapshot.data!.isEmpty){
-                        return Text("no data");
+                        return const Text("no data");
                       }else if(snapshot.hasError) {
                         return Text(snapshot.error.toString());
                       }else{
@@ -101,24 +100,22 @@ class _borrarProspectoState extends State<borrarProspecto> {
                         return Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Container(
-                              child: Table(
-                                  children: const <TableRow>[
-                                    TableRow(
-                                      decoration: BoxDecoration(
-                                          color: Colors.orange
-                                      ),
-                                      children: [
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("id", style: TextStyle(color: Colors.white)))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("nombre", style: TextStyle(color: Colors.white)))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("primer apellido", style: TextStyle(color: Colors.white)))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("segundo apellido", style: TextStyle(color: Colors.white)))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("motivo", style: TextStyle(color: Colors.white)))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Estatus", style: TextStyle(color: Colors.white)))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Icon(Icons.delete,color: Colors.white,)))
-                                      ],
-                                    ),]
-                              ),
+                            Table(
+                                children: const <TableRow>[
+                                  TableRow(
+                                    decoration: BoxDecoration(
+                                        color: Colors.orange
+                                    ),
+                                    children: [
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("id", style: TextStyle(color: Colors.white)))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("nombre", style: TextStyle(color: Colors.white)))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("primer apellido", style: TextStyle(color: Colors.white)))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("segundo apellido", style: TextStyle(color: Colors.white)))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("motivo", style: TextStyle(color: Colors.white)))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("Estatus", style: TextStyle(color: Colors.white)))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Icon(Icons.delete,color: Colors.white,)))
+                                    ],
+                                  ),]
                             ),
                             ListView.builder(
                                 itemCount: items.length,
@@ -126,27 +123,25 @@ class _borrarProspectoState extends State<borrarProspecto> {
                                 shrinkWrap: true,
                                 itemBuilder: (context, index)
                                 {
-                                  return Container(
-                                    child: Table(
-                                      children: <TableRow>[
-                                        TableRow(
-                                            children:
-                                            [
-                                              TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].id.toString()))),
-                                              TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].nombre))),
-                                              TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].primerApellido))),
-                                              TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].segundoApellido))),
-                                              TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].motivo.toString()))),
-                                              TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].estatus.toString()))),
-                                              TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: IconButton(onPressed: () {
-                                                setState(() {
-                                                  db.borrarProspecto(int.parse(items[index].id.toString())).whenComplete(_refresh);
-                                                });
-                                              }, icon: Icon(Icons.delete))))
-                                            ]
-                                        ),
-                                      ],
-                                    ),
+                                  return Table(
+                                    children: <TableRow>[
+                                      TableRow(
+                                          children:
+                                          [
+                                            TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].id.toString()))),
+                                            TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].nombre))),
+                                            TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].primerApellido))),
+                                            TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].segundoApellido))),
+                                            TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].motivo.toString()))),
+                                            TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].estatus.toString()))),
+                                            TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: IconButton(onPressed: () {
+                                              setState(() {
+                                                db.borrarProspecto(int.parse(items[index].id.toString())).whenComplete(_refresh);
+                                              });
+                                            }, icon: const Icon(Icons.delete))))
+                                          ]
+                                      ),
+                                    ],
                                   );
                                 }),
                           ],

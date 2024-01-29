@@ -11,7 +11,7 @@ bool onError= false;
 class IniciarSession extends StatefulWidget{
 
 
-   IniciarSession({super.key});
+  const IniciarSession({super.key});
 
   @override
   State<IniciarSession> createState() => _IniciarSessionState();
@@ -34,7 +34,7 @@ class _IniciarSessionState extends State<IniciarSession> {
   login() async {
     var response = await db.login(JefeDeReclutamiento(username: _textUserName.text, password: _textPassword.text));
     if(response == true){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => JefeReclutadorPrincipal()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const JefeReclutadorPrincipal()));
     }else{
       onError = true;
       textError = 'usuario o contrasena incorrecto';
@@ -60,8 +60,8 @@ class _IniciarSessionState extends State<IniciarSession> {
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(50),
+      appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(50),
           child: barraRegresar(titulo: 'Tel-Soluciones')),
       body: Center(
         child: SingleChildScrollView(
@@ -77,11 +77,11 @@ class _IniciarSessionState extends State<IniciarSession> {
                     fit: BoxFit.fill,
                   ),
                 ),
-                SizedBox(height: 10),
-                Text("Jefe De Reclutamiento"),
-                SizedBox(height: 10),
-                Text("Nombre de Usuario"),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
+                const Text("Jefe De Reclutamiento"),
+                const SizedBox(height: 10),
+                const Text("Nombre de Usuario"),
+                const SizedBox(height: 10),
                 SizedBox(
                   width: 400,
                   child: TextField(
@@ -90,9 +90,9 @@ class _IniciarSessionState extends State<IniciarSession> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20))),
                   ),),
-                SizedBox(height: 10),
-                Text("Contraseña"),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
+                const Text("Contraseña"),
+                const SizedBox(height: 10),
                 SizedBox(
                     width: 400,
                     child: TextField(
@@ -102,7 +102,7 @@ class _IniciarSessionState extends State<IniciarSession> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20))),
                     )),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange,
@@ -114,7 +114,7 @@ class _IniciarSessionState extends State<IniciarSession> {
                       });
                     },
                     child: const Text('Log-in',style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500, fontSize: 25),)),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Container(
                   child: onError == true ? Text(textError) : null,
                 ),

@@ -54,9 +54,9 @@ class _ReporteReclutador extends State<ReporteReclutador>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: PreferredSize(
-          child: barraRegSal(titulo: 'Reporte de Reclutador',), 
-          preferredSize: const Size.fromHeight(50)),
+      appBar: const PreferredSize(
+          preferredSize:  Size.fromHeight(50),
+          child: barraRegSal(titulo: 'Reporte de Reclutador',)),
       body: Center(
         child: Row(
           children: [
@@ -76,25 +76,25 @@ class _ReporteReclutador extends State<ReporteReclutador>{
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Icon(Icons.calendar_month),
+                          const Icon(Icons.calendar_month),
                           Text(formatter.format(_dateTimeDesde)),
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
                               onPressed: () {
                             _showDatePickerDesde();
-                          }, child: Text("Desde", style: TextStyle(color: Colors.white))),
-                          Icon(Icons.calendar_month),
+                          }, child: const Text("Desde", style: TextStyle(color: Colors.white))),
+                          const Icon(Icons.calendar_month),
                           Text(formatter.format(_dateTimeHasta)),
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
                               onPressed: () {
                             _showDatePickerHasta();
-                          }, child: Text("Hasta", style: TextStyle(color: Colors.white))),
+                          }, child: const Text("Hasta", style: TextStyle(color: Colors.white))),
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
                               onPressed: () {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => Reporte(desde: formatter.format(_dateTimeDesde), hasta: formatter.format(_dateTimeHasta)) ));
-                          }, child: Text("Buscar", style: TextStyle(color: Colors.white)))
+                          }, child: const Text("Buscar", style: TextStyle(color: Colors.white)))
                         ],
                       )
                     ],

@@ -8,7 +8,7 @@ class examenTeclado extends StatefulWidget{
 
   final int prospect_id;
   final int quizzscore;
-  examenTeclado({required this.prospect_id,required this.quizzscore});
+  const examenTeclado({required this.prospect_id,required this.quizzscore});
   @override
   State<examenTeclado> createState() => _examenTeclado();
 }
@@ -32,7 +32,7 @@ class _examenTeclado extends State<examenTeclado>{
   Widget build(BuildContext context){
     setString();
     return Scaffold(
-      appBar: PreferredSize(preferredSize: const Size.fromHeight(50),child:barraInformativa(titulo:'Examen de Teclado')),
+      appBar: const PreferredSize(preferredSize:  Size.fromHeight(50),child:barraInformativa(titulo:'Examen de Teclado')),
       body:   Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
@@ -46,7 +46,7 @@ class _examenTeclado extends State<examenTeclado>{
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontSize: 25),)),
-            Spacer(),
+            const Spacer(),
             ElevatedButton(style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange,
                   padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
@@ -60,7 +60,7 @@ class _examenTeclado extends State<examenTeclado>{
         const SizedBox(
           height: 20,
         ),
-        Text("RELOJ"),
+        const Text("RELOJ"),
         Text(_resultado_Tiempo,style: const TextStyle(fontSize: 50.0),),
         const SizedBox(
           height: 20,
@@ -92,7 +92,6 @@ class _examenTeclado extends State<examenTeclado>{
                   erroresfinales=errores;
                   tiempofinalExamen=tiempofinal;
                   resetearexamen();
-                  print(this.widget.prospect_id.toString()+" "+this.widget.quizzscore.toString()+" "+sacarWpm(exam.length, tiempofinal).toString());
                   Navigator.push(
                       context,
                       //MaterialPageRoute(builder: (context) =>  Resultados(time: tiempofinal, length: exam.length, errors: errores,)));
@@ -126,12 +125,11 @@ class _examenTeclado extends State<examenTeclado>{
           erroresfinales=errores;
           tiempofinalExamen=tiempofinal;
           resetearexamen();
-          print(this.widget.prospect_id.toString()+" "+this.widget.quizzscore.toString()+" "+sacarWpm(exam.length, 10).toString());
           Navigator.push(
               context,
               //MaterialPageRoute(builder: (context) =>  Resultados(time: tiempofinal, length: exam.length, errors: errores,)));
               MaterialPageRoute(builder: (context) => instruccionesExamenAuditivo(prospecto_id: this.widget.prospect_id, quizzscore: this.widget.quizzscore, tecladoscore: sacarWpm(exam.length, 10),)));
-        }, child: Text('saltar quizz'))
+        }, child: const Text('saltar quizz'))
       ],
     ),
     );

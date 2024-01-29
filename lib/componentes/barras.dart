@@ -12,7 +12,7 @@ class barraInformativa extends StatelessWidget {
       leading: Image.asset("assets/images/logo-Tel-soluciones.png"),
       title: Text(
         titulo,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
       backgroundColor: Colors.blueAccent,
     );
@@ -28,7 +28,7 @@ class barraIniciarSession extends StatelessWidget {
       leading: Image.asset("assets/images/logo-Tel-soluciones.png"),
       title: Text(
         titulo,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
       actions: <Widget>[
         ElevatedButton(
@@ -58,14 +58,14 @@ class barraRegresar extends StatelessWidget {
       leading:Image.asset("assets/images/logo-Tel-soluciones.png") ,
       title: Text(
         titulo,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
       actions: <Widget>[
         IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back, color: Colors.white,))
+            icon: const Icon(Icons.arrow_back, color: Colors.white,))
       ],
       backgroundColor: Colors.blueAccent,
     );
@@ -81,13 +81,13 @@ class barraSalir extends StatelessWidget {
       leading: Image.asset("assets/images/logo-Tel-soluciones.png"),
       title: Text(
         titulo,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
       actions: <Widget>[
         IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()));
-            }, icon: Icon(Icons.exit_to_app, color: Colors.white,))
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Inicio()));
+            }, icon: const Icon(Icons.exit_to_app, color: Colors.white,))
       ],
       backgroundColor: Colors.blueAccent,
     );
@@ -103,18 +103,18 @@ class barraRegSal extends StatelessWidget {
       leading: Image.asset("assets/images/logo-Tel-soluciones.png"),
       title: Text(
         titulo,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
       actions: <Widget>[
         IconButton(
             onPressed: () {
               Navigator.of(context).pop();
-            }, icon:   Icon(Icons.arrow_back, color: Colors.white,)),
+            }, icon:   const Icon(Icons.arrow_back, color: Colors.white,)),
         IconButton(
             onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Inicio()));
 
-            }, icon: Icon(Icons.exit_to_app, color: Colors.white,))
+            }, icon: const Icon(Icons.exit_to_app, color: Colors.white,))
       ],
       backgroundColor: Colors.blueAccent,
     );

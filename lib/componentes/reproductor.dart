@@ -106,7 +106,7 @@ class _reproductorState extends State<reproductor>{
               },
             ),
           ),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
         ],
       ),
     );

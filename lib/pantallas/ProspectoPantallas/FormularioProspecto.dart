@@ -19,8 +19,8 @@ class _FormularioProspecto extends State<FormularioProspecto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(50),
+      appBar: const PreferredSize(
+          preferredSize:  Size.fromHeight(50),
           child: barraRegresar(titulo: 'Por Favor de Introducir Datos')),
       body: Center(
         child: Column(
@@ -133,11 +133,11 @@ class _campos extends State<campos> {
                     FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ ]"))
                   ],
                   controller: _textNombre,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: 'Nombre(s)',
                   ),
                 )),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             SizedBox(
@@ -147,7 +147,7 @@ class _campos extends State<campos> {
                     FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ ]"))
                   ],
                   controller: _textAp,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: 'Apellido Paterno',
                   ),
                 )),
@@ -158,80 +158,78 @@ class _campos extends State<campos> {
                     FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ ]"))
                   ],
                   controller: _textAm,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: 'Apellido Materno',
                   ),
                 )),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             SizedBox(
               width: 300,
               child: TextField(
                 controller: _textdir,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Direccion'
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             SizedBox(
                 width: 300,
                 child: TextField(
                   controller: _textTelefono,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: 'Telefono',),
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.digitsOnly
                   ],
                 )),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             SizedBox(
                 width: 300,
                 child: TextField(
                   controller: _textEsc,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: 'Escolaridad',),
                 )),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             SizedBox(
                 width: 80,
                 child: TextField(
                   controller: _textEdad,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Edad',),
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.digitsOnly
                   ],
                 )),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
-            Container(
-              child: DropdownButton(
-                value: dropdownvalueCamp,
-                icon: const Icon(Icons.keyboard_arrow_down),
-                items: campanas.map((String items) {
-                  return DropdownMenuItem(
-                  value: items,
-                  child: Text(items),
-                  );
-                }).toList(),
-                onChanged: (String? newValue){
-                  setState(() {
-                    dropdownvalueCamp = newValue!;
-                  });
-                },
-              ),
+            DropdownButton(
+              value: dropdownvalueCamp,
+              icon: const Icon(Icons.keyboard_arrow_down),
+              items: campanas.map((String items) {
+                return DropdownMenuItem(
+                value: items,
+                child: Text(items),
+                );
+              }).toList(),
+              onChanged: (String? newValue){
+                setState(() {
+                  dropdownvalueCamp = newValue!;
+                });
+              },
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
           ],
         ),
         ElevatedButton(
@@ -255,7 +253,7 @@ class _campos extends State<campos> {
                       campana: dropdownvalueCamp)).whenComplete(() => Navigator.pop(context));
             }
           });
-        }, child: Text("Nuevo",style: TextStyle(
+        }, child: const Text("Nuevo",style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w500,
             fontSize: 25),))

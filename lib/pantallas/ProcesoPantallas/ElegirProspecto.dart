@@ -19,8 +19,9 @@ class ElegirPros extends StatefulWidget{
 }
 
 class _ElegirProsState extends State<ElegirPros> {
+
   @override
-  void Dispose(){
+  void dispose(){
     super.dispose();
   }
 
@@ -53,14 +54,14 @@ class _ElegirProsState extends State<ElegirPros> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Prospectos sin calificacion'),),
+      appBar: AppBar(title: const Text('Prospectos sin calificacion'),),
       body: FutureBuilder<List<Prospecto>>(
         future: prospectos,
         builder: (BuildContext context, AsyncSnapshot<List<Prospecto>> snapshot){
           if(snapshot.connectionState == ConnectionState.waiting){
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }else if(snapshot.hasData && snapshot.data!.isEmpty){
-            return Text("no data");
+            return const Text("no data");
           }else if(snapshot.hasError) {
             return Text(snapshot.error.toString());
           }else{

@@ -16,7 +16,7 @@ class Resultados extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(preferredSize: const Size.fromHeight(50),child:barraInformativa(titulo:'Examen de Teclado')),
+      appBar: const PreferredSize(preferredSize: Size.fromHeight(50),child:barraInformativa(titulo:'Examen de Teclado')),
       body: Center(
         child: Column(
           children: [

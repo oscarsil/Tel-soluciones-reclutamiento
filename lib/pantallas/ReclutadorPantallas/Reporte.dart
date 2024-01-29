@@ -45,16 +45,16 @@ class _ReporteState extends State<Reporte> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("prueba de reporte",style: TextStyle(color: Colors.white),),
+        title: const Text("prueba de reporte",style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.blue,
       ),
       body: FutureBuilder<List<Reclutador>>(
         future: reclutadores,
         builder: (BuildContext context, AsyncSnapshot<List<Reclutador>> snapshot){
           if(snapshot.connectionState == ConnectionState.waiting){
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }else if(snapshot.hasData && snapshot.data!.isEmpty){
-            return Text("no data");
+            return const Text("no data");
           }else if(snapshot.hasError){
             return Text(snapshot.error.toString());
           }else{
@@ -66,20 +66,18 @@ class _ReporteState extends State<Reporte> {
                   return Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Container(
-                        child: Table(
-                            children: const <TableRow>[
-                              TableRow(
-                                decoration: BoxDecoration(
-                                    color: Colors.orange
-                                ),
-                                children: [
-                                  TableCell(child: Align(alignment: Alignment.center,child: Text("id",style: TextStyle(color: Colors.white),))),
-                                  TableCell(child:  Align(alignment: Alignment.center,child:Text("nombre",style: TextStyle(color: Colors.white)))),
-                                  TableCell(child:  Align(alignment: Alignment.center,child:Text('Entrevistados',style: TextStyle(color: Colors.white))),),
-                                ],
-                              ),]
-                        ),
+                      Table(
+                          children: const <TableRow>[
+                            TableRow(
+                              decoration: BoxDecoration(
+                                  color: Colors.orange
+                              ),
+                              children: [
+                                TableCell(child: Align(alignment: Alignment.center,child: Text("id",style: TextStyle(color: Colors.white),))),
+                                TableCell(child:  Align(alignment: Alignment.center,child:Text("nombre",style: TextStyle(color: Colors.white)))),
+                                TableCell(child:  Align(alignment: Alignment.center,child:Text('Entrevistados',style: TextStyle(color: Colors.white))),),
+                              ],
+                            ),]
                       ),
                       ListView.builder(
                           itemCount: items.length,
@@ -87,36 +85,34 @@ class _ReporteState extends State<Reporte> {
                           shrinkWrap: true,
                           itemBuilder: (context, index)
                           {
-                            return Container(
-                              child: Table(
-                                children: <TableRow>[
-                                  TableRow(
-                                      children:
-                                      [
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].id.toString()))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].username))),
-                                        TableCell(
-                                            child: Align(
-                                              alignment: Alignment.center,
-                                              child: FutureBuilder(
-                                                  future: function(items[index].id),
-                                                  builder: (BuildContext context, AsyncSnapshot<String> text){
-                                                    if(text.connectionState == ConnectionState.waiting){
-                                                      return Text("waiting");
-                                                    }else if (text.hasData && text.data!.isEmpty){
-                                                      return Text("no data");
-                                                    }else if(text.hasError){
-                                                      return Text(text.error.toString());
-                                                    }else{
-                                                      return new Text(text.data as String);
-                                                    }
-                                                  }),
-                                            )
-                                        )
-                                      ]
-                                  ),
-                                ],
-                              ),
+                            return Table(
+                              children: <TableRow>[
+                                TableRow(
+                                    children:
+                                    [
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].id.toString()))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].username))),
+                                      TableCell(
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: FutureBuilder(
+                                                future: function(items[index].id),
+                                                builder: (BuildContext context, AsyncSnapshot<String> text){
+                                                  if(text.connectionState == ConnectionState.waiting){
+                                                    return const Text("waiting");
+                                                  }else if (text.hasData && text.data!.isEmpty){
+                                                    return const Text("no data");
+                                                  }else if(text.hasError){
+                                                    return Text(text.error.toString());
+                                                  }else{
+                                                    return Text(text.data as String);
+                                                  }
+                                                }),
+                                          )
+                                      )
+                                    ]
+                                ),
+                              ],
                             );
                           }
                       ),

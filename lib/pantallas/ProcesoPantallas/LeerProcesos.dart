@@ -34,14 +34,14 @@ class _verProcesoState extends State<verProceso>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Ver Procesos"),),
+      appBar: AppBar(title: const Text("Ver Procesos"),),
       body: FutureBuilder<List<ProccesoDeContratacion>>(
         future: procesos,
         builder: (BuildContext context, AsyncSnapshot<List<ProccesoDeContratacion>> snapshot){
           if(snapshot.connectionState == ConnectionState.waiting){
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }else if(snapshot.hasData && snapshot.data!.isEmpty){
-            return Text("no data");
+            return const Text("no data");
           }else if(snapshot.hasError) {
             return Text(snapshot.error.toString());
           }else{
@@ -49,40 +49,36 @@ class _verProcesoState extends State<verProceso>{
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  child: Table(
-                      children: const <TableRow>[
-                        TableRow(
-                          children: [
-                            TableCell(child: Text("id",)),
-                            TableCell(child: Text("nombre")),
-                            TableCell(child: Text("id reclutante")),
-                            TableCell(child: Text("id prospecto")),
-                            TableCell(child: Text("pts")),
-                          ],
-                        ),]
-                  ),
+                Table(
+                    children: const <TableRow>[
+                      TableRow(
+                        children: [
+                          TableCell(child: Text("id",)),
+                          TableCell(child: Text("nombre")),
+                          TableCell(child: Text("id reclutante")),
+                          TableCell(child: Text("id prospecto")),
+                          TableCell(child: Text("pts")),
+                        ],
+                      ),]
                 ),
                 ListView.builder(
                     itemCount: items.length,
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return Container(
-                        child: Table(
-                          children: <TableRow>[
-                            TableRow(
-                                children:
-                                [
-                                  TableCell(child: Text(items[index].id.toString())),
-                                  TableCell(child: Text(items[index].nombreReclutador)),
-                                  TableCell(child: Text(items[index].idReclutante.toString())),
-                                  TableCell(child: Text(items[index].idProspecto.toString())),
-                                  TableCell(child: Text(items[index].pts)),
-                                ]
-                            ),
-                          ],
-                        ),
+                      return Table(
+                        children: <TableRow>[
+                          TableRow(
+                              children:
+                              [
+                                TableCell(child: Text(items[index].id.toString())),
+                                TableCell(child: Text(items[index].nombreReclutador)),
+                                TableCell(child: Text(items[index].idReclutante.toString())),
+                                TableCell(child: Text(items[index].idProspecto.toString())),
+                                TableCell(child: Text(items[index].pts)),
+                              ]
+                          ),
+                        ],
                       );
                     }
                 ),

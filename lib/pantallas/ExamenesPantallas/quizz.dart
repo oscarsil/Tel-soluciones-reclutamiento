@@ -34,7 +34,7 @@ var opciones = [
 
 class quizz extends StatefulWidget{
   final int prospecto_int;
-  quizz({required this.prospecto_int});
+  const quizz({required this.prospecto_int});
   @override
   State<quizz> createState() => _quizzState();
 }
@@ -57,7 +57,6 @@ class _quizzState extends State<quizz>{
       if(question_pointer ==5 ){
         puntuaje='0';
         resetearexamen();
-        print(this.widget.prospecto_int.toString()+" "+(2*finalscore).toString());
         Navigator.push(
             context,
             MaterialPageRoute(builder: (context) =>  instruccionesExamenTeclado(prospecto_id: this.widget.prospecto_int,quizzscore: finalscore*2,)
@@ -99,23 +98,23 @@ class _quizzState extends State<quizz>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: PreferredSize(preferredSize: const Size.fromHeight(50),child:barraInformativa(titulo:'Tel-Soluciones')),
+      appBar: const PreferredSize(preferredSize:  Size.fromHeight(50),child:barraInformativa(titulo:'Tel-Soluciones')),
       body:  Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text('pregunta $contador_Preguntas de 5'),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Text(pregunta),
-            SizedBox(height: 10,),
-            ElevatedButton(onPressed: contestoA, style:ElevatedButton.styleFrom(backgroundColor: Colors.orange) ,child: Text(opcion1, style: TextStyle(color: Colors.white),)),
-            SizedBox(height: 10,),
-            ElevatedButton(onPressed: contestoB ,style: ElevatedButton.styleFrom(backgroundColor: Colors.orange) ,child: Text(opcion2, style: TextStyle(color: Colors.white),)),
-            SizedBox(height: 10,),
-            ElevatedButton(onPressed: contestoC , style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),child: Text(opcion3, style: TextStyle(color: Colors.white),)),
-            SizedBox(height: 10,),
-            ElevatedButton(onPressed: contestoD, style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),child: Text(opcion4, style: TextStyle(color: Colors.white),)),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
+            ElevatedButton(onPressed: contestoA, style:ElevatedButton.styleFrom(backgroundColor: Colors.orange) ,child: Text(opcion1, style: const TextStyle(color: Colors.white),)),
+            const SizedBox(height: 10,),
+            ElevatedButton(onPressed: contestoB ,style: ElevatedButton.styleFrom(backgroundColor: Colors.orange) ,child: Text(opcion2, style: const TextStyle(color: Colors.white),)),
+            const SizedBox(height: 10,),
+            ElevatedButton(onPressed: contestoC , style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),child: Text(opcion3, style: const TextStyle(color: Colors.white),)),
+            const SizedBox(height: 10,),
+            ElevatedButton(onPressed: contestoD, style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),child: Text(opcion4, style: const TextStyle(color: Colors.white),)),
+            const SizedBox(height: 10,),
             Text('Puntuaje: $puntuaje'),
           ],
         ),

@@ -7,7 +7,7 @@ class apto extends StatefulWidget{
   final int quizzscore;
   final double tecladoscore;
   final double auditivoscore;
-  apto({required this.prospecto_id,required this.quizzscore,required this.tecladoscore, required this.auditivoscore});
+  const apto({required this.prospecto_id,required this.quizzscore,required this.tecladoscore, required this.auditivoscore});
   @override
   State<apto> createState() => _aptoState();
 }
@@ -39,12 +39,7 @@ class _aptoState extends State<apto> {
   }
   String pruebaresultados = '';
   String stringPrueba(){
-    return 'Prospecto id: '+this.widget.prospecto_id.toString()+' Calificacion de quizz: '
-        +this.widget.quizzscore.toString()+' PPM: '+this.widget.tecladoscore.toString()+
-        ' Calificacion de examen de Teclado: '+wpmtograde(this.widget.tecladoscore).toString()+
-        ' Calificacion de examen auditivo: '+this.widget.auditivoscore.toString()+
-        ' Promedio '+finalgrade(this.widget.quizzscore, wpmtograde(this.widget.tecladoscore), this.widget.auditivoscore).toStringAsFixed(2)
-        +' Apto o No Apto: '+VarificarApto(puntuajefinall);
+    return 'Prospecto id: ${this.widget.prospecto_id} Calificacion de quizz: ${this.widget.quizzscore} PPM: ${this.widget.tecladoscore} Calificacion de examen de Teclado: ${wpmtograde(this.widget.tecladoscore)} Calificacion de examen auditivo: ${this.widget.auditivoscore} Promedio ${finalgrade(this.widget.quizzscore, wpmtograde(this.widget.tecladoscore), this.widget.auditivoscore).toStringAsFixed(2)} Apto o No Apto: ${VarificarApto(puntuajefinall)}';
   }
 
 
@@ -52,21 +47,20 @@ class _aptoState extends State<apto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(preferredSize: const Size.fromHeight(50),child: barraInformativa(titulo: 'resultados',)),
+      appBar: const PreferredSize(preferredSize:  Size.fromHeight(50),child: barraInformativa(titulo: 'resultados',)),
       body: Center(
         child: Column(
           children: [
-            Text("Examen terminado"),
+            const Text("Examen terminado"),
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
                 padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
                 onPressed: () {
-                  print(stringPrueba());
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardReclutador()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardReclutador()));
                 },
-                child: Text("Volver a pagina principal", style: TextStyle(color: Colors.white, fontSize: 20),)),
+                child: const Text("Volver a pagina principal", style: TextStyle(color: Colors.white, fontSize: 20),)),
           ],
         ),
       ),

@@ -11,11 +11,11 @@ class instruccionesExamenAuditivo extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: PreferredSize(preferredSize: const Size.fromHeight(50),child:barraInformativa(titulo:'instrucciones para el Examen de Auditivo')),
+      appBar: const PreferredSize(preferredSize:  Size.fromHeight(50),child:barraInformativa(titulo:'instrucciones para el Examen de Auditivo')),
       body: Center(
         child: Column(
           children: [
-            Text('El siguiente es un examen auditivo, donde despues de presionar el boton comenzar,tendran dos minutos para escuchar el audio y  seleccionar las respuestas correctas'),
+            const Text('El siguiente es un examen auditivo, donde despues de presionar el boton comenzar,tendran dos minutos para escuchar el audio y  seleccionar las respuestas correctas'),
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange,
@@ -23,10 +23,9 @@ class instruccionesExamenAuditivo extends StatelessWidget{
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30))),
                 onPressed: () {
-              print(this.prospecto_id.toString()+" "+this.quizzscore.toString()+" "+this.tecladoscore.toString());
               Navigator.push(context,
               MaterialPageRoute(builder: (builder) => examenAuditivo(prospecto_id: this.prospecto_id, quizzscore:this.quizzscore,tecladoscore: this.tecladoscore,)));
-            }, child: Text('Comenzar',style: TextStyle(
+            }, child: const Text('Comenzar',style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w900,
                 fontSize: 25),))

@@ -51,8 +51,8 @@ class _ListaDeReclutadoresState extends State<ListaDeReclutadores> {
   @override
   Widget build(BuildContext context){
     return Scaffold(
-        appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(50),
+        appBar: const PreferredSize(
+            preferredSize:  Size.fromHeight(50),
             child: barraRegSal(titulo: 'Jefe de Reclutamiento')),
         body: Center(
             child: Row(
@@ -75,9 +75,9 @@ class _ListaDeReclutadoresState extends State<ListaDeReclutadores> {
                                 future: reclutadores,
                                 builder: (BuildContext context, AsyncSnapshot<List<Reclutador>> snapshot){
                                   if(snapshot.connectionState == ConnectionState.waiting){
-                                    return CircularProgressIndicator();
+                                    return const CircularProgressIndicator();
                                   }else if(snapshot.hasData && snapshot.data!.isEmpty){
-                                    return Text("no data");
+                                    return const Text("no data");
                                   }else if(snapshot.hasError){
                                     return Text(snapshot.error.toString());
                                   }else{
@@ -85,42 +85,38 @@ class _ListaDeReclutadoresState extends State<ListaDeReclutadores> {
                                     return Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Container(
-                                          child: Table(
-                                            children:
-                                              const <TableRow>[
-                                                TableRow(
-                                                  children: [
-                                                    TableCell(child: Text("id")),
-                                                    TableCell(child: Text("nombre"))
-                                                  ]
-                                                )],
-                                          )
+                                        Table(
+                                          children:
+                                            const <TableRow>[
+                                              TableRow(
+                                                children: [
+                                                  TableCell(child: Text("id")),
+                                                  TableCell(child: Text("nombre"))
+                                                ]
+                                              )],
                                         ),
                                         ListView.builder(
                                             itemCount: items.length,
                                           scrollDirection: Axis.vertical,
                                           shrinkWrap: true,
                                           itemBuilder: (context,index){
-                                              return Container(
-                                                child: Table(
-                                                  children: <TableRow>[
-                                                    TableRow(
-                                                      children: [
-                                                        TableCell(child: Text(items[index].id.toString())),
-                                                        TableCell(child: Text(items[index].username)),
-                                                        TableCell(child: IconButton(onPressed: () {
-                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => EditarReclutador(
-                                                              id: items[index].id,
-                                                              username: items[index].username,
-                                                              password: items[index].password,
-                                                              habilitado: valorHabil(items[index].habilitado))
-                                                          )).then((value) => _refresh());
-                                                        }, icon: Icon(Icons.edit)))
-                                                      ]
-                                                    )
-                                                  ],
-                                                ),
+                                              return Table(
+                                                children: <TableRow>[
+                                                  TableRow(
+                                                    children: [
+                                                      TableCell(child: Text(items[index].id.toString())),
+                                                      TableCell(child: Text(items[index].username)),
+                                                      TableCell(child: IconButton(onPressed: () {
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => EditarReclutador(
+                                                            id: items[index].id,
+                                                            username: items[index].username,
+                                                            password: items[index].password,
+                                                            habilitado: valorHabil(items[index].habilitado))
+                                                        )).then((value) => _refresh());
+                                                      }, icon: const Icon(Icons.edit)))
+                                                    ]
+                                                  )
+                                                ],
                                               );
                                           },
                                         )
@@ -129,7 +125,7 @@ class _ListaDeReclutadoresState extends State<ListaDeReclutadores> {
                                   }
                                 },
                               ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           Row(
@@ -139,11 +135,11 @@ class _ListaDeReclutadoresState extends State<ListaDeReclutadores> {
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.orange),
                                   onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => CrearReclutador()));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const CrearReclutador()));
                                   },
-                                  child: Text('Nuevo reclutador',
+                                  child: const Text('Nuevo reclutador',
                                       style: TextStyle(color: Colors.white))),
-                              SizedBox(
+                              const SizedBox(
                                 width: 20,
                               ),
                               /*

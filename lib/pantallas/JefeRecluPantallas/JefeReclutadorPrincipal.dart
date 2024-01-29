@@ -21,6 +21,7 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
   @override
   void dispose(){
     Keyword.dispose();
+    super.dispose();
   }
 
   @override
@@ -52,8 +53,8 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
   @override
   Widget build(BuildContext context){
     return Scaffold(
-        appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(50),
+        appBar: const PreferredSize(
+            preferredSize:  Size.fromHeight(50),
             child: barraSalir(titulo: 'Jefe de Reclutamiento')),
         body: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +68,7 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8)
                     ),
@@ -97,9 +98,9 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
                     builder: (BuildContext context, AsyncSnapshot<List<Prospecto>> snapshot){
 
                       if(snapshot.connectionState == ConnectionState.waiting){
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       }else if(snapshot.hasData && snapshot.data!.isEmpty){
-                        return Text("no data");
+                        return const Text("no data");
                       }else if(snapshot.hasError) {
                         return Text(snapshot.error.toString());
                       }else{
@@ -107,32 +108,29 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
                         return Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Container(
-                              child: Table(
-
-                                  children: const <TableRow>[
-                                    TableRow(
-                                      decoration: BoxDecoration(
-                                        color: Colors.orange
-                                      ),
-                                      children: [
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Id",style: TextStyle(color: Colors.white),))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Nombre",style: TextStyle(color: Colors.white),))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Primer Apellido",style: TextStyle(color: Colors.white),))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Segundo Apellido",style: TextStyle(color: Colors.white),))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Direccion",style: TextStyle(color: Colors.white),))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Telefono",style: TextStyle(color: Colors.white),))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Quizz",style: TextStyle(color: Colors.white),))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Calificacion PPM",style: TextStyle(color: Colors.white),))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Audio",style: TextStyle(color: Colors.white),))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Campaña",style: TextStyle(color: Colors.white),))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Motivo",style: TextStyle(color: Colors.white),))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Estatus",style: TextStyle(color: Colors.white),))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Edad",style: TextStyle(color: Colors.white),))),
-                                        TableCell(child: Align(alignment: Alignment.center,child: Text("Escolaridad",style: TextStyle(color: Colors.white),))),
-                                      ],
-                                    ),]
-                              ),
+                            Table(
+                                children: const <TableRow>[
+                                  TableRow(
+                                    decoration: BoxDecoration(
+                                      color: Colors.orange
+                                    ),
+                                    children: [
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("Id",style: TextStyle(color: Colors.white),))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("Nombre",style: TextStyle(color: Colors.white),))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("Primer Apellido",style: TextStyle(color: Colors.white),))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("Segundo Apellido",style: TextStyle(color: Colors.white),))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("Direccion",style: TextStyle(color: Colors.white),))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("Telefono",style: TextStyle(color: Colors.white),))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("Quizz",style: TextStyle(color: Colors.white),))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("Calificacion PPM",style: TextStyle(color: Colors.white),))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("Audio",style: TextStyle(color: Colors.white),))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("Campaña",style: TextStyle(color: Colors.white),))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("Motivo",style: TextStyle(color: Colors.white),))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("Estatus",style: TextStyle(color: Colors.white),))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("Edad",style: TextStyle(color: Colors.white),))),
+                                      TableCell(child: Align(alignment: Alignment.center,child: Text("Escolaridad",style: TextStyle(color: Colors.white),))),
+                                    ],
+                                  ),]
                             ),
                             ListView.builder(
                                 itemCount: items.length,
@@ -140,43 +138,41 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
                                 shrinkWrap: true,
                                 itemBuilder: (context, index)
                                 {
-                                  return Container(
-                                    child: Table(
-                                      children: <TableRow>[
-                                        TableRow(
-                                            children:
-                                            [
-                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].id.toString()))),
-                                              TableCell(
-                                                  child: Align(
-                                                    alignment: Alignment.center,
-                                                    child: GestureDetector(
-                                                        onTap: () {
-                                                          Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(builder: (context) => EditarProspecto(pros: items[index]))
-                                                          ).then((value) => _refresh());
-                                                        },
-                                                        child: Text(items[index].nombre
-                                                        )),
-                                                  )
-                                              ),
-                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].primerApellido))),
-                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].segundoApellido))),
-                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].direccion))),
-                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].telefono))),
-                                              TableCell(child:Align(alignment: Alignment.center,child:  Text(items[index].calquizz.toString()))),
-                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].calexamTec.toString()))),
-                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].calexamAud.toString()))),
-                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].campana.toString()))),
-                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].motivo.toString()))),
-                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].estatus.toString()))),
-                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].edad.toString()))),
-                                              TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].escolaridad))),
-                                            ]
-                                        ),
-                                      ],
-                                    ),
+                                  return Table(
+                                    children: <TableRow>[
+                                      TableRow(
+                                          children:
+                                          [
+                                            TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].id.toString()))),
+                                            TableCell(
+                                                child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(builder: (context) => EditarProspecto(pros: items[index]))
+                                                        ).then((value) => _refresh());
+                                                      },
+                                                      child: Text(items[index].nombre
+                                                      )),
+                                                )
+                                            ),
+                                            TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].primerApellido))),
+                                            TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].segundoApellido))),
+                                            TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].direccion))),
+                                            TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].telefono))),
+                                            TableCell(child:Align(alignment: Alignment.center,child:  Text(items[index].calquizz.toString()))),
+                                            TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].calexamTec.toString()))),
+                                            TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].calexamAud.toString()))),
+                                            TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].campana.toString()))),
+                                            TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].motivo.toString()))),
+                                            TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].estatus.toString()))),
+                                            TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].edad.toString()))),
+                                            TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].escolaridad))),
+                                          ]
+                                      ),
+                                    ],
                                   );
                                 }),
                           ],

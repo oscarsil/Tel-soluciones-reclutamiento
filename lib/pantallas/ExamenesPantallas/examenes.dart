@@ -13,41 +13,38 @@ class examenes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(50),
+      appBar: const PreferredSize(
+          preferredSize:  Size.fromHeight(50),
           child: barraInformativa(titulo: 'Tel-Soluciones')),
       body: Center(
         child: Column(
           children: [
             ElevatedButton(onPressed: () {
-              print("101");
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => quizz(prospecto_int: 101,)));
-            }, child: Text('quiiz')),
+            }, child: const Text('quiiz')),
             ElevatedButton(onPressed: () {
-              print("101 100");
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => instruccionesExamenTeclado(prospecto_id: 101,quizzscore: 100,)));
-            }, child: Text('Tecleado')),
-            ElevatedButton(onPressed: () {
-              print("101 100 45");
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => instruccionesExamenAuditivo(prospecto_id: 101,quizzscore: 100, tecladoscore: 45,)));
-            }, child: Text('Auditivo')),
+            }, child: const Text('Tecleado')),
             ElevatedButton(onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DashboardReclutador()));
-            }, child: Text('Dashboard reclutador')),
+                  MaterialPageRoute(builder: (context) => const instruccionesExamenAuditivo(prospecto_id: 101,quizzscore: 100, tecladoscore: 45,)));
+            }, child: const Text('Auditivo')),
+            ElevatedButton(onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const DashboardReclutador()));
+            }, child: const Text('Dashboard reclutador')),
             ElevatedButton(onPressed: () {
               Navigator.push(context, 
-                MaterialPageRoute(builder: (context) => apto(prospecto_id: 102, quizzscore: 100, tecladoscore: 42, auditivoscore: 80))
+                MaterialPageRoute(builder: (context) => const apto(prospecto_id: 102, quizzscore: 100, tecladoscore: 42, auditivoscore: 80))
               );
-            }, child: Text('Apto')),
+            }, child: const Text('Apto')),
             ElevatedButton(onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => verProceso())
+                  MaterialPageRoute(builder: (context) => const verProceso())
               );
-            }, child: Text('ver proceso'))
+            }, child: const Text('ver proceso'))
           ],
         ),
       ),

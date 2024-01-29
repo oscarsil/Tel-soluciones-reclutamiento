@@ -16,7 +16,7 @@ class _ElegirRecluState extends State<ElegirReclu> {
   final db = database_helper();
 
   @override
-  void Dispose(){
+  void dispose(){
     super.dispose();
   }
 
@@ -41,15 +41,15 @@ class _ElegirRecluState extends State<ElegirReclu> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reclutadores'),
+        title: const Text('Reclutadores'),
       ),
       body: FutureBuilder<List<Reclutador>>(
           future: reclutadores,
           builder: (BuildContext context, AsyncSnapshot<List<Reclutador>> snapshot){
               if(snapshot.connectionState == ConnectionState.waiting){
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               }else if(snapshot.hasData && snapshot.data!.isEmpty){
-                return Text("no data");
+                return const Text("no data");
               }else if(snapshot.hasError){
                 return Text(snapshot.error.toString());
               }else{
