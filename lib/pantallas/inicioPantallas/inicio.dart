@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/pantallas/ProspectoPantallas/FormularioProspecto.dart';
+import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/examenes.dart';
 
 class Inicio extends StatelessWidget {
   const Inicio({super.key});
@@ -45,7 +46,7 @@ class Inicio extends StatelessWidget {
                         fontWeight: FontWeight.w900,
                         fontSize: 25),
                   )),
-             /* ElevatedButton(onPressed: () {
+              ElevatedButton(onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -57,7 +58,7 @@ class Inicio extends StatelessWidget {
                     color: Colors.white,
                     fontWeight: FontWeight.w900,
                     fontSize: 25),
-              )),*/
+              )),
             ],
           ),
         ),

@@ -64,15 +64,15 @@ class _DashboardReclutadorState extends State<DashboardReclutador> {
       body: Center(
         child: Row(
           children: [
-            Expanded(
+            /*Expanded(
               flex: 1,
               child: Container(
                 color: Colors.blueAccent,
                 child: barraRelcutador(),
               ),
-            ),
+            ),*/
             Expanded(
-              flex: 5,
+              flex: 7,
               child: Container(
                   color: Colors.white,
                   child: Column(

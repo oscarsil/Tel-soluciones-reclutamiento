@@ -68,12 +68,6 @@ class barraRelcutador extends StatelessWidget{
         }, icon: const Icon(Icons.feed, color: Colors.white,size: 50,)),
         const SizedBox(height: 10,),
         const Wrap(children: [Text('Reporte de prospectos',style: TextStyle(fontSize: 18, color: Colors.white),)],),
-        const SizedBox(height: 50,),
-        IconButton(onPressed: ()  {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const borrarProspecto()));
-        }, icon: const Icon(Icons.remove_circle, color: Colors.white,size: 50,)),
-        const SizedBox(height: 10,),
-        const Wrap(children: [Text('Borrar prospectos',style: TextStyle(fontSize: 18, color: Colors.white),)],),
       ],
     );
   }
