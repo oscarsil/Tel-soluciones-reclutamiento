@@ -40,19 +40,6 @@ class _EditarProspecto extends State<EditarProspecto>{
 
   var campanas = ['Agente R02','Agente R03','Renovaciones','Admin'];
 
-  @override
-  void dispose(){
-    _textNombre.dispose();
-    _textAP.dispose();
-    _textAM.dispose();
-    _textEdad.dispose();
-    _textTelefono.dispose();
-    _textEscolaridad.dispose();
-    _textDireccion.dispose();
-    _textestatus.dispose();
-    _textMotivo.dispose();
-    super.dispose;
-  }
 
   @override
   Widget build(BuildContext context){
@@ -97,7 +84,7 @@ class _EditarProspecto extends State<EditarProspecto>{
                                    return null;
                                  },
                                  inputFormatters: [
-                                   FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ]"))
+                                   FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ ]"))
                                  ],
                                  controller: _textNombre,
                                  decoration: const InputDecoration(
@@ -116,7 +103,7 @@ class _EditarProspecto extends State<EditarProspecto>{
                                    return null;
                                  },
                                  inputFormatters: [
-                                   FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ]"))
+                                   FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ ]"))
                                  ],
                                  controller: _textAP,
                                  decoration: const InputDecoration(
@@ -135,7 +122,7 @@ class _EditarProspecto extends State<EditarProspecto>{
                                    return null;
                                  },
                                  inputFormatters: [
-                                   FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ]"))
+                                   FilteringTextInputFormatter.allow(RegExp("[a-zA-Zñ˜Ñ ]"))
                                  ],
                                  controller: _textAM,
                                  decoration: const InputDecoration(

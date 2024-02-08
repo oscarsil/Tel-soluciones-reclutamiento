@@ -18,11 +18,6 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
   final db = database_helper();
   final Keyword = TextEditingController();
 
-  @override
-  void dispose(){
-    Keyword.dispose();
-    super.dispose();
-  }
 
   @override
   void initState() {

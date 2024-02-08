@@ -19,12 +19,6 @@ class _CrearReclutadorState extends State<CrearReclutador> {
 
   final db = database_helper();
 
-  @override
-  void dispose(){
-    Nombre.dispose();
-    contra.dispose();
-    super.dispose();
-  }
 
   final formKey = GlobalKey<FormState>();
   @override

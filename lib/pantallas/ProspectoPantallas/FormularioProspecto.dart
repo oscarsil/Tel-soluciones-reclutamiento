@@ -108,17 +108,7 @@ class _campos extends State<campos> {
   }
 
 
-  @override
-  void dispose(){
-    _textNombre.dispose();
-    _textAp.dispose();
-    _textAm.dispose();
-    _textdir.dispose();
-    _textEdad.dispose();
-    _textTelefono.dispose();
-    _textEsc.dispose();
-    super.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {

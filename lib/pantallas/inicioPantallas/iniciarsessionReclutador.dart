@@ -19,12 +19,7 @@ class iniciarsessionReclutador extends StatefulWidget{
 
 class _iniciarsessionReclutadorState extends State<iniciarsessionReclutador> {
 
-  @override
-  void dispose(){
-    _textUserName.dispose();
-    _textPassword.dispose();
-    super.dispose();
-  }
+
 
   bool isLoginTrue = false;
 

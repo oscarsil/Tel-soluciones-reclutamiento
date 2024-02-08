@@ -15,10 +15,7 @@ class _ElegirRecluState extends State<ElegirReclu> {
   late Future<List<Reclutador>> reclutadores;
   final db = database_helper();
 
-  @override
-  void dispose(){
-    super.dispose();
-  }
+
 
 
   @override

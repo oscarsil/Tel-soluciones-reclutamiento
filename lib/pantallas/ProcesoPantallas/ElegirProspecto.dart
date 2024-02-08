@@ -20,10 +20,7 @@ class ElegirPros extends StatefulWidget{
 
 class _ElegirProsState extends State<ElegirPros> {
 
-  @override
-  void dispose(){
-    super.dispose();
-  }
+
 
   String getDate(){
     final DateTime now = DateTime.now();

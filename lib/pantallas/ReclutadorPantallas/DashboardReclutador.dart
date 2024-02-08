@@ -20,11 +20,7 @@ class _DashboardReclutadorState extends State<DashboardReclutador> {
   final db = database_helper();
   final Keyword = TextEditingController();
 
-  @override
-  void dispose(){
-    Keyword.dispose();
-    super.dispose();
-  }
+
 
 
   @override

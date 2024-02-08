@@ -20,12 +20,7 @@ class _examenTeclado extends State<examenTeclado>{
     return resultado;
   }
 
-  @override
-  void dispose(){
-    _timer.cancel();
-    _textFieldController.dispose();
-    super.dispose();
-  }
+
 
 
   @override

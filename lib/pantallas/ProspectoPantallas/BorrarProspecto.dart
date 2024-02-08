@@ -16,11 +16,7 @@ class _borrarProspectoState extends State<borrarProspecto> {
   final db = database_helper();
   final Keyword = TextEditingController();
 
-  @override
-  void dispose(){
-    Keyword.dispose();
-    super.dispose();
-  }
+
 
   @override
   void initState() {

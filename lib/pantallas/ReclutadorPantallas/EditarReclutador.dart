@@ -18,13 +18,7 @@ class EditarReclutador extends StatefulWidget{
 }
 
 class _EditarReclutador extends State<EditarReclutador>{
-  @override
-  void dispose(){
-    _textId.dispose();
-    _textNombre.dispose();
-    _textContra.dispose();
-    super.dispose();
-  }
+
 
   int editarHabilitado(bool habilitado){
     if(habilitado){return 1;}else{return 0;}
