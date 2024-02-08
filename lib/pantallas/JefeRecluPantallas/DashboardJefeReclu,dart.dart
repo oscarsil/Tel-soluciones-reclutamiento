@@ -4,18 +4,18 @@ import 'package:telsolreclutamiento/componentes/barraslaterales.dart';
 import 'package:telsolreclutamiento/modelos/procesoDeReclutamiento.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 
-class DashboardReclu extends StatefulWidget{
+class DashboardJefe extends StatefulWidget{
   final String fecha;
 
-  const DashboardReclu({
+  const DashboardJefe({
     required this.fecha
 });
 
   @override
-  State<DashboardReclu> createState() => _DashboardRecluState();
+  State<DashboardJefe> createState() => _DashboardJefeState();
 }
 
-class _DashboardRecluState extends State<DashboardReclu> {
+class _DashboardJefeState extends State<DashboardJefe> {
   late database_helper handler;
   final db = database_helper();
   late Future<List<ProccesoDeContratacion>> procesos;
@@ -39,23 +39,22 @@ class _DashboardRecluState extends State<DashboardReclu> {
   Future<String> califiacionProspecto(int? id) async{
     return db.caliProspecto(id);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const PreferredSize(
           preferredSize:  Size.fromHeight(50),
-          child: barraSalir(titulo: 'Dashboard Reclutador')),
+          child: barraSalir(titulo: 'Dashboard Jefe de Reclutamiento')),
       body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-              flex: 1,
-              child: Container(
-                color: Colors.blueAccent,
-                child: barraRelcutador(),
-              ),
-            ),
+            flex: 1,
+            child: barraslaterales(),
+          ),
           Expanded(
-            flex: 7,
+            flex: 5,
             child: FutureBuilder<List<ProccesoDeContratacion>>(
               future: procesos,
               builder: (BuildContext context, AsyncSnapshot<List<ProccesoDeContratacion>> snapshot){
@@ -134,12 +133,13 @@ class _DashboardRecluState extends State<DashboardReclu> {
                               }
                           ),
                         ],
-                      );},
+                      );
+                      },
                   );
                 }
               },
             ),
-          ),
+          )
         ],
       ),
     );

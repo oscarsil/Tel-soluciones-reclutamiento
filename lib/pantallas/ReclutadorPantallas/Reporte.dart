@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:telsolreclutamiento/modelos/reclutador.dart';
+import 'package:telsolreclutamiento/modelos/procesoDeReclutamiento.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 
 class Reporte extends StatefulWidget{
@@ -19,106 +19,118 @@ class _ReporteState extends State<Reporte> {
   final db = database_helper();
 
   late database_helper handler;
-  late Future<List<Reclutador>> reclutadores;
+  late Future<List<ProccesoDeContratacion>> procesos;
 
   @override
   void initState() {
     handler = database_helper();
-    reclutadores = handler.getReclutadores();
+    procesos = handler.ProcesosFecha(widget.desde, widget.hasta);
     handler.initDB().whenComplete(
             () {
-          reclutadores = getAllReclutadores();
+              procesos = getAllProcesos();
         }
     );
     super.initState();
   }
 
-  Future<List<Reclutador>> getAllReclutadores() {
-    return handler.getReclutadores();
+  Future<List<ProccesoDeContratacion>> getAllProcesos() {
+    return handler.ProcesosFecha(widget.desde, widget.hasta);
   }
 
-  Future<String> function(int? id) async {
-    return db.getCount(id,widget.desde,widget.hasta);
+  Future<String> califiacionProspecto(int? id) async{
+    return db.caliProspecto(id);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("prueba de reporte",style: TextStyle(color: Colors.white),),
+        title: const Text("Reporte",style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.blue,
       ),
-      body: FutureBuilder<List<Reclutador>>(
-        future: reclutadores,
-        builder: (BuildContext context, AsyncSnapshot<List<Reclutador>> snapshot){
+      body: FutureBuilder<List<ProccesoDeContratacion>>(
+        future: procesos,
+        builder: (BuildContext context, AsyncSnapshot<List<ProccesoDeContratacion>> snapshot){
           if(snapshot.connectionState == ConnectionState.waiting){
-            return const CircularProgressIndicator();
+            return CircularProgressIndicator();
           }else if(snapshot.hasData && snapshot.data!.isEmpty){
-            return const Text("no data");
-          }else if(snapshot.hasError){
+            return Text("no data");
+          }else if(snapshot.hasError) {
             return Text(snapshot.error.toString());
           }else{
-            final items = snapshot.data ?? <Reclutador>[];
+            final items = snapshot.data ?? <ProccesoDeContratacion>[];
             return ListView.builder(
-                itemCount: 1,
-                //error aqui
-                itemBuilder: (context, index){
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Table(
+              itemCount: 1,
+              itemBuilder: (context, index){
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      child: Table(
                           children: const <TableRow>[
                             TableRow(
-                              decoration: BoxDecoration(
-                                  color: Colors.orange
-                              ),
                               children: [
-                                TableCell(child: Align(alignment: Alignment.center,child: Text("id",style: TextStyle(color: Colors.white),))),
-                                TableCell(child:  Align(alignment: Alignment.center,child:Text("nombre",style: TextStyle(color: Colors.white)))),
-                                TableCell(child:  Align(alignment: Alignment.center,child:Text('Entrevistados',style: TextStyle(color: Colors.white))),),
+                                TableCell(child: Text("Nombre Prospecto",)),
+                                TableCell(child: Text("Calificaciones(quizz, tecleado,auditivo)")),
+                                TableCell(child: Text("nombre reclutador")),
+                                TableCell(child: Text("fecha de inicio de proceso")),
                               ],
                             ),]
                       ),
-                      ListView.builder(
-                          itemCount: items.length,
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index)
-                          {
-                            return Table(
+                    ),
+                    ListView.builder(
+                        itemCount: items.length,
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            child: Table(
                               children: <TableRow>[
                                 TableRow(
                                     children:
                                     [
-                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].id.toString()))),
-                                      TableCell(child: Align(alignment: Alignment.center,child: Text(items[index].username))),
+                                      TableCell(child: Text(items[index].nombreProspecto)),
+                                      /*
                                       TableCell(
-                                          child: Align(
-                                            alignment: Alignment.center,
-                                            child: FutureBuilder(
-                                                future: function(items[index].id),
-                                                builder: (BuildContext context, AsyncSnapshot<String> text){
-                                                  if(text.connectionState == ConnectionState.waiting){
-                                                    return const Text("waiting");
-                                                  }else if (text.hasData && text.data!.isEmpty){
-                                                    return const Text("no data");
-                                                  }else if(text.hasError){
-                                                    return Text(text.error.toString());
-                                                  }else{
-                                                    return Text(text.data as String);
-                                                  }
-                                                }),
-                                          )
-                                      )
+                                          child: FutureBuilder(
+                                              future: NombreProspecto(items[index].idProspecto),
+                                              builder: (BuildContext context, AsyncSnapshot<String> text){
+                                                if(text.connectionState == ConnectionState.waiting){
+                                                  return Text("waiting");
+                                                }else if (text.hasData && text.data!.isEmpty){
+                                                  return Text("no data");
+                                                }else if(text.hasError){
+                                                  return Text(text.error.toString());
+                                                }else{
+                                                  return   new Text(text.data as String);
+                                                }
+                                              })),
+
+                                       */
+                                      TableCell(child: FutureBuilder(future: califiacionProspecto(items[index].idProspecto),
+                                          builder: (BuildContext context, AsyncSnapshot<String> text){
+                                            if(text.connectionState == ConnectionState.waiting){
+                                              return Text("waiting");
+                                            }else if (text.hasData && text.data!.isEmpty){
+                                              return Text("no data");
+                                            }else if(text.hasError){
+                                              return Text(text.error.toString());
+                                            }else{
+                                              return   new Text(text.data as String);
+                                            }
+                                          })
+                                      ),
+                                      TableCell(child: Text(items[index].nombreReclutador)),
+                                      TableCell(child: Text(items[index].pts)),
                                     ]
                                 ),
                               ],
-                            );
-                          }
-                      ),
-                    ],
-                  );
-                }
+                            ),
+                          );
+                        }
+                    ),
+                  ],
+                );},
             );
           }
         },

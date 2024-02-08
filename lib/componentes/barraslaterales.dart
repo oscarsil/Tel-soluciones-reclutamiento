@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/DashboardReclutador.dart';
+import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/RecluElegirProsEditar.dart';
 import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/ListaDereclutador.dart';
-import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/JefeReclutadorPrincipal.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/JefeRecluElegirProsEditar.dart';
 import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/ReporteReclutador.dart';
 import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/borrarReclu.dart';
 import 'package:telsolreclutamiento/pantallas/ProspectoPantallas/BorrarProspecto.dart';
@@ -28,7 +28,7 @@ class barraslaterales extends StatelessWidget{
             const Align(alignment: Alignment.center,child: Wrap(children: [Text('Reclutador',style: TextStyle(fontSize: 18, color: Colors.white),)],)),
             const SizedBox(height: 50,),
             IconButton(onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const JefeReclutadorPrincipal()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const JefeRecluElegirProsEditar()));
             }, icon: const Icon(Icons.account_circle, color: Colors.white,size: 50,)),
             const SizedBox(height: 10,),
             const Align(alignment: Alignment.center,child: Wrap(children: [Text('Reporte de prospectos',style: TextStyle(fontSize: 18, color: Colors.white),)],)),
@@ -50,6 +50,12 @@ class barraslaterales extends StatelessWidget{
             }, icon: const Icon(Icons.remove_circle, color: Colors.white,size: 50,)),
             const SizedBox(height: 10,),
             const Align(alignment: Alignment.center,child: Wrap(children: [Text('Borrar Prospecto',style: TextStyle(fontSize: 18, color: Colors.white),)],)),
+            const SizedBox(height: 50,),
+            IconButton(onPressed: ()  {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const JefeRecluElegirProsEditar()));
+            }, icon: const Icon(Icons.edit, color: Colors.white,size: 50,)),
+            const SizedBox(height: 10,),
+            const Align(alignment: Alignment.center,child: Wrap(children: [Text('Editar Prospecto',style: TextStyle(fontSize: 18, color: Colors.white),)],)),
           ],
         ),
       ),
@@ -64,10 +70,10 @@ class barraRelcutador extends StatelessWidget{
       children: [
         const SizedBox(height: 50,),
         IconButton(onPressed: ()  {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardReclutador()));
-        }, icon: const Icon(Icons.feed, color: Colors.white,size: 50,)),
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const RecluElegirProsEditar()));
+        }, icon: const Icon(Icons.edit, color: Colors.white,size: 50,)),
         const SizedBox(height: 10,),
-        const Wrap(children: [Text('Reporte de prospectos',style: TextStyle(fontSize: 18, color: Colors.white),)],),
+        const Wrap(children: [Text('Editar de prospectos',style: TextStyle(fontSize: 18, color: Colors.white),)],),
       ],
     );
   }

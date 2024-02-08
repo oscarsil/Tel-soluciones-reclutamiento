@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/DashboardReclutador.dart';
+import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/RecluElegirProsEditar.dart';
 import 'package:telsolreclutamiento/modelos/reclutador.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 
@@ -19,7 +21,8 @@ class iniciarsessionReclutador extends StatefulWidget{
 
 class _iniciarsessionReclutadorState extends State<iniciarsessionReclutador> {
 
-
+  DateTime _dateTime = DateTime.now();
+  DateFormat formatter = DateFormat('yyyy-MM-dd');
 
   bool isLoginTrue = false;
 
@@ -29,7 +32,7 @@ class _iniciarsessionReclutadorState extends State<iniciarsessionReclutador> {
   login() async {
     var response = await db.loginReclu(Reclutador(username: _textUserName.text, password: _textPassword.text, habilitado: 1));
     if(response == true){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardReclutador()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardReclu(fecha: formatter.format(_dateTime))));
     }else{
       onError = true;
       textError = 'usuario o contrasena incorrecto';

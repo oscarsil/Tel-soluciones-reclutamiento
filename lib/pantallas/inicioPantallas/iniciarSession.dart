@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/JefeReclutadorPrincipal.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/JefeRecluElegirProsEditar.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/DashboardJefeReclu,dart.dart';
 import 'package:telsolreclutamiento/modelos/jefDeReclutamiento.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 
@@ -18,8 +20,8 @@ class IniciarSession extends StatefulWidget{
 }
 
 class _IniciarSessionState extends State<IniciarSession> {
-
-
+  DateTime _dateTime = DateTime.now();
+  DateFormat formatter = DateFormat('yyyy-MM-dd');
 
   bool isLoginTrue = false;
 
@@ -29,7 +31,7 @@ class _IniciarSessionState extends State<IniciarSession> {
   login() async {
     var response = await db.login(JefeDeReclutamiento(username: _textUserName.text, password: _textPassword.text));
     if(response == true){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const JefeReclutadorPrincipal()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>  DashboardJefe(fecha: formatter.format(_dateTime),)));
     }else{
       onError = true;
       textError = 'usuario o contrasena incorrecto';

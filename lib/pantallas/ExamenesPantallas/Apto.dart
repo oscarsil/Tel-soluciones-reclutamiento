@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/DashboardReclutador.dart';
+import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/RecluElegirProsEditar.dart';
 
 class apto extends StatefulWidget{
   final int prospecto_id;
@@ -58,7 +58,7 @@ class _aptoState extends State<apto> {
                 padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardReclutador()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const RecluElegirProsEditar()));
                 },
                 child: const Text("Volver a pagina principal", style: TextStyle(color: Colors.white, fontSize: 20),)),
           ],

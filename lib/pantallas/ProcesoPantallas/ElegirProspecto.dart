@@ -70,7 +70,11 @@ class _ElegirProsState extends State<ElegirPros> {
                         title: Text(items[index].nombre +" "+items[index].primerApellido + " "+items[index].segundoApellido),
                         onTap: () {
                           db.crearProceso(ProccesoDeContratacion(
-                              nombreReclutador: widget.UsernameReclu, idReclutante: widget.idReclu, idProspecto: items[index].id, pts: getDate())
+                              nombreReclutador: widget.UsernameReclu,
+                              idReclutante: widget.idReclu,
+                              nombreProspecto: items[index].nombre +" "+items[index].primerApellido + " "+items[index].segundoApellido,
+                              idProspecto: items[index].id,
+                              pts: getDate())
                           ).whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) => instruccionesQuizz(prospecto_int: items[index].id!))));
                         },
                       );

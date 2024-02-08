@@ -2,12 +2,14 @@ class ProccesoDeContratacion{
   final int? id;
   final String nombreReclutador;
   final int? idReclutante, idProspecto;
+  final String nombreProspecto;
   final String pts;
 
   ProccesoDeContratacion({
     this.id,
     required this.nombreReclutador,
     required this.idReclutante,
+    required this.nombreProspecto,
     required this.idProspecto,
     required this.pts
 });
@@ -16,6 +18,7 @@ class ProccesoDeContratacion{
       id: json["id"],
       nombreReclutador: json["nombreReclutador"],
       idReclutante: json["idReclutante"],
+      nombreProspecto: json["nombreProspecto"],
       idProspecto: json["idProspecto"],
       pts: json["pts"]);
 
@@ -24,6 +27,7 @@ class ProccesoDeContratacion{
       'id':id,
       'nombreReclutador':nombreReclutador,
       'idReclutante':idReclutante,
+      'nombreProspecto': nombreProspecto,
       'idProspecto':idProspecto,
       'pts':pts,
     };

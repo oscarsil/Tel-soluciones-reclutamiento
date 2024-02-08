@@ -5,14 +5,14 @@ import 'package:telsolreclutamiento/modelos/prospecto.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 import 'package:telsolreclutamiento/pantallas/ProspectoPantallas/EditarProspecto.dart';
 
-class JefeReclutadorPrincipal extends StatefulWidget{
-  const JefeReclutadorPrincipal({super.key});
+class JefeRecluElegirProsEditar extends StatefulWidget{
+  const JefeRecluElegirProsEditar({super.key});
 
   @override
-  State<JefeReclutadorPrincipal> createState() => _JefeReclutadorPrincipalState();
+  State<JefeRecluElegirProsEditar> createState() => _JefeRecluElegirProsEditarState();
 }
 
-class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
+class _JefeRecluElegirProsEditarState extends State<JefeRecluElegirProsEditar> {
   late database_helper handler;
   late Future<List<Prospecto>> prospectos;
   final db = database_helper();
@@ -180,6 +180,7 @@ class _JefeReclutadorPrincipalState extends State<JefeReclutadorPrincipal> {
               ),
             )
           ],
-        ));
+        )
+    );
   }
 }

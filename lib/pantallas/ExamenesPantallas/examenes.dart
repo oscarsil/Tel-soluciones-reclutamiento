@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/instruccionesExamAudio.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/quizz.dart';
-import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/DashboardReclutador.dart';
+import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/RecluElegirProsEditar.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/Apto.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/instruccionesExamenTecleado.dart';
 import 'package:telsolreclutamiento/pantallas/ProcesoPantallas/LeerProcesos.dart';
@@ -33,7 +33,7 @@ class examenes extends StatelessWidget {
             }, child: const Text('Auditivo')),
             ElevatedButton(onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const DashboardReclutador()));
+                  MaterialPageRoute(builder: (context) => const RecluElegirProsEditar()));
             }, child: const Text('Dashboard reclutador')),
             ElevatedButton(onPressed: () {
               Navigator.push(context, 

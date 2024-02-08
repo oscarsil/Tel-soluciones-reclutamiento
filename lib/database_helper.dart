@@ -12,11 +12,13 @@ class database_helper {
   String JefeDeReclu = "INSERT INTO JEFEDERECLU (username, password) VALUES ('Vladimir Jimenez','Telsol01')";
   String ReclutadorTable = "CREATE TABLE RECLUTADOR (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT, habilitado INTEGER)";
   String pruebaReclutador = "INSERT INTO RECLUTADOR (username, password, habilitado) VALUES ('Judith Garcia','Telsol01',0)";
+  String pruebaProceso = "INSERT INTO PROCESO (nombreReclutador, idReclutante, nombreProspecto, idProspecto, pts) "
+      "VALUES ('Judith Garcia', 1, 'Oscar Silva', 1, '2024-02-08')";
   String createProspectoTable = "CREATE TABLE PROSPECTO (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, "
       "primerApellido TEXT, segundoApellido TEXT, direccion TEXT, telefono TEXT, escolaridad TEXT, edad INTEGER, calquizz INTEGER,"
       " calexamTec INTEGER, calexamAud INTEGER, campana TEXT, estatus TEXT, motivo TEXT)";
   String createProcesoTable = "CREATE TABLE PROCESO (id INTEGER PRIMARY KEY "
-      "AUTOINCREMENT, nombreReclutador TEXT, idReclutante INTEGER, idProspecto INTEGER, pts TEXT)";
+      "AUTOINCREMENT, nombreReclutador TEXT, idReclutante INTEGER, nombreProspecto TEXT, idProspecto INTEGER, pts TEXT)";
 
   Future<Database> initDB() async{
     final databasePath = await getDatabasesPath();
@@ -28,6 +30,7 @@ class database_helper {
       await db.execute(pruebaReclutador);
       await db.execute(createProspectoTable);
       await db.execute(createProcesoTable);
+      await db.execute(pruebaProceso);
     });
   }
 
@@ -168,6 +171,35 @@ class database_helper {
     final Database db = await initDB();
     List<Map<String, Object?>> result = await db.query('PROCESO');
     return result.map((e) => ProccesoDeContratacion.fromMap(e)).toList();
+  }
+
+  Future<List<ProccesoDeContratacion>> procesosHoy(String fecha) async{
+    final Database db = await initDB();
+    List<Map<String, Object?>> resultado =  (await db.rawQuery('SELECT * FROM PROCESO WHERE pts = ?',[fecha]));
+    return resultado.map((e) => ProccesoDeContratacion.fromMap(e)).toList();
+  }
+
+  Future<List<ProccesoDeContratacion>> ProcesosFecha(desde, hasta) async{
+    final Database db = await initDB();
+    List<Map<String, Object?>> resultado = (await db.rawQuery('SELECT * FROM PROCESO WHERE  pts > ? and pts < ?',[desde,hasta]));
+    return resultado.map((e) => ProccesoDeContratacion.fromMap(e)).toList();
+  }
+
+  Future<String> caliProspecto(id) async {
+    final Database db = await initDB();
+    List<Map<String, Object?>> resultado = await db.rawQuery('SELECT * FROM PROSPECTO WHERE id = ?',[id]);
+    if(resultado.isEmpty){
+      return "Prospecto Borrado";
+    }else {
+      List<Prospecto> x = resultado.map((e) => Prospecto.fromMap(e)).toList();
+      String? CalificacionProspecto = "";
+      if(x.first.calquizz != null){
+        CalificacionProspecto = "${x.first.calquizz.toString()} ${x.first.calexamTec.toString()} ${x.first.calexamAud.toString()}";
+      }else{
+        CalificacionProspecto = "Sin aplicar";
+      }
+      return CalificacionProspecto;
+    }
   }
 
 
