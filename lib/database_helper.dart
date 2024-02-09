@@ -122,6 +122,23 @@ class database_helper {
   }
 
 
+  Future<int?> getIdProspecto(nombre , primerApellido, segundoApellido) async {
+    final Database db = await initDB();
+    List<Map<String, Object?>> busqueda = await db.rawQuery('SELECT * FROM PROSPECTO WHERE nombre = ? AND primerApellido = ? AND segundoApellido = ?',[nombre,primerApellido,segundoApellido]);
+    List<Prospecto> x = busqueda.map((e) => Prospecto.fromMap(e)).toList();
+    int? resultado = x.first.id;
+    return resultado;
+  }
+
+  Future<int?> getIDproceso(nombre, idProspecto, pts) async {
+    final Database db = await initDB();
+    List<Map<String, Object?>> busqueda = await db.rawQuery('SELECT * FROM PROCESO WHERE nombreProspecto = ? AND idProspecto = ? AND pts = ?',[nombre, idProspecto, pts]);
+    List<ProccesoDeContratacion> x = busqueda.map((e) => ProccesoDeContratacion.fromMap(e)).toList();
+    int? resultado = x.first.id;
+    return resultado;
+  }
+
+
 
   //METODOS DE BORRAR
 
@@ -159,6 +176,14 @@ class database_helper {
     final Database db = await initDB();
     return db.rawUpdate('UPDATE PROSPECTO SET calquizz = ?, calexamTec = ?, calexamAud = ? WHERE id = ?',[calquizz, calexamTec, calexamAud, id]);
   }
+
+  Future<int> editarProceso(id, nombreReclu, idReclu) async{
+    final Database db = await initDB();
+    return db.rawUpdate('UPDATE PROCESO SET nombreReclutador = ?, idReclutante = ? WHERE id = ?',[nombreReclu,idReclu,id]);
+  }
+
+
+  //Metodos para el dashboard y reporte
 
   Future<String> getCount(idReclu,desde,hasta) async {
     final Database db = await initDB();

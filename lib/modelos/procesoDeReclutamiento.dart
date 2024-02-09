@@ -1,14 +1,15 @@
 class ProccesoDeContratacion{
   final int? id;
-  final String nombreReclutador;
-  final int? idReclutante, idProspecto;
+  final String? nombreReclutador;
+  final int? idReclutante;
+  final int? idProspecto;
   final String nombreProspecto;
   final String pts;
 
   ProccesoDeContratacion({
     this.id,
-    required this.nombreReclutador,
-    required this.idReclutante,
+    this.nombreReclutador,
+     this.idReclutante,
     required this.nombreProspecto,
     required this.idProspecto,
     required this.pts

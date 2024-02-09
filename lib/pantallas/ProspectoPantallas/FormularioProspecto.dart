@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:flutter/services.dart';
 import 'package:telsolreclutamiento/modelos/prospecto.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
+import 'package:telsolreclutamiento/modelos/procesoDeReclutamiento.dart';
 
 
 bool formularioLlenado = false;
@@ -107,7 +109,17 @@ class _campos extends State<campos> {
     _textEsc.clear();
   }
 
+  String getDate(){
+    final DateTime now = DateTime.now();
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final String formatted = formatter.format(now);
+    return formatted;
+  }
 
+  Future<int?> getProspectoid(String nombre, primerApellido, segundoApellido) async{
+    int? x = await db.getIdProspecto(nombre, primerApellido, segundoApellido);
+    return x;
+  }
 
 
   @override
@@ -240,7 +252,17 @@ class _campos extends State<campos> {
                       telefono: _textTelefono.text,
                       escolaridad: _textEsc.text,
                       edad: int.parse(_textEdad.text),
-                      campana: dropdownvalueCamp)).whenComplete(() => Navigator.pop(context));
+                      campana: dropdownvalueCamp))
+                  .whenComplete(
+                      () async => 
+                          db.crearProceso(
+                              ProccesoDeContratacion(
+                                  nombreProspecto: _textNombre.text+" "+_textAp.text+" "+_textAm.text, 
+                                  idProspecto: await getProspectoid(_textNombre.text, _textAp.text, _textAm.text),
+                                  pts: getDate()
+                              )
+                          )
+              ).whenComplete(() => Navigator.pop(context));
             }
           });
         }, child: const Text("Nuevo",style: TextStyle(

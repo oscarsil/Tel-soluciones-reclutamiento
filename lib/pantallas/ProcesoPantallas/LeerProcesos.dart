@@ -72,7 +72,7 @@ class _verProcesoState extends State<verProceso>{
                               children:
                               [
                                 TableCell(child: Text(items[index].id.toString())),
-                                TableCell(child: Text(items[index].nombreReclutador)),
+                                TableCell(child: Text(items[index].nombreReclutador.toString())),
                                 TableCell(child: Text(items[index].idReclutante.toString())),
                                 TableCell(child: Text(items[index].idProspecto.toString())),
                                 TableCell(child: Text(items[index].pts)),

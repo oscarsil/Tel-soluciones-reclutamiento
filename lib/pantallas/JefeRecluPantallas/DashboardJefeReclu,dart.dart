@@ -61,7 +61,7 @@ class _DashboardJefeState extends State<DashboardJefe> {
                 if(snapshot.connectionState == ConnectionState.waiting){
                   return const CircularProgressIndicator();
                 }else if(snapshot.hasData && snapshot.data!.isEmpty){
-                  return const Text("no data");
+                  return const Text("Todavia no hay Prospectos por Hoy");
                 }else if(snapshot.hasError) {
                   return Text(snapshot.error.toString());
                 }else{
@@ -124,7 +124,7 @@ class _DashboardJefeState extends State<DashboardJefe> {
                                                 }
                                               })
                                           ),
-                                          TableCell(child: Text(items[index].nombreReclutador)),
+                                          TableCell(child: Text(items[index].nombreReclutador.toString())),
                                           TableCell(child: Text(items[index].pts)),
                                         ]
                                     ),

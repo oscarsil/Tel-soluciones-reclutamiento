@@ -47,6 +47,11 @@ class _ElegirProsState extends State<ElegirPros> {
     return handler.noscore();
   }
 
+  Future<int?> getIdProceso(nombre, idProspecto, pts) async{
+    int? x = await db.getIDproceso(nombre, idProspecto, pts);
+    return x;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -69,13 +74,10 @@ class _ElegirProsState extends State<ElegirPros> {
                       return ListTile(
                         title: Text(items[index].nombre +" "+items[index].primerApellido + " "+items[index].segundoApellido),
                         onTap: () {
-                          db.crearProceso(ProccesoDeContratacion(
-                              nombreReclutador: widget.UsernameReclu,
-                              idReclutante: widget.idReclu,
-                              nombreProspecto: items[index].nombre +" "+items[index].primerApellido + " "+items[index].segundoApellido,
-                              idProspecto: items[index].id,
-                              pts: getDate())
-                          ).whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) => instruccionesQuizz(prospecto_int: items[index].id!))));
+                          db.editarProceso(
+                              getIdProceso("${items[index].nombre} ${items[index].primerApellido} ${items[index].segundoApellido}", items[index].id, getDate()),
+                              widget.UsernameReclu,
+                              widget.idReclu).whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) => instruccionesQuizz(prospecto_int: items[index].id!))));
                         },
                       );
                     }

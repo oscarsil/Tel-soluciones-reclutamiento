@@ -120,7 +120,7 @@ class _ReporteState extends State<Reporte> {
                                             }
                                           })
                                       ),
-                                      TableCell(child: Text(items[index].nombreReclutador)),
+                                      TableCell(child: Text(items[index].nombreReclutador.toString())),
                                       TableCell(child: Text(items[index].pts)),
                                     ]
                                 ),
