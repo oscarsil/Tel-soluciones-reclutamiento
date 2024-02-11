@@ -88,7 +88,7 @@ class _borrarProspectoState extends State<borrarProspecto> {
                       if(snapshot.connectionState == ConnectionState.waiting){
                         return const CircularProgressIndicator();
                       }else if(snapshot.hasData && snapshot.data!.isEmpty){
-                        return const Text("no data");
+                        return const Text("No hay registro de prospectos para borrar");
                       }else if(snapshot.hasError) {
                         return Text(snapshot.error.toString());
                       }else{

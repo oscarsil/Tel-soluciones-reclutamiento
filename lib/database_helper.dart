@@ -11,9 +11,9 @@ class database_helper {
   String JefeRecluTable = "CREATE TABLE JEFEDERECLU (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT)";
   String JefeDeReclu = "INSERT INTO JEFEDERECLU (username, password) VALUES ('Vladimir Jimenez','Telsol01')";
   String ReclutadorTable = "CREATE TABLE RECLUTADOR (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT, habilitado INTEGER)";
-  String pruebaReclutador = "INSERT INTO RECLUTADOR (username, password, habilitado) VALUES ('Judith Garcia','Telsol01',0)";
-  String pruebaProceso = "INSERT INTO PROCESO (nombreReclutador, idReclutante, nombreProspecto, idProspecto, pts) "
-      "VALUES ('Judith Garcia', 1, 'Oscar Silva', 1, '2024-02-08')";
+  //String pruebaReclutador = "INSERT INTO RECLUTADOR (username, password, habilitado) VALUES ('Judith Garcia','Telsol01',0)";
+  //String pruebaProceso = "INSERT INTO PROCESO (nombreReclutador, idReclutante, nombreProspecto, idProspecto, pts) "
+  //   "VALUES ('Judith Garcia', 1, 'Oscar Silva', 1, '2024-02-08')";
   String createProspectoTable = "CREATE TABLE PROSPECTO (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, "
       "primerApellido TEXT, segundoApellido TEXT, direccion TEXT, telefono TEXT, escolaridad TEXT, edad INTEGER, calquizz INTEGER,"
       " calexamTec INTEGER, calexamAud INTEGER, campana TEXT, estatus TEXT, motivo TEXT)";
@@ -27,10 +27,10 @@ class database_helper {
       await db.execute(JefeRecluTable);
       await db.execute(JefeDeReclu);
       await db.execute(ReclutadorTable);
-      await db.execute(pruebaReclutador);
+      //await db.execute(pruebaReclutador);
       await db.execute(createProspectoTable);
       await db.execute(createProcesoTable);
-      await db.execute(pruebaProceso);
+     // await db.execute(pruebaProceso);
     });
   }
 

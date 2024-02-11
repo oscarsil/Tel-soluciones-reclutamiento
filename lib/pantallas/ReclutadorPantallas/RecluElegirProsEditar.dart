@@ -104,7 +104,7 @@ class _RecluElegirProsEditarState extends State<RecluElegirProsEditar> {
                               if(snapshot.connectionState == ConnectionState.waiting){
                                 return const CircularProgressIndicator();
                               }else if(snapshot.hasData && snapshot.data!.isEmpty){
-                                return const Text("no data");
+                                return const Text("No hay prospectos entrevistados el dia de hoy o que coinciden con la busqueda");
                               }else if(snapshot.hasError) {
                                 return Text(snapshot.error.toString());
                               }else{

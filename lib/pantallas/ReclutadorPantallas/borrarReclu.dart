@@ -51,7 +51,7 @@ class _borrarRecluState extends State<borrarReclu> {
               if(snapshot.connectionState == ConnectionState.waiting){
                 return const CircularProgressIndicator();
               }else if(snapshot.hasData && snapshot.data!.isEmpty){
-                return const Text("no data");
+                return const Text("No hay reclutadores en el sistema para borrar");
               }else if(snapshot.hasError){
                 return Text(snapshot.error.toString());
               }else{

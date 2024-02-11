@@ -61,7 +61,7 @@ class _DashboardJefeState extends State<DashboardJefe> {
                 if(snapshot.connectionState == ConnectionState.waiting){
                   return const CircularProgressIndicator();
                 }else if(snapshot.hasData && snapshot.data!.isEmpty){
-                  return const Text("Todavia no hay Prospectos por Hoy");
+                  return Center(child: const Text("Todavia no hay Prospectos Entrevistados por Hoy"));
                 }else if(snapshot.hasError) {
                   return Text(snapshot.error.toString());
                 }else{
