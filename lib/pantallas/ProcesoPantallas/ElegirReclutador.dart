@@ -46,7 +46,7 @@ class _ElegirRecluState extends State<ElegirReclu> {
               if(snapshot.connectionState == ConnectionState.waiting){
                 return const CircularProgressIndicator();
               }else if(snapshot.hasData && snapshot.data!.isEmpty){
-                return const Text("no data");
+                return Center(child: const Text("no hay reclutadores activos para proceder con la aplicaicon de examenes"));
               }else if(snapshot.hasError){
                 return Text(snapshot.error.toString());
               }else{

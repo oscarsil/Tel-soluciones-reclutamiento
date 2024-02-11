@@ -128,8 +128,8 @@ class _borrarProspectoState extends State<borrarProspecto> {
                                             TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].nombre))),
                                             TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].primerApellido))),
                                             TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].segundoApellido))),
-                                            TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].motivo.toString()))),
-                                            TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: Text(items[index].estatus.toString()))),
+                                            TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: items[index].motivo == null ? Text("N/A") : Text(items[index].motivo.toString()))),
+                                            TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: items[index].estatus == null ? Text("sin estatus") : Text(items[index].estatus.toString()))),
                                             TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Align(alignment: Alignment.center,child: IconButton(onPressed: () {
                                               setState(() {
                                                 db.borrarProspecto(int.parse(items[index].id.toString())).whenComplete(_refresh);

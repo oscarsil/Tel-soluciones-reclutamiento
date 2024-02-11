@@ -125,7 +125,7 @@ class _DashboardRecluState extends State<DashboardReclu> {
                                                 }
                                               })
                                           ),
-                                          TableCell(child: Text(items[index].nombreReclutador.toString())),
+                                          TableCell(child:  items[index].nombreReclutador == null ? Text("Reclutador no asignado") : Text(items[index].nombreReclutador.toString())),
                                           TableCell(child: Text(items[index].pts)),
                                         ]
                                     ),

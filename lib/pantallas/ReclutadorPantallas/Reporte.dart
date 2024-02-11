@@ -54,7 +54,7 @@ class _ReporteState extends State<Reporte> {
           if(snapshot.connectionState == ConnectionState.waiting){
             return CircularProgressIndicator();
           }else if(snapshot.hasData && snapshot.data!.isEmpty){
-            return Text("no data");
+            return Center(child: Text("no se encontro Prospectos entrevistados con los filtros de busqueda"));
           }else if(snapshot.hasError) {
             return Text(snapshot.error.toString());
           }else{
