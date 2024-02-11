@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:telsolreclutamiento/modelos/prospecto.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 import 'package:telsolreclutamiento/modelos/procesoDeReclutamiento.dart';
+import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/IDparaexamenes.dart';
 
 
 bool formularioLlenado = false;
@@ -254,7 +255,7 @@ class _campos extends State<campos> {
                       edad: int.parse(_textEdad.text),
                       campana: dropdownvalueCamp))
                   .whenComplete(
-                      () async => 
+                      () async =>
                           db.crearProceso(
                               ProccesoDeContratacion(
                                   nombreProspecto: _textNombre.text+" "+_textAp.text+" "+_textAm.text, 
@@ -262,7 +263,17 @@ class _campos extends State<campos> {
                                   pts: getDate()
                               )
                           )
-              ).whenComplete(() => Navigator.pop(context));
+              ).whenComplete(
+                      () async{
+                        int? idProspecto = await getProspectoid(_textNombre.text, _textAp.text, _textAm.text);
+                        Navigator.push(
+                          context, MaterialPageRoute(
+                        builder: (context) => IdProspecto(
+                            Id:  idProspecto,
+                      )
+                      )
+              );}
+            );
             }
           });
         }, child: const Text("Nuevo",style: TextStyle(
