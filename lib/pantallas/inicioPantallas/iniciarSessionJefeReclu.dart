@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/JefeRecluElegirProsEditar.dart';
-import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/DashboardJefeReclu,dart.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/DashboardJefeReclu.dart';
 import 'package:telsolreclutamiento/modelos/jefDeReclutamiento.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 

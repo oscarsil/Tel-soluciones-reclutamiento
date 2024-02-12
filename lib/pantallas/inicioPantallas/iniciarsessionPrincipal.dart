@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:telsolreclutamiento/pantallas/inicioPantallas/iniciarSession.dart';
+import 'package:telsolreclutamiento/pantallas/inicioPantallas/iniciarSessionJefeReclu.dart';
 import 'package:telsolreclutamiento/pantallas/inicioPantallas/iniciarsessionReclutador.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
-import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/CrearReclutador.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/CrearReclutador.dart';
 import 'package:telsolreclutamiento/componentes/barraslaterales.dart';
-import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/EditarReclutador.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/EditarReclutador.dart';
 import 'dart:core';
 import 'package:telsolreclutamiento/database_helper.dart';
 import 'package:telsolreclutamiento/modelos/reclutador.dart';

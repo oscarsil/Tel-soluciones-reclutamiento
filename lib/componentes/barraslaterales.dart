@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/RecluElegirProsEditar.dart';
 import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/ListaDereclutador.dart';
 import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/JefeRecluElegirProsEditar.dart';
-import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/ReporteReclutador.dart';
-import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/borrarReclu.dart';
-import 'package:telsolreclutamiento/pantallas/ProspectoPantallas/BorrarProspecto.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/ReporteReclutador.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/borrarReclu.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/BorrarProspecto.dart';
+import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/DashboardReclutador.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/DashboardJefeReclu.dart';
 
 class barraslaterales extends StatelessWidget{
+  DateTime _dateTime = DateTime.now();
+  DateFormat formatter = DateFormat('yyyy-MM-dd');
   @override
   Widget build(BuildContext context){
     return SingleChildScrollView(
@@ -18,6 +23,14 @@ class barraslaterales extends StatelessWidget{
         color: Colors.blueAccent,
         child: ListView(
           children: <Widget>[
+            const SizedBox(
+              height: 55,
+            ),
+            IconButton(onPressed: ()  {
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>  DashboardJefe(fecha: formatter.format(_dateTime))));
+            }, icon: const Icon(Icons.list_alt_rounded, color: Colors.white,size: 50,)),
+            const SizedBox(height: 10,),
+            const Align(alignment: Alignment.center,child: Wrap(children: [Text('DashBoard',style: TextStyle(fontSize: 18, color: Colors.white),)],)),
             const SizedBox(
               height: 55,
             ),
@@ -58,6 +71,8 @@ class barraslaterales extends StatelessWidget{
 }
 
 class barraRelcutador extends StatelessWidget{
+  DateTime _dateTime = DateTime.now();
+  DateFormat formatter = DateFormat('yyyy-MM-dd');
   @override
   Widget build(BuildContext context){
     return Column(
@@ -68,6 +83,12 @@ class barraRelcutador extends StatelessWidget{
         }, icon: const Icon(Icons.edit, color: Colors.white,size: 50,)),
         const SizedBox(height: 10,),
         const Wrap(children: [Text('Editar de prospectos',style: TextStyle(fontSize: 18, color: Colors.white),)],),
+        const SizedBox(height: 50,),
+        IconButton(onPressed: ()  {
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>  DashboardReclu(fecha: formatter.format(_dateTime))));
+        }, icon: const Icon(Icons.list_alt_outlined, color: Colors.white,size: 50,)),
+        const SizedBox(height: 10,),
+        const Wrap(children: [Text('DashBoard',style: TextStyle(fontSize: 18, color: Colors.white),)],),
         //Falta dashboard
       ],
     );

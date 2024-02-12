@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/componentes/barraslaterales.dart';
-import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/Reporte.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/Reporte.dart';
 
 class ReporteReclutador extends StatefulWidget{
   @override
