@@ -5,6 +5,8 @@ import 'package:telsolreclutamiento/modelos/prospecto.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 import 'package:telsolreclutamiento/pantallas/ProspectoPantallas/EditarProspecto.dart';
 
+import '../../componentes/barraslaterales.dart';
+
 class RecluElegirProsEditar extends StatefulWidget{
   const RecluElegirProsEditar({super.key});
 
@@ -58,13 +60,13 @@ class _RecluElegirProsEditarState extends State<RecluElegirProsEditar> {
       body: Center(
         child: Row(
           children: [
-            /*Expanded(
+            Expanded(
               flex: 1,
               child: Container(
                 color: Colors.blueAccent,
                 child: barraRelcutador(),
               ),
-            ),*/
+            ),
             Expanded(
               flex: 7,
               child: Container(
