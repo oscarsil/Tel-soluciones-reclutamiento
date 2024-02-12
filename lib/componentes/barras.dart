@@ -19,6 +19,35 @@ class barraInformativa extends StatelessWidget {
   }
 }
 
+class barraRegresarMenuPrincipal extends StatelessWidget{
+  final String titulo;
+  const barraRegresarMenuPrincipal({required this.titulo});
+  @override
+  Widget build(BuildContext context){
+    return AppBar(
+      leading: Image.asset("assets/images/logo-Tel-soluciones.png"),
+      title: Text(
+        titulo,
+        style: const TextStyle(color: Colors.white),
+      ),
+      backgroundColor: Colors.blueAccent,
+      actions: <Widget>[
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+            onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  Inicio()),
+          );
+        }, child: const Text(
+          'Regresar al menu Principal',
+          style: TextStyle(color: Colors.white),
+        ))
+      ],
+    );
+  }
+}
+
 class barraIniciarSession extends StatelessWidget {
   final String titulo;
   const barraIniciarSession({required this.titulo});
@@ -42,7 +71,8 @@ class barraIniciarSession extends StatelessWidget {
             child: const Text(
               'Iniciar session',
               style: TextStyle(color: Colors.white),
-            ))
+            )
+        )
       ],
       backgroundColor: Colors.blueAccent,
     );

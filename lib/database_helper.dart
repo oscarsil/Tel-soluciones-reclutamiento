@@ -227,5 +227,18 @@ class database_helper {
     }
   }
 
+  Future<String> obtenerNombreProspecto(id) async{
+    final Database db = await initDB();
+    List<Map<String, Object?>> resultado = await db.rawQuery('SELECT * FROM PROSPECTO WHERE id = ?',[id]);
+    if(resultado.isEmpty){
+      return "";
+    }else{
+      List<Prospecto> x = resultado.map((e) => Prospecto.fromMap(e)).toList();
+      String? nombreProspecto = "";
+      nombreProspecto = "${x.first.nombre} ${x.first.primerApellido} ${x.first.segundoApellido}";
+      return nombreProspecto;
+    }
+  }
+
 
 }

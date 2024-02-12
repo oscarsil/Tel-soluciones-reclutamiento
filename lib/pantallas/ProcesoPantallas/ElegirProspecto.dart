@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 import 'package:telsolreclutamiento/modelos/prospecto.dart';
-import 'package:telsolreclutamiento/modelos/procesoDeReclutamiento.dart';
 import 'package:intl/intl.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/instruccionesQuizz.dart';
 
@@ -63,7 +62,7 @@ class _ElegirProsState extends State<ElegirPros> {
           if(snapshot.connectionState == ConnectionState.waiting){
             return const CircularProgressIndicator();
           }else if(snapshot.hasData && snapshot.data!.isEmpty){
-            return const Text("no data");
+            return const Text("No hay prospectos sin exmanes que aplicar");
           }else if(snapshot.hasError) {
             return Text(snapshot.error.toString());
           }else{
@@ -77,7 +76,10 @@ class _ElegirProsState extends State<ElegirPros> {
                           db.editarProceso(
                               getIdProceso("${items[index].nombre} ${items[index].primerApellido} ${items[index].segundoApellido}", items[index].id, getDate()),
                               widget.UsernameReclu,
-                              widget.idReclu).whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) => instruccionesQuizz(prospecto_int: items[index].id!))));
+                              widget.idReclu).whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) => instruccionesQuizz(prospecto_int: items[index].id!)
+                          )
+                          )
+                          );
                         },
                       );
                     }

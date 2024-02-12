@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/modelos/reclutador.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 import 'package:telsolreclutamiento/pantallas/ProcesoPantallas/ElegirProspecto.dart';
+import 'package:telsolreclutamiento/pantallas/inicioPantallas/introducirIdProspecto.dart';
 
 class ElegirReclu extends StatefulWidget{
   const ElegirReclu({super.key});
@@ -45,7 +46,7 @@ class _ElegirRecluState extends State<ElegirReclu> {
           builder: (BuildContext context, AsyncSnapshot<List<Reclutador>> snapshot){
               if(snapshot.connectionState == ConnectionState.waiting){
                 return const CircularProgressIndicator();
-              }else if(snapshot.hasData && snapshot.data!.isEmpty){
+              }else if(snapshot.hasData && snapshot.data==""){
                 return Center(child: const Text("no hay reclutadores activos para proceder con la aplicaicon de examenes"));
               }else if(snapshot.hasError){
                 return Text(snapshot.error.toString());
@@ -58,7 +59,8 @@ class _ElegirRecluState extends State<ElegirReclu> {
                         title: Text(items[index].username),
                         subtitle: Text(items[index].id.toString()),
                         onTap: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => ElegirPros(idReclu: items[index].id, UsernameReclu: items[index].username)));
+                         //Navigator.push(context, MaterialPageRoute(builder: (context) => ElegirPros(idReclu: items[index].id, UsernameReclu: items[index].username)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => introducirIdProspecto(idReclu: items[index].id, UsernameReclu: items[index].username)));
                         },
                       );
                     });

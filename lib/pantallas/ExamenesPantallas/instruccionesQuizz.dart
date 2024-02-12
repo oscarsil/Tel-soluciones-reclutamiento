@@ -15,7 +15,7 @@ class _instruccionesQuizzState extends State<instruccionesQuizz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(preferredSize:  Size.fromHeight(50),child:barraInformativa(titulo:'instrucciones para el Quizz')),
+      appBar: const PreferredSize(preferredSize:  Size.fromHeight(50),child:barraRegresarMenuPrincipal(titulo:'instrucciones para el Quizz')),
       body: Center(
         child: Column(
           children: [

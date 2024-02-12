@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/pantallas/ProspectoPantallas/FormularioProspecto.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/examenes.dart';
+import 'package:telsolreclutamiento/pantallas/ProcesoPantallas/ElegirReclutador.dart';
 
 class Inicio extends StatelessWidget {
   const Inicio({super.key});
@@ -26,26 +27,49 @@ class Inicio extends StatelessWidget {
                   fit: BoxFit.fill,
                 ),
               ),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
-                      padding: const EdgeInsets.fromLTRB(180, 30, 180, 30),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30))),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => FormularioProspecto()),
-                    );
-                  },
-                  child: const Text(
-                    '    Nuevo\nProspecto',
-                    style: TextStyle(
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.orange,
+                            padding: const EdgeInsets.fromLTRB(150, 30, 150, 30),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30))),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FormularioProspecto()),
+                          );
+                        },
+                        child: const Text(
+                          '    Nuevo\nProspecto',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 25),
+                        )),
+                    SizedBox(width: 20,),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange,
+                        padding: const EdgeInsets.fromLTRB(110, 30, 110, 30),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30))),
+                        onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const ElegirReclu())
+                      );
+                    } , child: const Text("Iniciar Aplicacion \n de examen",style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w900,
-                        fontSize: 25),
-                  )),
+                        fontSize: 25),))
+                  ],
+                ),
+              ),
               ElevatedButton(onPressed: () {
                 Navigator.push(
                     context,
