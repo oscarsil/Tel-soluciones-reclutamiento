@@ -55,11 +55,11 @@ class _JefeRecluElegirProsEditarState extends State<JefeRecluElegirProsEditar> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              flex: 1,
+              flex: 3,
               child: barraslaterales(),
             ),
             Expanded(
-              flex: 5,
+              flex: 13,
               child: Column(
                 children: [
                   Container(
@@ -146,7 +146,7 @@ class _JefeRecluElegirProsEditarState extends State<JefeRecluElegirProsEditar> {
                                                       onTap: () {
                                                         Navigator.push(
                                                             context,
-                                                            MaterialPageRoute(builder: (context) => EditarProspecto(pros: items[index]))
+                                                            MaterialPageRoute(builder: (context) => EditarProspecto(pros: items[index],user: "Jefe",))
                                                         ).then((value) => _refresh());
                                                       },
                                                       child: Text(items[index].nombre

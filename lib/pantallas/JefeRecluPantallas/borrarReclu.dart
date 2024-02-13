@@ -41,7 +41,13 @@ class _borrarRecluState extends State<borrarReclu> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: const PreferredSize(preferredSize:  Size.fromHeight(50), child: barraRegSal(titulo: "borrar reclutador")),
+      appBar: AppBar(
+        title: Text(
+          "Borrar Reclutador",
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.blueAccent,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

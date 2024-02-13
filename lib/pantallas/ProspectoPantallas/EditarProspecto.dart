@@ -3,6 +3,8 @@ import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:flutter/services.dart';
 import 'package:telsolreclutamiento/modelos/prospecto.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/JefeRecluElegirProsEditar.dart';
+import 'package:telsolreclutamiento/pantallas/ReclutadorPantallas/RecluElegirProsEditar.dart';
 
 final _textNombre = TextEditingController();
 final _textAP = TextEditingController();
@@ -16,8 +18,12 @@ final _textMotivo = TextEditingController();
 
 
 class EditarProspecto extends StatefulWidget{
+  final String user;
   final Prospecto pros;
-  const EditarProspecto({required this.pros});
+  const EditarProspecto({
+    required this.pros,
+    required this.user
+  });
   @override
   State<EditarProspecto> createState() => _EditarProspecto();
 }
@@ -43,20 +49,29 @@ class _EditarProspecto extends State<EditarProspecto>{
 
   @override
   Widget build(BuildContext context){
-    _textNombre.text = widget.pros.nombre;
-    _textAP.text = widget.pros.primerApellido;
-    _textAM.text = widget.pros.segundoApellido;
-    _textEdad.text = widget.pros.edad.toString();
-    _textTelefono.text = widget.pros.telefono;
-    _textEscolaridad.text = widget.pros.escolaridad;
-    _textDireccion.text = widget.pros.direccion;
-    widget.pros.estatus == null ? _textestatus.text = "Sin estatus" : _textestatus.text = widget.pros.estatus.toString();
-    widget.pros.motivo == null ? _textMotivo.text = "N/A" : _textMotivo.text = widget.pros.motivo.toString();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _textNombre.text = widget.pros.nombre;
+      _textAP.text = widget.pros.primerApellido;
+      _textAM.text = widget.pros.segundoApellido;
+      _textEdad.text = widget.pros.edad.toString();
+      _textTelefono.text = widget.pros.telefono;
+      _textEscolaridad.text = widget.pros.escolaridad;
+      _textDireccion.text = widget.pros.direccion;
+      widget.pros.estatus == null ? _textestatus.text = "Sin estatus" : _textestatus.text = widget.pros.estatus.toString();
+      widget.pros.motivo == null ? _textMotivo.text = "N/A" : _textMotivo.text = widget.pros.motivo.toString();
+    });
+
 
     final formKey = GlobalKey<FormState>();
 
     return Scaffold(
-      appBar:  const PreferredSize(preferredSize: Size.fromHeight(50), child: barraRegSal(titulo: 'Editar Prospecto',)),
+      appBar:  AppBar(
+        title: Text(
+          "Editar Prospecto",
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.blueAccent,
+      ),
       body: Center(
           child: Form(
              key: formKey,
@@ -247,23 +262,44 @@ class _EditarProspecto extends State<EditarProspecto>{
                        )
                      ],
                    ),
-                   ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),onPressed: ()  {
-                     if(formKey.currentState!.validate()){
-                       db.editarProspecto(
-                         _textNombre.text,
-                         _textAP.text,
-                         _textAM.text,
-                         _textDireccion.text,
-                         _textTelefono.text,
-                         _textEscolaridad.text,
-                         int.parse(_textEdad.text),
-                         dropdownvalueCamp,
-                         _textestatus.text,
-                         _textMotivo.text,
-                         widget.pros.id
-                       ).whenComplete(() {Navigator.pop(context);});
-                     }
-                   }, child: const Text('Guardar', style: TextStyle(color: Colors.white),))
+                   Row(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+                       ElevatedButton(
+                           style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+                           onPressed: () {
+                         if(widget.user=="Jefe"){
+                           Navigator.push(context, MaterialPageRoute(builder: (context) => JefeRecluElegirProsEditar()));
+                         } else if(widget.user=="Reclutador"){
+                           Navigator.push(context, MaterialPageRoute(builder: (context) => RecluElegirProsEditar()));
+                         }
+                       }, child: const Text('Cancelar', style: TextStyle(color: Colors.white),)),
+                       SizedBox(width: 50,),
+                       ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),onPressed: ()  {
+                         if(formKey.currentState!.validate()){
+                           db.editarProspecto(
+                             _textNombre.text,
+                             _textAP.text,
+                             _textAM.text,
+                             _textDireccion.text,
+                             _textTelefono.text,
+                             _textEscolaridad.text,
+                             int.parse(_textEdad.text),
+                             dropdownvalueCamp,
+                             _textestatus.text,
+                             _textMotivo.text,
+                             widget.pros.id
+                           ).whenComplete(() {
+                             if(widget.user=="Jefe"){
+                               Navigator.push(context, MaterialPageRoute(builder: (context) => JefeRecluElegirProsEditar()));
+                             } else if(widget.user=="Reclutador"){
+                               Navigator.push(context, MaterialPageRoute(builder: (context) => RecluElegirProsEditar()));
+                             }
+                           });
+                         }
+                       }, child: const Text('Guardar', style: TextStyle(color: Colors.white),)),
+                     ],
+                   )
                  ],
                ),
              ),

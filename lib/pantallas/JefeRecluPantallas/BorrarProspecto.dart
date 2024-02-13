@@ -46,9 +46,13 @@ class _borrarProspectoState extends State<borrarProspecto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const PreferredSize(
-            preferredSize:  Size.fromHeight(50),
-            child: barraRegSal(titulo: 'borrar Prospecto')),
+        appBar: AppBar(
+          title: Text(
+            "Borrar Prospecto",
+            style: const TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.blueAccent,
+        ),
         body: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

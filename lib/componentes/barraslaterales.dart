@@ -24,7 +24,7 @@ class barraslaterales extends StatelessWidget{
         child: ListView(
           children: <Widget>[
             const SizedBox(
-              height: 55,
+              height: 35,
             ),
             IconButton(onPressed: ()  {
               Navigator.push(context, MaterialPageRoute(builder: (context) =>  DashboardJefe(fecha: formatter.format(_dateTime))));
@@ -38,31 +38,31 @@ class barraslaterales extends StatelessWidget{
               Navigator.push(context, MaterialPageRoute(builder: (context) => const ListaDeReclutadores()));
             }, icon: const Icon(Icons.account_circle, color: Colors.white,size: 50,)),
             const SizedBox(height: 10,),
-            const Align(alignment: Alignment.center,child: Wrap(children: [Text('Reclutador',style: TextStyle(fontSize: 18, color: Colors.white),)],)),
-            const SizedBox(height: 50,),
+            const Align(alignment: Alignment.center,child: Wrap(children: [Text('Reclutadores',style: TextStyle(fontSize: 18, color: Colors.white),)],)),
+            const SizedBox(height: 30,),
             IconButton(onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => const JefeRecluElegirProsEditar()));
             }, icon: const Icon(Icons.account_circle, color: Colors.white,size: 50,)),
             const SizedBox(height: 10,),
             const Align(alignment: Alignment.center,child: Wrap(children: [Text('Editar Prospecto',style: TextStyle(fontSize: 18, color: Colors.white),)],)),
-            const SizedBox(height: 50,),
+            const SizedBox(height: 30,),
             IconButton(onPressed: ()  {
               Navigator.push(context, MaterialPageRoute(builder: (context) => ReporteReclutador()));
             }, icon: const Icon(Icons.feed, color: Colors.white,size: 50,)),
             const SizedBox(height: 10,),
-            const Align(alignment: Alignment.center,child: Wrap(children: [Text('Reporte de Reclutador',style: TextStyle(fontSize: 18, color: Colors.white),)],)),
-            const SizedBox(height: 50,),
+            const Align(alignment: Alignment.center,child: Wrap(children: [Text('Reporte',style: TextStyle(fontSize: 18, color: Colors.white),)],)),
+            const SizedBox(height: 30,),
             IconButton(onPressed: ()  {
               Navigator.push(context, MaterialPageRoute(builder: (context) => const borrarReclu()));
             }, icon: const Icon(Icons.remove_circle, color: Colors.white,size: 50,)),
             const SizedBox(height: 10,),
-            const Align(alignment: Alignment.center,child: Wrap(children: [Text('Borrar Reclutador',style: TextStyle(fontSize: 18, color: Colors.white),)],)),
-            const SizedBox(height: 50,),
+            const Align(alignment: Alignment.center,child: Text('Borrar\nReclutador',style: TextStyle(fontSize: 18, color: Colors.white),)),
+            const SizedBox(height: 30,),
             IconButton(onPressed: ()  {
               Navigator.push(context, MaterialPageRoute(builder: (context) => const borrarProspecto()));
             }, icon: const Icon(Icons.remove_circle, color: Colors.white,size: 50,)),
             const SizedBox(height: 10,),
-            const Align(alignment: Alignment.center,child: Wrap(children: [Text('Borrar Prospecto',style: TextStyle(fontSize: 18, color: Colors.white),)],)),
+            const Align(alignment: Alignment.center,child: Text('Borrar\nProspecto',style: TextStyle(fontSize: 18, color: Colors.white),)),
           ],
         ),
       ),

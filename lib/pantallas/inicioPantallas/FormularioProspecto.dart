@@ -22,9 +22,13 @@ class _FormularioProspecto extends State<FormularioProspecto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-          preferredSize:  Size.fromHeight(50),
-          child: barraRegresar(titulo: 'Por Favor de Introducir Datos')),
+      appBar: AppBar(
+        title: Text(
+          "Por favor de Introducir Datos",
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.blueAccent,
+      ),
       body: Center(
         child: Column(
           children: [

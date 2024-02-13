@@ -24,8 +24,13 @@ class _CrearReclutadorState extends State<CrearReclutador> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(preferredSize:  Size.fromHeight(50),
-          child: barraRegSal(titulo: 'Crear Reclutador')),
+      appBar: AppBar(
+        title: Text(
+          "Crear Reclutador",
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.blueAccent,
+      ),
       body: Form(
         key: formKey,
         child: Center(

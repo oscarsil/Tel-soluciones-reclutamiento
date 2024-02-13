@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:telsolreclutamiento/componentes/barras.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
+import 'package:telsolreclutamiento/pantallas/JefeRecluPantallas/ListaDereclutador.dart';
 
 
 class EditarReclutador extends StatefulWidget{
@@ -43,7 +43,13 @@ class _EditarReclutador extends State<EditarReclutador>{
     _textNombre.text = widget.username;
     _textContra.text = widget.password;
     return  Scaffold(
-      appBar: const PreferredSize(preferredSize: Size.fromHeight(50), child: barraRegSal(titulo: 'Editar Reclutador',)),
+      appBar: AppBar(
+        title: Text(
+          "Editar Reclutador",
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.blueAccent,
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -96,7 +102,9 @@ class _EditarReclutador extends State<EditarReclutador>{
                         _textNombre.text,
                         _textContra.text,
                         editarHabilitado(widget.habilitado),
-                        widget.id).whenComplete((){Navigator.pop(context);});
+                        widget.id).whenComplete((){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ListaDeReclutadores()));
+                        });
                   }
                 });
               }, child: const Text('Listo', style: TextStyle(color: Colors.white),)),

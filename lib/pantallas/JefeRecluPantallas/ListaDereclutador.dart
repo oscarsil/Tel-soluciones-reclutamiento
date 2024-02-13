@@ -53,19 +53,19 @@ class _ListaDeReclutadoresState extends State<ListaDeReclutadores> {
     return Scaffold(
         appBar: const PreferredSize(
             preferredSize:  Size.fromHeight(50),
-            child: barraRegSal(titulo: 'Jefe de Reclutamiento')),
+            child: barraSalir(titulo: 'Jefe de Reclutamiento')),
         body: Center(
             child: Row(
               children: [
                 Expanded(
-                  flex: 1,
+                  flex: 3,
                   child: Container(
                     color: Colors.blueAccent,
                     child: barraslaterales(),
                   ),
                 ),
                 Expanded(
-                  flex: 5,
+                  flex: 13,
                   child: Container(
                       color: Colors.white,
                       child: Column(

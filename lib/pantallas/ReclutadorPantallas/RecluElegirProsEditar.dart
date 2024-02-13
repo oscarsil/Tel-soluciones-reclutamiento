@@ -158,7 +158,7 @@ class _RecluElegirProsEditarState extends State<RecluElegirProsEditar> {
                                                               onTap: () {
                                                                 Navigator.push(
                                                                     context,
-                                                                    MaterialPageRoute(builder: (context) => EditarProspecto(pros: items[index]))
+                                                                    MaterialPageRoute(builder: (context) => EditarProspecto(pros: items[index],user: "Reclutador",))
                                                                 ).then((value) => _refresh());
                                                               },
                                                               child: Text(items[index].nombre
