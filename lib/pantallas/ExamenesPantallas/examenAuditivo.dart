@@ -185,6 +185,7 @@ class _examenAuditivo extends State<examenAuditivo> {
                 onPressed: () {
                   _controller.pause();
                   audioPlayer.stop();
+                  print(wpmtograde(this.widget.tecladoscore));
                   db.editarCalificacionProspecto(
                           this.widget.quizzscore,
                           wpmtograde(this.widget.tecladoscore),

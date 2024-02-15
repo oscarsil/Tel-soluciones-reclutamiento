@@ -87,10 +87,13 @@ class _examenTeclado extends State<examenTeclado>{
                   erroresfinales=errores;
                   tiempofinalExamen=tiempofinal;
                   resetearexamen();
+                  print(tiempofinalExamen.toString());
+                  print(exam.length);
+                  print(sacarWpm(exam.length, tiempofinalExamen));
                   Navigator.push(
                       context,
                       //MaterialPageRoute(builder: (context) =>  Resultados(time: tiempofinal, length: exam.length, errors: errores,)));
-                      MaterialPageRoute(builder: (context) => instruccionesExamenAuditivo(prospecto_id: this.widget.prospect_id, quizzscore: this.widget.quizzscore, tecladoscore: sacarWpm(exam.length, tiempofinal),)));
+                      MaterialPageRoute(builder: (context) => instruccionesExamenAuditivo(prospecto_id: this.widget.prospect_id, quizzscore: this.widget.quizzscore, tecladoscore: sacarWpm(exam.length, tiempofinalExamen),)));
                 }
                 else{
                   textpointer++;
@@ -112,7 +115,7 @@ class _examenTeclado extends State<examenTeclado>{
           errorText,
           style: const TextStyle(color: Colors.red), // Estilo del mensaje de error
         ),
-        ElevatedButton(onPressed: () {
+       /* ElevatedButton(onPressed: () {
           startExam();
           tiempofinal = _stopwatch.elapsed.inSeconds;
           _stop();
@@ -120,11 +123,12 @@ class _examenTeclado extends State<examenTeclado>{
           erroresfinales=errores;
           tiempofinalExamen=tiempofinal;
           resetearexamen();
+          print(tiempofinalExamen);
           Navigator.push(
               context,
               //MaterialPageRoute(builder: (context) =>  Resultados(time: tiempofinal, length: exam.length, errors: errores,)));
-              MaterialPageRoute(builder: (context) => instruccionesExamenAuditivo(prospecto_id: this.widget.prospect_id, quizzscore: this.widget.quizzscore, tecladoscore: sacarWpm(exam.length, 10),)));
-        }, child: const Text('saltar quizz'))
+              MaterialPageRoute(builder: (context) => instruccionesExamenAuditivo(prospecto_id: this.widget.prospect_id, quizzscore: this.widget.quizzscore, tecladoscore: sacarWpm(exam.length, tiempofinalExamen),)));
+        }, child: const Text('saltar quizz')) */
       ],
     ),
     );
@@ -135,6 +139,8 @@ class _examenTeclado extends State<examenTeclado>{
       "activacion de un determinado servicio en la red telefonica. "
       "Los costes resultantes son facturados al cliente "
       "del telefono por parte de las companias telefonicas.";
+
+
   int textpointer = 1;
   String textoPasado = '';
   String letraActual = '';
