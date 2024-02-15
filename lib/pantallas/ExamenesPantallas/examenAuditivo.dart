@@ -7,79 +7,75 @@ import 'package:timer_count_down/timer_count_down.dart';
 import 'package:telsolreclutamiento/pantallas/ExamenesPantallas/Apto.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 
-
 class examenAuditivo extends StatefulWidget {
   final int prospecto_id;
   final int quizzscore;
   final double tecladoscore;
-  const examenAuditivo({required this.prospecto_id, required this.quizzscore, required this.tecladoscore});
+
+  const examenAuditivo(
+      {required this.prospecto_id,
+      required this.quizzscore,
+      required this.tecladoscore});
+
   @override
   State<examenAuditivo> createState() => _examenAuditivo();
 }
 
 class _examenAuditivo extends State<examenAuditivo> {
+  double resultadofinal = 0;
 
-  int wpmtograde(double wpm){
-    if(wpm >= 45){
+  int wpmtograde(double wpm) {
+    if (wpm >= 45) {
       return 100;
-    }else{
-      return ((wpm*100)/45).toInt();
+    } else {
+      return ((wpm * 100) / 45).toInt();
     }
   }
 
   final db = database_helper();
 
   final CountdownController _controller =
-  new CountdownController(autoStart: true);
+      new CountdownController(autoStart: true);
 
   final audioPlayer = AudioPlayer();
   bool isPlaying = false;
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
 
-  Future stopAudio() async{
+  Future stopAudio() async {
     await audioPlayer.stop();
   }
 
-
-
   Future setAudio() async {
-    final player = AudioCache(prefix:  'assets/');
+    final player = AudioCache(prefix: 'assets/');
     final url = await player.load('Pregunta_Audio.mp3');
     audioPlayer.setUrl(url.path, isLocal: true);
   }
 
-  String formatTime(Duration duration){
+  String formatTime(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
 
-    return [
-      minutes,
-      seconds
-    ].join(':');
+    return [minutes, seconds].join(':');
   }
-
-
 
   @override
   void initState() {
+    _controller.restart();
+    clearSeleccionado();
     super.initState();
-
     setAudio();
-
     audioPlayer.onPlayerStateChanged.listen((state) {
       setState(() {
         isPlaying = state == PlayerState.PLAYING;
       });
     });
-
     audioPlayer.onDurationChanged.listen((newDuration) {
       setState(() {
         duration = newDuration;
       });
     });
-
     audioPlayer.onAudioPositionChanged.listen((newPosition) {
       setState(() {
         position = newPosition;
@@ -88,42 +84,62 @@ class _examenAuditivo extends State<examenAuditivo> {
   }
 
   double result = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const PreferredSize(
-          preferredSize:  Size.fromHeight(50),
+          preferredSize: Size.fromHeight(50),
           child: barraInformativa(titulo: 'Examen de Auditivo')),
       body: SingleChildScrollView(
         child: Column(
           children: [
             const Text('Segundos Restantes'),
             Countdown(
-                controller: _controller.restart(),
+                controller: _controller,
                 seconds: 120,
                 build: (BuildContext context, double time) =>
                     Text(time.toString()),
                 interval: const Duration(milliseconds: 100),
                 onFinished: () {
-                  setState(() {
-                    examenterminado = true;
-                    resultadofinal = vp.calcularcalificacion(vp.Calificacion(
-                        NipSeleccionado,
-                        FechaSeleccionada,
-                        PromoSeleccionadda,
-                        NacSeleccionada,
-                        NombreSeleccionada,
-                        Estadoseleccionado,
-                        Cacseleccionado));
-                  });
+                  print("finished");
                   audioPlayer.stop();
-                  db.editarCalificacionProspecto(this.widget.quizzscore, wpmtograde(this.widget.tecladoscore), double.parse(resultadofinal.toStringAsFixed(2)).toInt(), this.widget.prospecto_id)
-                      .whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                      apto(prospecto_id: this.widget.prospecto_id, quizzscore: this.widget.quizzscore, tecladoscore: this.widget.tecladoscore, auditivoscore: double.parse(resultadofinal.toStringAsFixed(2)),)))
-                  );
+                  db
+                      .editarCalificacionProspecto(
+                          this.widget.quizzscore,
+                          wpmtograde(this.widget.tecladoscore),
+                          double.parse(vp
+                                  .calcularcalificacion(vp.Calificacion(
+                                      NipSeleccionado,
+                                      FechaSeleccionada,
+                                      PromoSeleccionadda,
+                                      NacSeleccionada,
+                                      NombreSeleccionada,
+                                      Estadoseleccionado,
+                                      Cacseleccionado))
+                                  .toStringAsFixed(2))
+                              .toInt(),
+                          this.widget.prospecto_id)
+                      .whenComplete(() => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => apto(
+                                    prospecto_id: this.widget.prospecto_id,
+                                    quizzscore: this.widget.quizzscore,
+                                    tecladoscore: this.widget.tecladoscore,
+                                    auditivoscore: vp
+                                        .calcularcalificacion(vp.Calificacion(
+                                        NipSeleccionado,
+                                        FechaSeleccionada,
+                                        PromoSeleccionadda,
+                                        NacSeleccionada,
+                                        NombreSeleccionada,
+                                        Estadoseleccionado,
+                                        Cacseleccionado)),
+                                  ))));
                 }),
             Slider(
-              min:0,
+              min: 0,
               max: duration.inSeconds.toDouble(),
               value: position.inSeconds.toDouble(),
               onChanged: (value) async {
@@ -133,31 +149,33 @@ class _examenAuditivo extends State<examenAuditivo> {
                 await audioPlayer.resume();
               },
             ),
-            Padding(padding: const EdgeInsets.symmetric(horizontal: 16),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(formatTime(position)),
                     Text(formatTime(duration)),
                   ],
-                )
-            ),
+                )),
             CircleAvatar(
               radius: 35,
               child: IconButton(
                 icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
                 iconSize: 50,
                 onPressed: () async {
-                  if(isPlaying){
+                  if (isPlaying) {
                     await audioPlayer.pause();
-                  }else{
+                  } else {
                     await audioPlayer.resume();
                   }
                 },
               ),
             ),
             QuestionOptions(),
-            const SizedBox(height: 30,),
+            const SizedBox(
+              height: 30,
+            ),
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange,
@@ -165,43 +183,51 @@ class _examenAuditivo extends State<examenAuditivo> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30))),
                 onPressed: () {
-                  _controller.restart();
-                  setState(() {
-                    examenterminado = true;
-                    result = vp.calcularcalificacion(vp.Calificacion(
-                        NipSeleccionado,
-                        FechaSeleccionada,
-                        PromoSeleccionadda,
-                        NacSeleccionada,
-                        NombreSeleccionada,
-                        Estadoseleccionado,
-                        Cacseleccionado));
-                    resultadofinal = result;
-                  });
+                  _controller.pause();
                   audioPlayer.stop();
-                  db.editarCalificacionProspecto(this.widget.quizzscore, wpmtograde(this.widget.tecladoscore), double.parse(resultadofinal.toStringAsFixed(2)).toInt(), this.widget.prospecto_id)
-                      .whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                      apto(prospecto_id: this.widget.prospecto_id, quizzscore: this.widget.quizzscore, tecladoscore: this.widget.tecladoscore, auditivoscore: double.parse(resultadofinal.toStringAsFixed(2)),)))
-                  );
+                  db.editarCalificacionProspecto(
+                          this.widget.quizzscore,
+                          wpmtograde(this.widget.tecladoscore),
+                          double.parse(vp
+                                  .calcularcalificacion(vp.Calificacion(
+                                      NipSeleccionado,
+                                      FechaSeleccionada,
+                                      PromoSeleccionadda,
+                                      NacSeleccionada,
+                                      NombreSeleccionada,
+                                      Estadoseleccionado,
+                                      Cacseleccionado))
+                                  .toStringAsFixed(2))
+                              .toInt(),
+                          this.widget.prospecto_id)
+                      .whenComplete(() => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => apto(
+                                    prospecto_id: this.widget.prospecto_id,
+                                    quizzscore: this.widget.quizzscore,
+                                    tecladoscore: this.widget.tecladoscore,
+                                    auditivoscore: vp
+                                        .calcularcalificacion(vp.Calificacion(
+                                        NipSeleccionado,
+                                        FechaSeleccionada,
+                                        PromoSeleccionadda,
+                                        NacSeleccionada,
+                                        NombreSeleccionada,
+                                        Estadoseleccionado,
+                                        Cacseleccionado))
+                                  ))));
                 },
                 child: const Text(
                   'Terminar',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 )),
-            const SizedBox(
-              height: 10,
-            ),
-            if (examenterminado) Text(resultadofinal.toStringAsFixed(2)),
-            const SizedBox(
-              height: 10,
-            ),
           ],
         ),
       ),
     );
   }
 }
-
 
 class QuestionOptions extends StatefulWidget {
   @override
@@ -210,6 +236,7 @@ class QuestionOptions extends StatefulWidget {
 
 class _QuestionOption extends State<QuestionOptions> {
   String dropdownValue = 'respuesta';
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -418,51 +445,14 @@ String NombreSeleccionada = '';
 String Estadoseleccionado = '';
 String Cacseleccionado = '';
 
-double resultadofinal = 0;
-bool examenterminado = false;
-
-class ButtonEnviarRespuestas extends StatefulWidget {
-  @override
-  State<ButtonEnviarRespuestas> createState() => _ButtonEnviarRespuestas();
+void clearSeleccionado () {
+   NipSeleccionado = '';
+   FechaSeleccionada = '';
+   PromoSeleccionadda = '';
+   NacSeleccionada = '';
+   NombreSeleccionada = '';
+   Estadoseleccionado = '';
+   Cacseleccionado = '';
 }
 
 validarRespuestaExamenAuditorio vp = validarRespuestaExamenAuditorio();
-
-class _ButtonEnviarRespuestas extends State<ButtonEnviarRespuestas> {
-  double result = 0;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange,
-                padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30))),
-            onPressed: () {
-              setState(() {
-                  examenterminado = true;
-                  result = vp.calcularcalificacion(vp.Calificacion(
-                      NipSeleccionado,
-                      FechaSeleccionada,
-                      PromoSeleccionadda,
-                      NacSeleccionada,
-                      NombreSeleccionada,
-                      Estadoseleccionado,
-                      Cacseleccionado));
-                  resultadofinal = result;
-              });
-            },
-            child: const Text(
-              'Terminar',
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            )),
-        const SizedBox(
-          height: 10,
-        ),
-        if (examenterminado) Text(resultadofinal.toStringAsFixed(2)),
-      ],
-    );
-  }
-}
