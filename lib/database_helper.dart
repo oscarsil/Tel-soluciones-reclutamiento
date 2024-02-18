@@ -206,7 +206,7 @@ class database_helper {
 
   Future<List<ProccesoDeContratacion>> ProcesosFecha(desde, hasta) async{
     final Database db = await initDB();
-    List<Map<String, Object?>> resultado = (await db.rawQuery('SELECT * FROM PROCESO WHERE  pts > ? and pts < ?',[desde,hasta]));
+    List<Map<String, Object?>> resultado = (await db.rawQuery('SELECT * FROM PROCESO WHERE  pts >= ? and pts <= ?',[desde,hasta]));
     return resultado.map((e) => ProccesoDeContratacion.fromMap(e)).toList();
   }
 

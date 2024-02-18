@@ -49,6 +49,14 @@ class _nombreProspectoState extends State<nombreProspecto> {
     return x;
   }
 
+  late int? IDproseco;
+
+  void asignarIdProseco(nombre, idProspecto, pts) async {
+    IDproseco = await getIdProceso(nombre, idProspecto, pts);
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,13 +84,8 @@ class _nombreProspectoState extends State<nombreProspecto> {
             crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       ElevatedButton(onPressed: () {
-                        db.editarProceso(
-                            getIdProceso(name, widget.id, getDate()),
-                            widget.UsernameReclu,
-                            widget.idReclu).whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) => instruccionesQuizz(prospecto_int: widget.id)
-                        )
-                        )
-                        );
+                        asignarIdProseco(name, widget.id, getDate());
+                        db.editarProceso(IDproseco, widget.UsernameReclu, widget.idReclu).whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) => instruccionesQuizz(prospecto_int: widget.id))));
                       }, child: Text("Si")),
                       SizedBox(width: 10,),
                       ElevatedButton(onPressed: () {

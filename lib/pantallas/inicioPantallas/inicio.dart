@@ -70,6 +70,7 @@ class Inicio extends StatelessWidget {
                   ],
                 ),
               ),
+/*
               ElevatedButton(onPressed: () {
                 Navigator.push(
                     context,
@@ -83,6 +84,7 @@ class Inicio extends StatelessWidget {
                     fontWeight: FontWeight.w900,
                     fontSize: 25),
               )),
+*/
             ],
           ),
         ),

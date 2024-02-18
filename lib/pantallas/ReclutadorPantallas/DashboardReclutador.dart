@@ -76,11 +76,14 @@ class _DashboardRecluState extends State<DashboardReclu> {
                           Table(
                               children: const <TableRow>[
                                 TableRow(
+                                  decoration: BoxDecoration(
+                                      color: Colors.orange
+                                  ),
                                   children: [
-                                    TableCell(child: Text("Nombre Prospecto",)),
-                                    TableCell(child: Text("Calificaciones(quizz, tecleado,auditivo)")),
-                                    TableCell(child: Text("nombre reclutador")),
-                                    TableCell(child: Text("fecha de inicio de proceso")),
+                                    TableCell(child:Align(alignment: Alignment.center,child: Text("Nombre Prospecto",style: TextStyle(color: Colors.white),))),
+                                    TableCell(child:Align(alignment: Alignment.center,child: Text("Calificaciones(quizz, tecleado,auditivo)",style: TextStyle(color: Colors.white),))),
+                                    TableCell(child:Align(alignment: Alignment.center,child: Text("nombre reclutador",style: TextStyle(color: Colors.white),))),
+                                    TableCell(child: Align(alignment: Alignment.center,child:Text("fecha de inicio de proceso",style: TextStyle(color: Colors.white),))),
                                   ],
                                 ),]
                           ),
@@ -94,7 +97,7 @@ class _DashboardRecluState extends State<DashboardReclu> {
                                     TableRow(
                                         children:
                                         [
-                                          TableCell(child: Text(items[index].nombreProspecto)),
+                                          TableCell(child:Align(alignment: Alignment.center,child: Text(items[index].nombreProspecto))),
                                           /*
                                   TableCell(
                                       child: FutureBuilder(
@@ -112,7 +115,7 @@ class _DashboardRecluState extends State<DashboardReclu> {
                                       })),
 
                                    */
-                                          TableCell(child: FutureBuilder(future: califiacionProspecto(items[index].idProspecto),
+                                          TableCell(child:Align(alignment: Alignment.center,child: FutureBuilder(future: califiacionProspecto(items[index].idProspecto),
                                               builder: (BuildContext context, AsyncSnapshot<String> text){
                                                 if(text.connectionState == ConnectionState.waiting){
                                                   return const Text("waiting");
@@ -123,10 +126,10 @@ class _DashboardRecluState extends State<DashboardReclu> {
                                                 }else{
                                                   return   new Text(text.data as String);
                                                 }
-                                              })
+                                              }))
                                           ),
-                                          TableCell(child:  items[index].nombreReclutador == null ? Text("Reclutador no asignado") : Text(items[index].nombreReclutador.toString())),
-                                          TableCell(child: Text(items[index].pts)),
+                                          TableCell(child: Align(alignment: Alignment.center,child: items[index].nombreReclutador == null ? Text("Reclutador no asignado") : Text(items[index].nombreReclutador.toString()))),
+                                          TableCell(child: Align(alignment: Alignment.center,child:Text(items[index].pts))),
                                         ]
                                     ),
                                   ],

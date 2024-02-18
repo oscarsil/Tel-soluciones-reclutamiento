@@ -77,6 +77,7 @@ class _EditarReclutador extends State<EditarReclutador>{
                   controller: _textContra,
                 ),
               ),
+              /*
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -90,6 +91,9 @@ class _EditarReclutador extends State<EditarReclutador>{
                   }),
                 ],
               ),
+
+              */
+              SizedBox(height: 10,),
               ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),onPressed: ()  {
                 setState(() {
                   if(_textNombre.text =='' || _textContra.text == ''){

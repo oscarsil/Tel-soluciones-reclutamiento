@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:telsolreclutamiento/database_helper.dart';
 import 'package:telsolreclutamiento/modelos/prospecto.dart';
-import 'package:telsolreclutamiento/componentes/barras.dart';
+import '../../componentes/barras.dart';
+import '../../componentes/barraslaterales.dart';
 
 class borrarProspecto extends StatefulWidget{
   const borrarProspecto({super.key});
@@ -46,18 +47,18 @@ class _borrarProspectoState extends State<borrarProspecto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Borrar Prospecto",
-            style: const TextStyle(color: Colors.white),
-          ),
-          backgroundColor: Colors.blueAccent,
-        ),
+        appBar: const PreferredSize(
+            preferredSize:  Size.fromHeight(50),
+            child: barraSalir(titulo: 'Borrar Reclutador')),
         body: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              flex: 5,
+              flex: 3,
+              child: barraslaterales(),
+            ),
+            Expanded(
+              flex: 13,
               child: Column(
                 children: [
                   Container(

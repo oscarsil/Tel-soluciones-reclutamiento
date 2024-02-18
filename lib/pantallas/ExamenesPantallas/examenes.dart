@@ -15,7 +15,7 @@ class examenes extends StatelessWidget {
     return Scaffold(
       appBar: const PreferredSize(
           preferredSize:  Size.fromHeight(50),
-          child: barraInformativa(titulo: 'Tel-Soluciones')),
+          child: barraRegresar(titulo: 'Tel-Soluciones')),
       body: Center(
         child: Column(
           children: [
