@@ -18,6 +18,8 @@ class nombreProspecto extends StatefulWidget {
   State<nombreProspecto> createState() => _nombreProspectoState();
 }
 
+
+
 class _nombreProspectoState extends State<nombreProspecto> {
   late database_helper handler;
   late Future<String> resultado;
@@ -49,11 +51,8 @@ class _nombreProspectoState extends State<nombreProspecto> {
     return x;
   }
 
-  late int? IDproseco;
 
-  void asignarIdProseco(nombre, idProspecto, pts) async {
-    IDproseco = await getIdProceso(nombre, idProspecto, pts);
-  }
+
 
 
 
@@ -63,10 +62,11 @@ class _nombreProspectoState extends State<nombreProspecto> {
       appBar: AppBar(title: Text("Resultado de busqueda"),),
       body: FutureBuilder(future: resultado,
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+            late int? IDproseco;
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
             } else if (snapshot.hasData && snapshot.data!.isEmpty) {
-              return Text("no existe Prospecto con ese id");
+              return Center(child: Text("no existe Prospecto con ese id",style: TextStyle(fontSize: 40),));
             } else if (snapshot.hasError) {
               return Text(snapshot.error.toString());
             } else {
@@ -83,8 +83,8 @@ class _nombreProspectoState extends State<nombreProspecto> {
                   mainAxisAlignment: MainAxisAlignment.center ,
             crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      ElevatedButton(onPressed: () {
-                        asignarIdProseco(name, widget.id, getDate());
+                      ElevatedButton(onPressed: () async {
+                        IDproseco = await getIdProceso(name, widget.id, getDate());
                         db.editarProceso(IDproseco, widget.UsernameReclu, widget.idReclu).whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) => instruccionesQuizz(prospecto_int: widget.id))));
                       }, child: Text("Si")),
                       SizedBox(width: 10,),
