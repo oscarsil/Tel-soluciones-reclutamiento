@@ -250,7 +250,7 @@ class _QuestionOption extends State<QuestionOptions> {
           ),
           Row(
             children: [
-              const Text('Nip:'),
+              const Text('Cual es el Nip?'),
               const Spacer(),
               DropdownMenu<String>(
                 onSelected: (String? value) {
@@ -272,7 +272,7 @@ class _QuestionOption extends State<QuestionOptions> {
           ),
           Row(
             children: [
-              const Text('Fecha de Portabilidad:'),
+              const Text('Que fecha es el Fecha de Portabilidad?'),
               const Spacer(),
               DropdownMenu<String>(
                 onSelected: (String? value) {
@@ -294,7 +294,7 @@ class _QuestionOption extends State<QuestionOptions> {
           ),
           Row(
             children: [
-              const Text('Promocion:'),
+              const Text('que Promocion escojio el cliente?'),
               const Spacer(),
               DropdownMenu<String>(
                 onSelected: (String? value) {
@@ -316,7 +316,7 @@ class _QuestionOption extends State<QuestionOptions> {
           ),
           Row(
             children: [
-              const Text('Fecha de Nacimiento:'),
+              const Text('cual es el Fecha de Nacimiento de cliente?'),
               const Spacer(),
               DropdownMenu<String>(
                 onSelected: (String? value) {
@@ -338,7 +338,7 @@ class _QuestionOption extends State<QuestionOptions> {
           ),
           Row(
             children: [
-              const Text('Nombre'),
+              const Text('cual es el Nombre del ciente?'),
               const Spacer(),
               DropdownMenu<String>(
                 onSelected: (String? value) {
@@ -360,7 +360,7 @@ class _QuestionOption extends State<QuestionOptions> {
           ),
           Row(
             children: [
-              const Text('Estado:'),
+              const Text('en que Estado fue registrado?'),
               const Spacer(),
               DropdownMenu<String>(
                 onSelected: (String? value) {
@@ -382,7 +382,7 @@ class _QuestionOption extends State<QuestionOptions> {
           ),
           Row(
             children: [
-              const Text('CAC Cercano:'),
+              const Text('cual es su CAC mas Cercano?'),
               const Spacer(),
               DropdownMenu<String>(
                 onSelected: (String? value) {
